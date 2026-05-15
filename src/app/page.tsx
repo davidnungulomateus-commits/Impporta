@@ -19,7 +19,9 @@ import {
   MapPin,
   Languages,
   Camera,
-  CheckCircle
+  CheckCircle,
+  Menu,
+  X
 } from "lucide-react";
 import styles from "./page.module.css";
 import Link from "next/link";
@@ -33,6 +35,7 @@ export default function Home() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   const [emailError, setEmailError] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     role: "",
@@ -123,8 +126,60 @@ export default function Home() {
             >
               Request Access
             </button>
+
+            <button 
+              className={styles.menuBtn}
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label="Toggle Menu"
+            >
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
           </nav>
         </div>
+
+        {/* Mobile Menu */}
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.div 
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              className={styles.mobileMenu}
+            >
+              <div className={styles.mobileNav}>
+                <Link href="#features" className={styles.mobileNavLink} onClick={() => setIsMenuOpen(false)}>Features</Link>
+                <Link href="#solutions" className={styles.mobileNavLink} onClick={() => setIsMenuOpen(false)}>Solutions</Link>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "1rem 0" }}>
+                  <span style={{ fontSize: "0.875rem", fontWeight: 600 }}>Theme</span>
+                  <div className={styles.themeToggle}>
+                    <button 
+                      className={`${styles.themeBtn} ${theme === "light" ? styles.themeBtnActive : ""}`}
+                      onClick={() => setTheme("light")}
+                    >
+                      <Sun size={18} />
+                    </button>
+                    <button 
+                      className={`${styles.themeBtn} ${theme === "dark" ? styles.themeBtnActive : ""}`}
+                      onClick={() => setTheme("dark")}
+                    >
+                      <Moon size={18} />
+                    </button>
+                  </div>
+                </div>
+                <button 
+                  className="btn-primary" 
+                  style={{ width: "100%", marginTop: "1rem" }}
+                  onClick={() => {
+                    setIsModalOpen(true);
+                    setIsMenuOpen(false);
+                  }}
+                >
+                  Request Access
+                </button>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </header>
 
       {/* Hero Section */}
@@ -320,7 +375,7 @@ export default function Home() {
                   <span style={{ fontSize: "10px", background: "rgba(16, 185, 129, 0.1)", color: "var(--emerald-500)", padding: "2px 8px", borderRadius: "99px", fontWeight: "600" }}>PASSED</span>
                 </div>
                 
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.75rem", marginBottom: "1.5rem" }}>
+                <div className={styles.responsiveGrid} style={{ marginBottom: "1.5rem", gap: "0.75rem" }}>
                   {[1, 2, 3, 4].map((i) => (
                     <div key={i} style={{ aspectRatio: "4/3", background: "var(--slate-100)", borderRadius: "6px", position: "relative", border: "1px solid var(--border-color)", overflow: "hidden" }}>
                        <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", opacity: 0.2 }}>

@@ -2,6 +2,8 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 /* Header */
@@ -48,10 +50,55 @@
   align-items: center;
 }
 
-@media (max-width: 768px) {
-  .nav {
+@media (max-width: 900px) {
+  .nav > a, .nav > .themeToggle, .nav > .btn-primary {
     display: none;
   }
+}
+
+.menuBtn {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+@media (max-width: 900px) {
+  .menuBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.mobileMenu {
+  position: absolute;
+  top: 72px;
+  left: 0;
+  right: 0;
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-color);
+  overflow: hidden;
+  z-index: 99;
+}
+
+.mobileNav {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.mobileNavLink {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .navLink {
@@ -111,6 +158,12 @@
   text-align: center;
   position: relative;
   overflow: hidden;
+  width: 100%;
+}
+@media (max-width: 768px) {
+  .hero {
+    padding: 8rem 1.5rem 4rem;
+  }
 }
 
 .heroBackground {
@@ -140,7 +193,7 @@
 }
 
 .heroTitle {
-  font-size: 4.5rem;
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
   font-weight: 800;
   line-height: 1.1;
   letter-spacing: -0.03em;
@@ -150,7 +203,7 @@
 }
 
 .heroDescription {
-  font-size: 1.25rem;
+  font-size: clamp(1rem, 4vw, 1.25rem);
   color: var(--text-secondary);
   max-width: 700px;
   line-height: 1.6;
@@ -204,7 +257,7 @@
 }
 
 .featuresTitle {
-  font-size: 3rem;
+  font-size: clamp(2rem, 6vw, 3rem);
   font-weight: 700;
   margin-bottom: 1rem;
   color: var(--text-primary);
@@ -249,7 +302,7 @@
 }
 
 .featureTitle {
-  font-size: 2rem;
+  font-size: clamp(1.5rem, 5vw, 2rem);
   font-weight: 700;
   margin-bottom: 1rem;
   color: var(--text-primary);
@@ -367,7 +420,7 @@
 }
 
 .audienceTitle {
-  font-size: 2rem;
+  font-size: clamp(1.5rem, 5vw, 2rem);
   margin-bottom: 1rem;
   color: var(--text-primary);
 }
@@ -399,10 +452,25 @@
   width: 100%;
   max-width: 500px;
   border-radius: 24px;
-  padding: 3rem;
+  padding: clamp(1.5rem, 5vw, 3rem);
   position: relative;
   border: 1px solid var(--border-color);
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  margin: auto;
+}
+
+@media (max-width: 600px) {
+  .modalContent {
+    border-radius: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .closeBtn {
+    top: 1rem;
+    right: 1rem;
+  }
 }
 
 .closeBtn {
@@ -546,6 +614,24 @@
   margin-bottom: 1.5rem;
 }
 
+@media (max-width: 480px) {
+  .radioGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.responsiveGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 600px) {
+  .responsiveGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .radioBtn {
   padding: 1rem;
   border-radius: 12px;
@@ -635,7 +721,7 @@
 }
 
 .ctaTitle {
-  font-size: 3rem;
+  font-size: clamp(2rem, 8vw, 3rem);
   margin-bottom: 1.5rem;
   color: var(--text-primary);
 }
