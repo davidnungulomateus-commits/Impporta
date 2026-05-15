@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
+import Clarity from "@/components/Clarity";
+
+const clarityId = process.env.NEXT_PUBLIC_CLARITY_ID || "";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -26,7 +30,25 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${jakarta.variable}`}>
-      <body>{children}</body>
+      <head>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-D8W30VMD4Q"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-D8W30VMD4Q');
+          `}
+        </Script>
+      </head>
+      <body>
+        <Clarity projectId={clarityId} />
+        {children}
+      </body>
     </html>
   );
 }
