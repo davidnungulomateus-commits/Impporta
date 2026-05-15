@@ -744,8 +744,9 @@ export default function Home() {
           <div className={styles.logo} style={{ fontSize: "1.25rem" }}>
             Impport<span className={styles.logoAccent}>a</span>
           </div>
-          <div>
-            &copy; {new Date().getFullYear()} Impporta Inc. All rights reserved.
+          <div style={{ display: "flex", gap: "2rem", alignItems: "center" }}>
+            <Link href="/privacy" className={styles.navLink} style={{ fontSize: "0.875rem" }}>Privacy Policy</Link>
+            <span>&copy; {new Date().getFullYear()} Impporta Inc. All rights reserved.</span>
           </div>
         </div>
       </footer>
