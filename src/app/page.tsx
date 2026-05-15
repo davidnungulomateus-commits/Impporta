@@ -24,6 +24,7 @@ import {
 import styles from "./page.module.css";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
   const [theme, setTheme] = useState<"light" | "dark">("dark");
@@ -31,6 +32,7 @@ export default function Home() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
+  const [emailError, setEmailError] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     role: "",
@@ -38,14 +40,27 @@ export default function Home() {
     teamSize: "",
     email: ""
   });
+  const router = useRouter();
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
 
+  const validateEmail = (email: string) => {
+    return String(email)
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
+  };
+
   const handleSubmit = async () => {
-    if (!formData.email) return;
+    if (!formData.email || !validateEmail(formData.email)) {
+      setEmailError(true);
+      return;
+    }
     
+    setEmailError(false);
     setIsSubmitting(true);
     try {
       const response = await fetch('/api/request-access', {
@@ -56,6 +71,10 @@ export default function Home() {
 
       if (response.ok) {
         setIsSuccess(true);
+        // Redirect after a brief delay to show success animation
+        setTimeout(() => {
+          router.push('/success');
+        }, 1500);
       } else {
         alert("Something went wrong. Please try again.");
       }
@@ -495,13 +514,25 @@ export default function Home() {
               }}>×</button>
               
               {!isSuccess && (
-                <div className={styles.stepIndicator}>
-                  {[1, 2, 3, 4, 5].map((step) => (
+                <div className={styles.progressContainer}>
+                  <div className={styles.progressTrack}>
                     <div 
-                      key={step} 
-                      className={`${styles.stepDot} ${currentStep >= step ? styles.stepDotActive : ""}`}
+                      className={styles.progressFill} 
+                      style={{ width: `${((currentStep - 1) / 4) * 100}%` }}
                     />
-                  ))}
+                  </div>
+                  <div className={styles.stepIndicator}>
+                    {[1, 2, 3, 4, 5].map((step) => (
+                      <div 
+                        key={step} 
+                        className={`
+                          ${styles.stepDot} 
+                          ${currentStep > step ? styles.stepDotCompleted : ""}
+                          ${currentStep === step ? styles.stepDotActive : ""}
+                        `}
+                      />
+                    ))}
+                  </div>
                 </div>
               )}
 
@@ -514,23 +545,37 @@ export default function Home() {
                     className={styles.successStep}
                   >
                     <div className={styles.successIcon}>
-                      <ShieldCheck size={48} />
+                      <motion.svg 
+                        viewBox="0 0 52 52" 
+                        className={styles.checkmarkSvg}
+                      >
+                        <motion.circle 
+                          cx="26" cy="26" r="25" 
+                          fill="none" 
+                          stroke="currentColor" 
+                          strokeWidth="2"
+                          initial={{ pathLength: 0 }}
+                          animate={{ pathLength: 1 }}
+                          transition={{ duration: 0.5, ease: "easeInOut" }}
+                        />
+                        <motion.path 
+                          fill="none" 
+                          stroke="currentColor" 
+                          strokeWidth="5" 
+                          d="M14.1 27.2l7.1 7.2 16.7-16.8" 
+                          initial={{ pathLength: 0 }}
+                          animate={{ pathLength: 1 }}
+                          transition={{ duration: 0.3, delay: 0.5 }}
+                        />
+                      </motion.svg>
                     </div>
                     <h2 className={styles.modalTitle}>Request Received!</h2>
                     <p className={styles.modalSubtitle}>
                       We've added you to our priority waitlist. Keep an eye on <strong>{formData.email}</strong> for your invitation.
                     </p>
-                    <button 
-                      className="btn-primary" 
-                      style={{ width: "100%" }}
-                      onClick={() => {
-                        setIsModalOpen(false);
-                        setIsSuccess(false);
-                        setCurrentStep(1);
-                      }}
-                    >
-                      Return to Site
-                    </button>
+                    <div className={styles.redirectBadge}>
+                      Redirecting to confirmation...
+                    </div>
                   </motion.div>
                 ) : (
                   <>
@@ -655,16 +700,24 @@ export default function Home() {
                       >
                         <h2 className={styles.modalTitle}>Final Step</h2>
                         <p className={styles.modalSubtitle}>Where should we send your access invitation?</p>
-                        <input 
-                          type="email" 
-                          className={styles.modalInput} 
-                          placeholder="work@example.com"
-                          value={formData.email}
-                          onChange={(e) => setFormData({...formData, email: e.target.value})}
-                          autoFocus
-                          onKeyDown={(e) => e.key === 'Enter' && formData.email && handleSubmit()}
-                        />
-                        <div style={{ display: "flex", gap: "1rem", marginTop: "1rem" }}>
+                        <div style={{ position: "relative" }}>
+                          <input 
+                            type="email" 
+                            className={`${styles.modalInput} ${emailError ? styles.modalInputError : ""}`} 
+                            placeholder="work@example.com"
+                            value={formData.email}
+                            onChange={(e) => {
+                              setFormData({...formData, email: e.target.value});
+                              if (emailError) setEmailError(false);
+                            }}
+                            autoFocus
+                            onKeyDown={(e) => e.key === 'Enter' && formData.email && handleSubmit()}
+                          />
+                          {emailError && (
+                            <span className={styles.errorMessage}>Please enter a valid email address</span>
+                          )}
+                        </div>
+                        <div style={{ display: "flex", gap: "1rem", marginTop: "1.5rem" }}>
                           <button className="btn-secondary" style={{ flex: 1 }} onClick={() => setCurrentStep(4)}>Back</button>
                           <button 
                             className="btn-primary" 
