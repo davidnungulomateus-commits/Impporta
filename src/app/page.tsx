@@ -120,8 +120,7 @@ export default function Home() {
             </div>
 
             <button 
-              className="btn-primary" 
-              style={{ padding: "0.5rem 1rem", fontSize: "0.875rem" }}
+              className={`btn-primary ${styles.headerCta}`}
               onClick={() => setIsModalOpen(true)}
             >
               Request Access

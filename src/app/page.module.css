@@ -38,6 +38,14 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
+  transition: all 0.2s ease;
+}
+
+@media (max-width: 600px) {
+  .logo {
+    font-size: 1.25rem;
+    gap: 0.5rem;
+  }
 }
 
 .logoAccent {
@@ -50,8 +58,15 @@
   align-items: center;
 }
 
+.headerCta {
+  padding: 0.5rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
 @media (max-width: 900px) {
-  .nav > a, .nav > .themeToggle, .nav > .btn-primary {
+  .nav > a, .nav > .themeToggle, .headerCta {
     display: none;
   }
 }
@@ -78,9 +93,7 @@
   top: 72px;
   left: 0;
   right: 0;
-  background: var(--glass-bg);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: var(--background);
   border-bottom: 1px solid var(--border-color);
   overflow: hidden;
   z-index: 99;
