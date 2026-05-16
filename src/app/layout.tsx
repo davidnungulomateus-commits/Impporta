@@ -34,12 +34,17 @@ export default function RootLayout({
           src="https://www.googletagmanager.com/gtag/js?id=G-D8W30VMD4Q"
           strategy="afterInteractive"
         />
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=AW-18164745890"
+          strategy="afterInteractive"
+        />
         <Script id="google-analytics" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', 'G-D8W30VMD4Q');
+            gtag('config', 'AW-18164745890');
           `}
         </Script>
         <Script id="microsoft-clarity" strategy="afterInteractive">
