@@ -192,7 +192,7 @@ export default function Home() {
             className={styles.heroTag}
           >
             <span style={{ background: "var(--emerald-500)", width: 8, height: 8, borderRadius: "50%" }}></span>
-            The New Standard for Global Sourcing
+            Your Direct Line to China — Without the Chaos
           </motion.div>
           
           <motion.h1 
@@ -201,7 +201,7 @@ export default function Home() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className={styles.heroTitle}
           >
-            Centralize your <span className="text-gradient">international sourcing</span> workflow
+            Import from China with <span className="text-gradient">confidence, clarity</span> and full control
           </motion.h1>
           
           <motion.p 
@@ -210,8 +210,8 @@ export default function Home() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className={styles.heroDescription}
           >
-            A professional, unified workspace bringing buyers, agents, and operations together. 
-            Manage deals, negotiate contracts, and communicate in real-time.
+            Stop losing money to hidden duties, unreliable suppliers, and communication breakdowns. 
+            Impporta gives you a professional workspace to source, verify, and ship from China — all in one place.
           </motion.p>
           
           <motion.div 
@@ -264,9 +264,9 @@ export default function Home() {
       <section id="features" className={styles.features}>
         <div className="container">
           <div className={styles.featuresHeader}>
-            <h2 className={styles.featuresTitle}>The Four Pillars of Sourcing Excellence</h2>
+            <h2 className={styles.featuresTitle}>Everything you need to import from China — in one platform</h2>
             <p className={styles.heroDescription} style={{ margin: "0 auto" }}>
-              Comprehensive tools designed for high-stakes international trade and corporate compliance.
+              From factory floor to your warehouse door. Impporta handles the complexity so you can focus on growing your business.
             </p>
           </div>
 
@@ -277,9 +277,9 @@ export default function Home() {
                 <CheckCircle2 size={28} />
               </div>
               <span className={styles.audienceRole} style={{ color: "var(--emerald-500)", background: "rgba(16, 185, 129, 0.1)" }}>Pillar 1</span>
-              <h3 className={styles.featureTitle}>Financial Transparency & Control</h3>
+              <h3 className={styles.featureTitle}>Know your exact landed cost before you order</h3>
               <p className={styles.featureDescription}>
-                Eliminating the "sticker shock" of hidden import costs with automated intelligence.
+                Most importers get blindsided by duties, taxes, and port charges they never saw coming. Our Landed Cost Engine calculates every fee upfront — so your margins stay protected.
               </p>
               <div className={styles.subFeatureGrid} style={{ display: "grid", gridTemplateColumns: "1fr", gap: "1.5rem", marginTop: "2rem" }}>
                 <div className={styles.subFeature} style={{ display: "flex", gap: "1rem" }}>
@@ -288,7 +288,7 @@ export default function Home() {
                   </div>
                   <div>
                     <strong style={{ display: "block", marginBottom: "0.25rem" }}>Landed Cost Engine</strong>
-                    <p style={{ fontSize: "0.875rem", opacity: 0.8 }}>An automated calculator that factors in SACU duties, Ad Valorem taxes, and specific "Tax-on-Tax" VAT logic.</p>
+                    <p style={{ fontSize: "0.875rem", opacity: 0.8 }}>Automatically calculates SACU duties, Ad Valorem taxes, and VAT-on-VAT stacking — giving you the true cost of every shipment before you commit a single dollar.</p>
                   </div>
                 </div>
                 <div className={styles.subFeature} style={{ display: "flex", gap: "1rem" }}>
@@ -297,7 +297,7 @@ export default function Home() {
                   </div>
                   <div>
                     <strong style={{ display: "block", marginBottom: "0.25rem" }}>Secure Payment Escrow</strong>
-                    <p style={{ fontSize: "0.875rem", opacity: 0.8 }}>A financial safety net that holds funds until quality and loading are confirmed by field agents.</p>
+                    <p style={{ fontSize: "0.875rem", opacity: 0.8 }}>Your money stays protected. Funds are held in escrow and only released to your Chinese supplier once your on-the-ground agent confirms quality and loading.</p>
                   </div>
                 </div>
               </div>
@@ -333,30 +333,30 @@ export default function Home() {
                 <ShieldCheck size={28} />
               </div>
               <span className={styles.audienceRole} style={{ color: "var(--emerald-500)", background: "rgba(16, 185, 129, 0.1)" }}>Pillar 2</span>
-              <h3 className={styles.featureTitle}>Risk Management & Quality Assurance</h3>
+              <h3 className={styles.featureTitle}>See exactly what's leaving the factory in China</h3>
               <p className={styles.featureDescription}>
-                Providing the "eyes on the ground" that large corporations require for compliance and peace of mind.
+                You can't fly to Guangzhou for every shipment. We put verified agents on the ground so you get eyes inside the factory — before your container is sealed.
               </p>
               <div className={styles.subFeatureGrid} style={{ display: "grid", gridTemplateColumns: "1fr", gap: "1.5rem", marginTop: "2rem" }}>
                 <div className={styles.subFeature} style={{ display: "flex", gap: "1rem" }}>
                   <Eye size={20} className={styles.checkIcon} style={{ flexShrink: 0 }} />
                   <div>
                     <strong style={{ display: "block", marginBottom: "0.25rem" }}>Visual Inspection Hub</strong>
-                    <p style={{ fontSize: "0.875rem", opacity: 0.8 }}>A central gallery for agents to upload high-res photos and videos before containers leave China.</p>
+                    <p style={{ fontSize: "0.875rem", opacity: 0.8 }}>Agents upload timestamped HD photos and videos directly from the Chinese factory floor — giving you proof of quality before the container door closes.</p>
                   </div>
                 </div>
                 <div className={styles.subFeature} style={{ display: "flex", gap: "1rem" }}>
                   <CheckCircle2 size={20} className={styles.checkIcon} style={{ flexShrink: 0 }} />
                   <div>
-                    <strong style={{ display: "block", marginBottom: "0.25rem" }}>Supplier Verification Badges</strong>
-                    <p style={{ fontSize: "0.875rem", opacity: 0.8 }}>Factories physically audited by agents to ensure legitimacy and ISO/ethical standards.</p>
+                    <strong style={{ display: "block", marginBottom: "0.25rem" }}>Verified Chinese Supplier Badges</strong>
+                    <p style={{ fontSize: "0.875rem", opacity: 0.8 }}>Our agents physically audit factories in China to verify legitimacy, production capacity, and compliance — so you never wire money to a ghost supplier.</p>
                   </div>
                 </div>
                 <div className={styles.subFeature} style={{ display: "flex", gap: "1rem" }}>
                   <AlertTriangle size={20} className={styles.checkIcon} style={{ flexShrink: 0 }} />
                   <div>
                     <strong style={{ display: "block", marginBottom: "0.25rem" }}>Anti-Dumping Alerts</strong>
-                    <p style={{ fontSize: "0.875rem", opacity: 0.8 }}>Automated warnings for products carrying heavy protective duties in the SACU region.</p>
+                    <p style={{ fontSize: "0.875rem", opacity: 0.8 }}>Automatically flags Chinese-origin products that carry heavy protective duties in your import region — protecting your margins before you negotiate a price.</p>
                   </div>
                 </div>
               </div>
@@ -406,30 +406,30 @@ export default function Home() {
                 <Ship size={28} />
               </div>
               <span className={styles.audienceRole} style={{ color: "var(--blue-500)", background: "rgba(59, 130, 246, 0.1)" }}>Pillar 3</span>
-              <h3 className={styles.featureTitle}>Logistics & Compliance Intelligence</h3>
+              <h3 className={styles.featureTitle}>Navigate customs, ports, and paperwork without the stress</h3>
               <p className={styles.featureDescription}>
-                Streamlining the movement of goods through complex African ports with real-time data and organization.
+                Chinese shipments involve a mountain of documents, HS codes, and port logistics. Impporta organizes all of it in one intelligent hub so nothing gets lost — and no shipment gets held up.
               </p>
               <div className={styles.subFeatureGrid} style={{ display: "grid", gridTemplateColumns: "1fr", gap: "1.5rem", marginTop: "2rem" }}>
                 <div className={styles.subFeature} style={{ display: "flex", gap: "1rem" }}>
                   <Search size={20} className={styles.checkIcon} style={{ flexShrink: 0 }} />
                   <div>
                     <strong style={{ display: "block", marginBottom: "0.25rem" }}>HS Code Lookup Tool</strong>
-                    <p style={{ fontSize: "0.875rem", opacity: 0.8 }}>Searchable database of SADC-specific codes to ensure correct duty rates from the start.</p>
+                    <p style={{ fontSize: "0.875rem", opacity: 0.8 }}>Search and confirm the correct Harmonized System codes for your Chinese goods before you even place an order — locking in accurate duty rates from day one.</p>
                   </div>
                 </div>
                 <div className={styles.subFeature} style={{ display: "flex", gap: "1rem" }}>
                   <Archive size={20} className={styles.checkIcon} style={{ flexShrink: 0 }} />
                   <div>
                     <strong style={{ display: "block", marginBottom: "0.25rem" }}>Digital Document Vault</strong>
-                    <p style={{ fontSize: "0.875rem", opacity: 0.8 }}>Organized home for the "Big Three": Commercial Invoice, Packing List, and Bill of Lading.</p>
+                    <p style={{ fontSize: "0.875rem", opacity: 0.8 }}>Every import document — Commercial Invoice, Packing List, Bill of Lading — stored, versioned, and instantly accessible. No more hunting through email threads for a customs clearance doc.</p>
                   </div>
                 </div>
                 <div className={styles.subFeature} style={{ display: "flex", gap: "1rem" }}>
                   <Clock size={20} className={styles.checkIcon} style={{ flexShrink: 0 }} />
                   <div>
                     <strong style={{ display: "block", marginBottom: "0.25rem" }}>Port Congestion Monitor</strong>
-                    <p style={{ fontSize: "0.875rem", opacity: 0.8 }}>Real-time updates on delays at Durban or Walvis Bay for inventory planning.</p>
+                    <p style={{ fontSize: "0.875rem", opacity: 0.8 }}>Live delay data for major destination ports so you can adjust your inventory planning the moment your Chinese shipment is en route.</p>
                   </div>
                 </div>
               </div>
@@ -461,23 +461,23 @@ export default function Home() {
                 <MessageCircle size={28} />
               </div>
               <span className={styles.audienceRole} style={{ color: "var(--emerald-500)", background: "rgba(16, 185, 129, 0.1)" }}>Pillar 4</span>
-              <h3 className={styles.featureTitle}>Accountability & Communication</h3>
+              <h3 className={styles.featureTitle}>Break the language barrier between you and your Chinese suppliers</h3>
               <p className={styles.featureDescription}>
-                Bridging the language and distance gap between Africa and China with transparency.
+                Miscommunication with Chinese factories costs importers thousands every year. Impporta gives you a real-time bilingual workspace so nothing gets lost in translation — literally.
               </p>
               <div className={styles.subFeatureGrid} style={{ display: "grid", gridTemplateColumns: "1fr", gap: "1.5rem", marginTop: "2rem" }}>
                 <div className={styles.subFeature} style={{ display: "flex", gap: "1rem" }}>
                   <Languages size={20} className={styles.checkIcon} style={{ flexShrink: 0 }} />
                   <div>
-                    <strong style={{ display: "block", marginBottom: "0.25rem" }}>Agent Chat with Auto-Translate</strong>
-                    <p style={{ fontSize: "0.875rem", opacity: 0.8 }}>Seamless messaging between English/Afrikaans and Mandarin for technical specs.</p>
+                    <strong style={{ display: "block", marginBottom: "0.25rem" }}>Built-in Mandarin Auto-Translate</strong>
+                    <p style={{ fontSize: "0.875rem", opacity: 0.8 }}>Message your Chinese supplier or on-ground agent in English and get instant Mandarin translation — with full technical spec precision that generic translators miss.</p>
                   </div>
                 </div>
                 <div className={styles.subFeature} style={{ display: "flex", gap: "1rem" }}>
                   <MapPin size={20} className={styles.checkIcon} style={{ flexShrink: 0 }} />
                   <div>
                     <strong style={{ display: "block", marginBottom: "0.25rem" }}>End-to-End Milestone Tracking</strong>
-                    <p style={{ fontSize: "0.875rem", opacity: 0.8 }}>Visual timeline showing progress from factory floor to customs clearance.</p>
+                    <p style={{ fontSize: "0.875rem", opacity: 0.8 }}>A live visual timeline tracks every stage of your import — from the moment production starts in China to the moment your goods clear customs. Full visibility, zero guesswork.</p>
                   </div>
                 </div>
               </div>
@@ -506,25 +506,23 @@ export default function Home() {
       <section id="solutions" className={styles.audience}>
         <div className="container">
           <div className={styles.featuresHeader} style={{ marginBottom: "4rem" }}>
-            <h2 className={styles.featuresTitle}>Empowering Every Role</h2>
+            <h2 className={styles.featuresTitle}>Built for everyone in the China import chain</h2>
           </div>
           
           <div className={styles.audienceGrid}>
             <div className={styles.audienceCard}>
-              <span className={styles.audienceRole}>For Clients (Buyers)</span>
-              <h3 className={styles.audienceTitle}>Source with Confidence</h3>
+              <span className={styles.audienceRole}>For Buyers & Importers</span>
+              <h3 className={styles.audienceTitle}>Import from China without the risk</h3>
               <p className={styles.audienceDescription}>
-                Discover vetted products in our Explore hub. Work directly with professional agents 
-                who guide you through the complexities of international trade in a secure, transparent environment.
+                Browse a curated marketplace of verified Chinese suppliers. Work with professional sourcing agents who know the factories, speak the language, and protect your money — from first quote to final delivery.
               </p>
             </div>
             
             <div className={styles.audienceCard}>
-              <span className={styles.audienceRole}>For Agents (Facilitators)</span>
-              <h3 className={styles.audienceTitle}>Scale Your Deal Flow</h3>
+              <span className={styles.audienceRole}>For Sourcing Agents</span>
+              <h3 className={styles.audienceTitle}>Run more deals. Impress every client.</h3>
               <p className={styles.audienceDescription}>
-                Manage multiple clients and suppliers from a single dashboard. Keep your communications, 
-                contracts, and operations organized without context-switching between different apps.
+                Manage multiple buyers, Chinese suppliers, and live shipments from a single professional dashboard. No more juggling WhatsApp threads, spreadsheets, and email — everything your clients need is in one transparent workspace.
               </p>
             </div>
           </div>
@@ -535,9 +533,9 @@ export default function Home() {
       <section className={styles.cta}>
         <div className="container">
           <div className={styles.ctaInner}>
-            <h2 className={styles.ctaTitle}>Ready to transform your sourcing workflow?</h2>
+            <h2 className={styles.ctaTitle}>Start importing from China the smart way</h2>
             <p className={styles.ctaDescription}>
-              Join top-tier importers and agents who use Impporta to close deals faster and manage complex supply chains with ease.
+              Join serious buyers and professional sourcing agents already using Impporta to eliminate risk, cut hidden costs, and build reliable supply chains from China.
             </p>
             <button 
               className="btn-primary" 
