@@ -1281,6 +1281,42 @@ body {
   gap: 10px;
 }
 
+.lang-switcher {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  padding: 3px 8px;
+}
+
+.lang-btn {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-tertiary);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 2px 4px;
+  border-radius: var(--radius-sm);
+  transition: all 0.15s;
+}
+
+.lang-btn:hover {
+  color: var(--text-primary);
+}
+
+.lang-btn.active {
+  color: var(--accent);
+  font-weight: 800;
+}
+
+.lang-divider {
+  font-size: 0.68rem;
+  color: var(--border);
+}
+
 .btn-whatsapp-sm {
   display: inline-flex;
   align-items: center;
