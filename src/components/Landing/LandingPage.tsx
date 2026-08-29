@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import {
   ShieldCheck,
@@ -21,10 +21,72 @@ import {
   Flame,
   KeyRound,
   FileCheck,
-  Globe
+  Globe,
+  ChevronDown
 } from 'lucide-react';
 
 type Language = 'pt' | 'en';
+
+function CustomSelect({
+  value,
+  options,
+  onChange,
+}: {
+  value: string;
+  options: { label: string; value: string }[];
+  onChange: (val: string) => void;
+}) {
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setIsOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const selectedOption = options.find((o) => o.value === value) || options[0];
+
+  return (
+    <div className="custom-select-wrapper" ref={dropdownRef}>
+      <button
+        type="button"
+        className={`custom-select-btn ${isOpen ? 'active' : ''}`}
+        onClick={() => setIsOpen(!isOpen)}
+        aria-expanded={isOpen}
+      >
+        <span className="select-text">{selectedOption?.label}</span>
+        <ChevronDown size={15} className={`select-chevron ${isOpen ? 'open' : ''}`} />
+      </button>
+
+      {isOpen && (
+        <div className="custom-select-dropdown animate-fade-in">
+          {options.map((opt) => {
+            const isSelected = opt.value === value;
+            return (
+              <button
+                key={opt.value}
+                type="button"
+                className={`custom-select-option ${isSelected ? 'selected' : ''}`}
+                onClick={() => {
+                  onChange(opt.value);
+                  setIsOpen(false);
+                }}
+              >
+                <span>{opt.label}</span>
+                {isSelected && <Check size={14} className="text-accent" />}
+              </button>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default function LandingPage() {
   const [lang, setLang] = useState<Language>('pt');
@@ -1122,31 +1184,27 @@ export default function LandingPage() {
 
                   <div className="form-row">
                     <div className="form-group">
-                      <label htmlFor="host-units">{t.form.unitsLabel}</label>
-                      <select
-                        id="host-units"
+                      <label>{t.form.unitsLabel}</label>
+                      <CustomSelect
                         value={formData.units}
-                        onChange={(e) => setFormData({ ...formData, units: e.target.value })}
-                      >
-                        <option value="1 unit">{lang === 'pt' ? '1 unidade' : '1 unit'}</option>
-                        <option value="2 units">{lang === 'pt' ? '2 unidades' : '2 units'}</option>
-                        <option value="3 units">{lang === 'pt' ? '3 unidades' : '3 units'}</option>
-                        <option value="4 units">{lang === 'pt' ? '4 unidades' : '4 units'}</option>
-                        <option value="5+ units">{lang === 'pt' ? '5+ unidades' : '5+ units'}</option>
-                      </select>
+                        options={[
+                          { value: '1 unit', label: lang === 'pt' ? '1 unidade' : '1 unit' },
+                          { value: '2 units', label: lang === 'pt' ? '2 unidades' : '2 units' },
+                          { value: '3 units', label: lang === 'pt' ? '3 unidades' : '3 units' },
+                          { value: '4 units', label: lang === 'pt' ? '4 unidades' : '4 units' },
+                          { value: '5+ units', label: lang === 'pt' ? '5+ unidades' : '5+ units' },
+                        ]}
+                        onChange={(val) => setFormData({ ...formData, units: val })}
+                      />
                     </div>
 
                     <div className="form-group">
-                      <label htmlFor="host-zone">{t.form.zoneLabel}</label>
-                      <select
-                        id="host-zone"
+                      <label>{t.form.zoneLabel}</label>
+                      <CustomSelect
                         value={formData.neighborhood}
-                        onChange={(e) => setFormData({ ...formData, neighborhood: e.target.value })}
-                      >
-                        {neighborhoods.map((n) => (
-                          <option key={n} value={n}>{n}</option>
-                        ))}
-                      </select>
+                        options={neighborhoods.map((n) => ({ value: n, label: n }))}
+                        onChange={(val) => setFormData({ ...formData, neighborhood: val })}
+                      />
                     </div>
                   </div>
 
