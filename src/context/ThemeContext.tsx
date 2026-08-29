@@ -15,7 +15,7 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 const themeScript = `
 (function(){
   try {
-    var t = localStorage.getItem('impporta-theme') || 'dark';
+    var t = localStorage.getItem('impporta-theme') || 'light';
     document.documentElement.setAttribute('data-theme', t);
   } catch(e) {}
 })();
@@ -24,8 +24,8 @@ const themeScript = `
 export function ThemeProvider({ children }: { children: ReactNode }) {
   // Read theme synchronously from the DOM so it matches the inline script
   const [theme, setTheme] = useState<Theme>(() => {
-    if (typeof window === 'undefined') return 'dark';
-    return (document.documentElement.getAttribute('data-theme') as Theme) || 'dark';
+    if (typeof window === 'undefined') return 'light';
+    return (document.documentElement.getAttribute('data-theme') as Theme) || 'light';
   });
 
   useEffect(() => {
