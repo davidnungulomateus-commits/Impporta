@@ -293,7 +293,6 @@ export default function LandingPage() {
         colServices: 'Tipologias',
         colZones: 'Bairros',
         colContact: 'Contacto & Suporte',
-        portalLink: 'Acesso à Plataforma',
         rights: 'Todos os direitos reservados. Serviços de limpeza e gestão de instalações em Portugal.',
       },
     },
@@ -477,7 +476,6 @@ export default function LandingPage() {
         colServices: 'Services',
         colZones: 'Neighborhoods',
         colContact: 'Contact & Support',
-        portalLink: 'Platform Portal',
         rights: 'All rights reserved. Registered cleaning & facility management in Portugal.',
       },
     },
@@ -1198,7 +1196,6 @@ export default function LandingPage() {
             <div className="footer-column">
               <span className="footer-col-title">{t.footer.colContact}</span>
               <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">WhatsApp Support</a>
-              <Link href="/deals" style={{ color: 'var(--text-tertiary)', fontSize: '0.75rem' }}>{t.footer.portalLink}</Link>
             </div>
           </div>
         </div>
