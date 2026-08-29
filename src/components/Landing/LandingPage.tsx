@@ -75,10 +75,20 @@ export default function LandingPage() {
     lang === 'pt' ? 'Outra zona na Grande Lisboa' : 'Other in Greater Lisbon',
   ];
 
+  const submittedWhatsAppMessage = encodeURIComponent(
+    lang === 'pt'
+      ? `Olá! Gostaria de pedir a primeira limpeza gratuita para o meu Alojamento Local.\n\n👤 Nome: ${formData.name}\n📱 Contacto: ${formData.phone}\n🏠 Unidades: ${formData.units}\n📍 Bairro: ${formData.neighborhood}`
+      : `Hello! I would like to request the first free turnover clean for my short-term rental.\n\n👤 Name: ${formData.name}\n📱 Phone: ${formData.phone}\n🏠 Units: ${formData.units}\n📍 Neighborhood: ${formData.neighborhood}`
+  );
+  const submittedWhatsAppUrl = `https://wa.me/351927322095?text=${submittedWhatsAppMessage}`;
+
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.phone) return;
     setFormSubmitted(true);
+    if (typeof window !== 'undefined') {
+      window.open(submittedWhatsAppUrl, '_blank', 'noopener,noreferrer');
+    }
   };
 
   const whatsappMessage = encodeURIComponent(
@@ -86,7 +96,7 @@ export default function LandingPage() {
       ? `Olá! Gostaria de experimentar a primeira limpeza gratuita para o meu Alojamento Local (${formData.units}) em ${formData.neighborhood}.`
       : `Hello! I would like to try the first free turnover clean for my short-term rental (${formData.units}) in ${formData.neighborhood}.`
   );
-  const whatsappUrl = `https://wa.me/351910000000?text=${whatsappMessage}`;
+  const whatsappUrl = `https://wa.me/351927322095?text=${whatsappMessage}`;
 
   const scrollToForm = () => {
     const el = document.getElementById('claim-trial');
@@ -1074,7 +1084,7 @@ export default function LandingPage() {
                     {t.form.successDesc(formData.name, formData.phone)}
                   </p>
                   <a
-                    href={whatsappUrl}
+                    href={submittedWhatsAppUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn-primary-hero mt-4"
