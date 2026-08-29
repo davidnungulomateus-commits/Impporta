@@ -31,10 +31,10 @@ export const metadata: Metadata = {
 const themeScript = `
 (function(){
   try {
-    var t = localStorage.getItem('impporta-theme') || 'dark';
+    var t = localStorage.getItem('impporta-theme') || 'light';
     document.documentElement.setAttribute('data-theme', t);
   } catch(e) {
-    document.documentElement.setAttribute('data-theme', 'dark');
+    document.documentElement.setAttribute('data-theme', 'light');
   }
 })();
 `;
