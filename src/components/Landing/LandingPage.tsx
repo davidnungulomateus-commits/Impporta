@@ -21,7 +21,6 @@ import {
   Flame,
   KeyRound,
   FileCheck,
-  Globe,
   ChevronDown
 } from 'lucide-react';
 
@@ -117,30 +116,82 @@ export default function LandingPage() {
     name: '',
     phone: '',
     units: '1 unit',
-    neighborhood: 'Baixa / Chiado',
+    neighborhood: 'Lisboa - Baixa / Chiado',
+    customLocation: '',
   });
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [sliderPosition, setSliderPosition] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
 
-  const neighborhoods = [
-    'Baixa / Chiado',
-    'Alfama / Castelo',
-    'Bairro Alto / Misericórdia',
-    'Príncipe Real',
-    'Arroios / Anjos',
-    'Campo de Ourique / Estrela',
-    'Avenidas Novas / Saldanha',
-    'Santos / Alcântara',
-    'Belém / Ajuda',
-    'Parque das Nações',
-    lang === 'pt' ? 'Outra zona na Grande Lisboa' : 'Other in Greater Lisbon',
+  // Extensive locations list covering Lisboa, Cascais, Oeiras, Sintra and surroundings
+  const locationOptions = [
+    // Lisboa
+    { value: 'Lisboa - Baixa / Chiado', label: 'Lisboa - Baixa / Chiado' },
+    { value: 'Lisboa - Alfama / Castelo / Graça', label: 'Lisboa - Alfama / Castelo / Graça' },
+    { value: 'Lisboa - Bairro Alto / Príncipe Real', label: 'Lisboa - Bairro Alto / Príncipe Real' },
+    { value: 'Lisboa - Arroios / Anjos / Penha de França', label: 'Lisboa - Arroios / Anjos / Penha de França' },
+    { value: 'Lisboa - Campo de Ourique / Estrela / Lapa', label: 'Lisboa - Campo de Ourique / Estrela / Lapa' },
+    { value: 'Lisboa - Avenidas Novas / Saldanha / Alvalade', label: 'Lisboa - Avenidas Novas / Saldanha / Alvalade' },
+    { value: 'Lisboa - Belém / Ajuda / Restelo', label: 'Lisboa - Belém / Ajuda / Restelo' },
+    { value: 'Lisboa - Parque das Nações / Expo', label: 'Lisboa - Parque das Nações / Expo' },
+    { value: 'Lisboa - Santos / Alcântara', label: 'Lisboa - Santos / Alcântara' },
+    { value: 'Lisboa - Lumiar / Telheiras / Benfica', label: 'Lisboa - Lumiar / Telheiras / Benfica' },
+    // Cascais
+    { value: 'Cascais - Centro & Baía', label: 'Cascais - Centro & Baía' },
+    { value: 'Cascais - Estoril & Parede', label: 'Cascais - Estoril & Parede' },
+    { value: 'Cascais - Carcavelos & São Pedro', label: 'Cascais - Carcavelos & São Pedro' },
+    { value: 'Cascais - São Domingos de Rana / Alcabideche', label: 'Cascais - São Domingos de Rana / Alcabideche' },
+    { value: 'Cascais - Guincho & Quinta da Marinha', label: 'Cascais - Guincho & Quinta da Marinha' },
+    // Oeiras
+    { value: 'Oeiras - Centro & Paço de Arcos', label: 'Oeiras - Centro & Paço de Arcos' },
+    { value: 'Oeiras - Algés, Linda-a-Velha & Cruz Quebrada', label: 'Oeiras - Algés, Linda-a-Velha & Cruz Quebrada' },
+    { value: 'Oeiras - Carnaxide & Queijas', label: 'Oeiras - Carnaxide & Queijas' },
+    { value: 'Oeiras - Porto Salvo & Barcarena', label: 'Oeiras - Porto Salvo & Barcarena' },
+    // Sintra
+    { value: 'Sintra - Vila & Centro Histórico', label: 'Sintra - Vila & Centro Histórico' },
+    { value: 'Sintra - Colares, Praia das Maçãs & Azenhas do Mar', label: 'Sintra - Colares, Praia das Maçãs & Azenhas do Mar' },
+    { value: 'Sintra - Queluz, Belas & Massamá', label: 'Sintra - Queluz, Belas & Massamá' },
+    { value: 'Sintra - Mem Martins, Rio de Mouro & Algueirão', label: 'Sintra - Mem Martins, Rio de Mouro & Algueirão' },
+    // Arredores & Margem Sul
+    { value: 'Amadora & Odivelas', label: 'Amadora & Odivelas' },
+    { value: 'Loures & Sacavém', label: 'Loures & Sacavém' },
+    { value: 'Margem Sul - Almada / Costa da Caparica', label: 'Margem Sul - Almada / Costa da Caparica' },
+    { value: 'Outro', label: lang === 'pt' ? 'Outra localização (escrever)' : 'Other location (type below)' },
   ];
+
+  // Grouped location chips for visual display
+  const locationGroups = [
+    {
+      region: lang === 'pt' ? 'Lisboa Centro' : 'Lisbon Central',
+      places: ['Baixa & Chiado', 'Alfama & Castelo', 'Bairro Alto & Príncipe Real', 'Arroios & Anjos', 'Campo de Ourique & Estrela', 'Saldanha & Avenidas Novas', 'Belém & Ajuda', 'Parque das Nações'],
+    },
+    {
+      region: lang === 'pt' ? 'Linha de Cascais' : 'Cascais Coast',
+      places: ['Cascais Centro', 'Estoril', 'Parede', 'Carcavelos', 'São Pedro do Estoril', 'São Domingos de Rana', 'Guincho'],
+    },
+    {
+      region: 'Oeiras',
+      places: ['Oeiras Centro', 'Paço de Arcos', 'Algés', 'Linda-a-Velha', 'Carnaxide', 'Porto Salvo'],
+    },
+    {
+      region: lang === 'pt' ? 'Sintra & Litoral' : 'Sintra & Coast',
+      places: ['Sintra Vila', 'Colares', 'Praia das Maçãs', 'Azenhas do Mar', 'Queluz & Belas', 'Mem Martins & Rio de Mouro'],
+    },
+    {
+      region: lang === 'pt' ? 'Outros Arredores' : 'Surrounding Areas',
+      places: ['Amadora', 'Odivelas', 'Loures', 'Almada', 'Costa da Caparica'],
+    },
+  ];
+
+  const resolvedLocation =
+    formData.neighborhood === 'Outro' && formData.customLocation.trim()
+      ? formData.customLocation.trim()
+      : formData.neighborhood;
 
   const submittedWhatsAppMessage = encodeURIComponent(
     lang === 'pt'
-      ? `Olá! Gostaria de pedir a primeira limpeza gratuita para o meu Alojamento Local.\n\n👤 Nome: ${formData.name}\n📱 Contacto: ${formData.phone}\n🏠 Unidades: ${formData.units}\n📍 Bairro: ${formData.neighborhood}`
-      : `Hello! I would like to request the first free turnover clean for my short-term rental.\n\n👤 Name: ${formData.name}\n📱 Phone: ${formData.phone}\n🏠 Units: ${formData.units}\n📍 Neighborhood: ${formData.neighborhood}`
+      ? `Olá! Gostaria de pedir a primeira limpeza gratuita para o meu Alojamento Local.\n\n👤 Nome: ${formData.name}\n📱 Contacto: ${formData.phone}\n🏠 Unidades: ${formData.units}\n📍 Localização: ${resolvedLocation}`
+      : `Hello! I would like to request the first free turnover clean for my short-term rental.\n\n👤 Name: ${formData.name}\n📱 Phone: ${formData.phone}\n🏠 Units: ${formData.units}\n📍 Location: ${resolvedLocation}`
   );
   const submittedWhatsAppUrl = `https://wa.me/351927322095?text=${submittedWhatsAppMessage}`;
 
@@ -155,8 +206,8 @@ export default function LandingPage() {
 
   const whatsappMessage = encodeURIComponent(
     lang === 'pt'
-      ? `Olá! Gostaria de experimentar a primeira limpeza gratuita para o meu Alojamento Local (${formData.units}) em ${formData.neighborhood}.`
-      : `Hello! I would like to try the first free turnover clean for my short-term rental (${formData.units}) in ${formData.neighborhood}.`
+      ? `Olá! Gostaria de experimentar a primeira limpeza gratuita para o meu Alojamento Local (${formData.units}) em ${resolvedLocation}.`
+      : `Hello! I would like to try the first free turnover clean for my short-term rental (${formData.units}) in ${resolvedLocation}.`
   );
   const whatsappUrl = `https://wa.me/351927322095?text=${whatsappMessage}`;
 
@@ -176,7 +227,7 @@ export default function LandingPage() {
 
   const t = {
     pt: {
-      brandSub: 'Limpeza de Alojamento Local Lisboa',
+      brandSub: 'Lisboa · Cascais · Oeiras · Sintra',
       nav: {
         whyUs: 'Porquê Nós',
         inclusions: 'O Que Inclui',
@@ -186,10 +237,10 @@ export default function LandingPage() {
         freeCleanBtn: '1ª Limpeza Grátis',
       },
       hero: {
-        pill: 'Concebido para Anfitriões de Airbnb & AL com 1–5 Unidades em Lisboa',
+        pill: 'Concebido para Anfitriões de Airbnb & AL em Lisboa, Cascais, Oeiras e Sintra',
         headlinePart1: 'A sua próxima avaliação de 1 estrela',
         headlinePart2: 'começa na casa de banho.',
-        subheadline: 'Um turnover mal feito não perde apenas um hóspede — perde os próximos dez. Protegemos a sua receita de AL com limpezas 100% verificadas por foto, padrão de hotel e com entrega garantida antes do check-in das 15:00.',
+        subheadline: 'Um turnover mal feito não perde apenas um hóspede — perde os próximos dez. Protegemos a sua receita de AL em Lisboa, Cascais, Oeiras e Sintra com limpezas 100% verificadas por foto, padrão de hotel e entrega garantida antes do check-in das 15:00.',
         ctaPrimary: 'Pedir 1ª Limpeza Gratuita',
         ctaSecondary: 'Falar por WhatsApp',
         guarantee: 'Sem contratos de fidelização · Cancele quando quiser',
@@ -207,11 +258,11 @@ export default function LandingPage() {
       },
       pain: {
         tag: 'A Realidade do Alojamento Local',
-        title: 'Porque é que as limpezas tradicionais falham no AL em Lisboa',
-        subtitle: 'As limpezas domésticas funcionam com rotinas semanais. O Alojamento Local exige turnovers rápidos e rigorosos, onde um único cabelo esquecido arruína o estatuto de Superhost.',
+        title: 'Porque é que as limpezas tradicionais falham no AL em Lisboa e arredores',
+        subtitle: 'As limpezas domésticas funcionam com rotinas semanais. O Alojamento Local em Lisboa, Cascais, Oeiras e Sintra exige turnovers rápidos e rigorosos, onde um único cabelo esquecido arruína o estatuto de Superhost.',
         card1Badge: 'Janela Apertada',
         card1Title: 'A janela impossível das 10h às 15h',
-        card1Text: 'Checkout às 10h00, novo check-in às 15h00. Sem margem para erros, sem atrasos e sem tempo para ter de atravessar Lisboa para corrigir falhas.',
+        card1Text: 'Checkout às 10h00, novo check-in às 15h00. Sem margem para erros, sem atrasos e sem tempo para ter de atravessar a cidade para corrigir falhas.',
         card2Badge: 'Roleta de Qualidade',
         card2Title: 'Qualidade inconsistente em cada limpeza',
         card2Text: 'Uma limpeza corre bem, a seguinte deixa camas mal feitas ou pó. Não devia ter de inspecionar fisicamente cada unidade para poder dormir tranquilo.',
@@ -269,7 +320,7 @@ export default function LandingPage() {
         t0Title: 'Estúdio / T0',
         t1Badge: '1 Quarto',
         t1Title: 'Apartamento T1',
-        t1Ribbon: 'Mais Comum em Lisboa',
+        t1Ribbon: 'Mais Comum na Região',
         t2Badge: '2 Quartos',
         t2Title: 'Apartamento T2',
         t3Badge: '3 Quartos',
@@ -283,7 +334,7 @@ export default function LandingPage() {
         featureT3Large: 'Unidade grande e desinfeção profunda',
         bookTrialBtn: 'Pedir Limpeza Grátis',
         bookT1Btn: 'Obter Limpeza T1 Grátis',
-        volumeBanner: 'Gere entre 3 e 5 unidades em Lisboa? Descontos de volume e gestão de chaves dedicadas são ativados automaticamente.',
+        volumeBanner: 'Gere entre 3 e 5 unidades em Lisboa, Cascais, Oeiras ou Sintra? Descontos de volume e gestão de chaves dedicadas são ativados automaticamente.',
         trialBoxBadge: 'Oferta Sem Risco',
         trialBoxTitle: '1ª Limpeza gratuita — sem compromisso nem contrato.',
         trialBoxDesc: 'Experimente o nosso padrão no seu próximo checkout. Se não considerar a melhor limpeza que o seu AL já teve, não paga absolutamente nada.',
@@ -292,7 +343,7 @@ export default function LandingPage() {
       howItWorks: {
         tag: 'Processo & Confiança',
         title: 'Como funciona em 3 passos simples',
-        subtitle: 'Criámos o nosso processo para poupar mais de 10 horas semanais de stress operacional aos anfitriões de Lisboa.',
+        subtitle: 'Criámos o nosso processo para poupar mais de 10 horas semanais de stress operacional aos anfitriões da Grande Lisboa.',
         step1Num: '01',
         step1Title: 'Envie o seu calendário',
         step1Text: 'Sincronize o seu link iCal do Airbnb ou envie facilmente as datas de checkout na nossa conversa de WhatsApp.',
@@ -306,60 +357,63 @@ export default function LandingPage() {
         badge2: 'Lista de 42 Pontos com Foto',
         badge3: 'Gestão Segura de Cofres/Chaves',
         badge4: 'Entrega Garantida até às 15:00',
-        cohortBadge: 'Vagas de Lançamento em Lisboa',
-        cohortTitle: 'A integrar novos anfitriões na Baixa, Alfama, Chiado, Arroios e Príncipe Real',
+        cohortBadge: 'Vagas de Lançamento Ativas',
+        cohortTitle: 'A integrar anfitriões em Lisboa, Cascais, Oeiras, Sintra e arredores',
         cohortSub: 'Limitamos o número de anfitriões parceiros para assegurar que todas as unidades cumprem rigorosamente o horário das 15:00 sem exceções.',
       },
       neighborhoods: {
-        title: 'Cobertura em todas as principais zonas de AL de Lisboa',
+        title: 'Cobertura em Lisboa, Cascais, Oeiras, Sintra e Arredores',
+        subtitle: 'Equipas dedicadas distribuídas por todas as zonas turísticas e de lazer.',
       },
       faq: {
         tag: 'Perguntas Frequentes',
-        title: 'Respostas para Anfitriões de AL em Lisboa',
+        title: 'Respostas para Anfitriões de AL',
         q1: 'Como funciona o teste da "1ª Limpeza Grátis"?',
         a1: 'Basta preencher o formulário abaixo ou enviar mensagem no WhatsApp. Agendamos o seu próximo turnover, executamos a limpeza completa de 42 pontos e enviamos o relatório fotográfico. Não são pedidos dados de pagamento nem há qualquer compromisso.',
-        q2: 'Como é que a equipa acede às chaves e ao imóvel?',
-        a2: 'A maioria dos anfitriões utiliza fechaduras inteligentes ou cofres de chaves (Master Lock, Igloohome, Nuki). Seguimos protocolos rigorosos de segurança e as chaves são guardadas no cofre imediatamente após a saída da equipa.',
-        q3: 'O que acontece se o hóspede deixar danos ou sujidade extrema?',
-        a3: 'A equipa fotografa de imediato os danos e avisa-o pelo WhatsApp antes de avançar com o turnover, fornecendo a documentação exata necessária para abrir pedidos de caução no Airbnb AirCover.',
-        q4: 'Como é gerida a lavagem de roupas de cama e toalhas?',
-        a4: 'Fazemos a lavagem no local se a unidade tiver máquinas de lavar e secar, ou trocamos pelo conjunto sobresselente do anfitrião. Para quem tem várias unidades, também articulamos com serviços de lavandaria externa.',
+        q2: 'Cobrem imóveis fora de Lisboa (Cascais, Oeiras, Sintra)?',
+        a2: 'Sim! Temos equipas móveis permanentes a cobrir toda a Linha de Cascais, Oeiras, Sintra (Vila, Colares e arredores) e Margem Sul com as mesmas garantias de pontualidade.',
+        q3: 'Como é que a equipa acede às chaves e ao imóvel?',
+        a3: 'A maioria dos anfitriões utiliza fechaduras inteligentes ou cofres de chaves (Master Lock, Igloohome, Nuki). Seguimos protocolos rigorosos de segurança e as chaves são guardadas no cofre imediatamente após a saída da equipa.',
+        q4: 'O que acontece se o hóspede deixar danos ou sujidade extrema?',
+        a4: 'A equipa fotografa de imediato os danos e avisa-o pelo WhatsApp antes de avançar com o turnover, fornecendo a documentação exata necessária para abrir pedidos de caução no Airbnb AirCover.',
       },
       form: {
         tag: 'Vagas Limitadas de Lançamento',
         headline: 'Peça a sua primeira limpeza de turnover gratuita.',
-        sub: 'Sem cartão de crédito. Sem contratos de fidelização. Veja a diferença que turnovers com fotos verificadas trazem ao seu AL em Lisboa.',
+        sub: 'Sem cartão de crédito. Sem contratos de fidelização. Disponível para alojamentos em Lisboa, Cascais, Oeiras, Sintra e arredores.',
         perk1: 'Limpeza profunda completa com lista de 42 pontos',
         perk2: 'Relatório fotográfico enviado para o seu WhatsApp',
         perk3: 'Inspecção de danos e quebras antes da nova entrada',
         waBoxTitle: 'Prefere resposta imediata?',
-        waBoxDesc: 'Fale diretamente com a nossa equipa de operações de Lisboa no WhatsApp.',
+        waBoxDesc: 'Fale diretamente com a nossa equipa de operações no WhatsApp.',
         waBtn: 'Falar no WhatsApp Agora',
         boxTitle: 'Pedir Limpeza de Teste Gratuita',
-        boxSubtitle: 'Preencha 4 dados rápidos para reservar a sua vaga.',
+        boxSubtitle: 'Preencha os dados para agendar a sua limpeza sem custos.',
         nameLabel: 'O seu Nome',
         namePlaceholder: 'ex: Manuel Silva',
         phoneLabel: 'Número de WhatsApp / Telemóvel',
         phonePlaceholder: 'ex: +351 912 345 678',
         unitsLabel: 'Número de Unidades',
-        zoneLabel: 'Bairro em Lisboa',
+        zoneLabel: 'Localização do Imóvel',
+        customLocationLabel: 'Escreva a localização ou morada do seu AL',
+        customLocationPlaceholder: 'ex: Sintra - Colares, Carcavelos, Parede, etc.',
         submitBtn: 'Marcar Limpeza Gratuita',
         privacyNote: 'Sem spam. Apenas entraremos em contacto para agendar a sua limpeza de turnover.',
         successTitle: 'Pedido de Limpeza Gratuita Recebido!',
         successDesc: (name: string, phone: string) =>
-          `Obrigado, ${name}! A nossa equipa de Lisboa entrará em contacto para o seu WhatsApp (${phone}) em menos de 15 minutos para confirmar o seu agendamento.`,
+          `Obrigado, ${name}! A nossa equipa entrará em contacto para o seu WhatsApp (${phone}) em menos de 15 minutos para confirmar o seu agendamento.`,
         fastTrackBtn: 'Acelerar no WhatsApp',
       },
       footer: {
-        tagline: 'Serviço especializado de limpeza e turnover para anfitriões de Airbnb e Alojamento Local em Lisboa.',
+        tagline: 'Serviço especializado de limpeza e turnover para anfitriões de Airbnb e Alojamento Local em Lisboa, Cascais, Oeiras, Sintra e arredores.',
         colServices: 'Tipologias',
-        colZones: 'Bairros',
+        colZones: 'Zonas Atendidas',
         colContact: 'Contacto & Suporte',
         rights: 'Todos os direitos reservados. Serviços de limpeza e gestão de instalações em Portugal.',
       },
     },
     en: {
-      brandSub: 'Lisbon STR Cleaning',
+      brandSub: 'Lisbon · Cascais · Oeiras · Sintra',
       nav: {
         whyUs: 'Why Us',
         inclusions: 'Inclusions',
@@ -369,10 +423,10 @@ export default function LandingPage() {
         freeCleanBtn: 'First Clean Free',
       },
       hero: {
-        pill: 'Engineered for 1–5 Unit Airbnb & AL Hosts in Lisbon',
+        pill: 'Engineered for Airbnb & AL Hosts in Lisbon, Cascais, Oeiras & Sintra',
         headlinePart1: 'Your next 1-star review',
         headlinePart2: 'starts in the bathroom.',
-        subheadline: 'A dirty turnover doesn\'t just lose one guest — it loses the next ten. We protect your AL revenue with 100% photo-verified, hotel-standard turnovers guaranteed ready before your 3:00 PM check-in.',
+        subheadline: 'A dirty turnover doesn\'t just lose one guest — it loses the next ten. We protect your AL revenue across Lisbon, Cascais, Oeiras & Sintra with 100% photo-verified, hotel-standard turnovers guaranteed ready before your 3:00 PM check-in.',
         ctaPrimary: 'Get Your First Clean Free',
         ctaSecondary: 'Message on WhatsApp',
         guarantee: 'Zero contract lock-in · Cancel anytime',
@@ -390,11 +444,11 @@ export default function LandingPage() {
       },
       pain: {
         tag: 'The Reality of STR Hosting',
-        title: 'Why traditional cleaners fail Airbnb hosts in Lisbon',
-        subtitle: 'Domestic cleaners work on weekly routines. Alojamento Local runs on tight, unpredictable guest turnovers where a single missed hair costs superhost status.',
+        title: 'Why traditional cleaners fail Airbnb hosts across Greater Lisbon',
+        subtitle: 'Domestic cleaners work on weekly routines. Short-term rentals across Lisbon, Cascais, Oeiras & Sintra demand tight, rigorous turnovers where a single missed hair costs superhost status.',
         card1Badge: 'Turnaround Crunch',
         card1Title: 'The impossible 10am–3pm window',
-        card1Text: 'Checkout at 10:00 AM, next arrival at 3:00 PM. No room for delays, no second chances, and no time for you to rush across Lisbon to fix missed spots.',
+        card1Text: 'Checkout at 10:00 AM, next arrival at 3:00 PM. No room for delays, no second chances, and no time for you to rush across town to fix missed spots.',
         card2Badge: 'Quality Roulette',
         card2Title: 'Inconsistent quality every turnover',
         card2Text: 'One clean is great, the next leaves unmade beds or a dusty shower corner. You shouldn\'t have to physically inspect every unit yourself to sleep at night.',
@@ -452,7 +506,7 @@ export default function LandingPage() {
         t0Title: 'Studio / T0',
         t1Badge: '1 Bedroom',
         t1Title: 'T1 Apartment',
-        t1Ribbon: 'Most Common in Lisbon',
+        t1Ribbon: 'Most Common across Region',
         t2Badge: '2 Bedroom',
         t2Title: 'T2 Apartment',
         t3Badge: '3 Bedroom',
@@ -466,7 +520,7 @@ export default function LandingPage() {
         featureT3Large: 'Large unit turnover & deep sanitization',
         bookTrialBtn: 'Book Free Trial',
         bookT1Btn: 'Get T1 Clean Free',
-        volumeBanner: 'Managing 3 to 5 units in Lisbon? Volume pricing and dedicated key-holding discounts automatically kick in.',
+        volumeBanner: 'Managing 3 to 5 units in Lisbon, Cascais, Oeiras or Sintra? Volume pricing and dedicated key-holding discounts automatically kick in.',
         trialBoxBadge: 'Risk-Free Offer',
         trialBoxTitle: 'First clean free — no commitment, no contract.',
         trialBoxDesc: 'Test our turnover standard on your next guest checkout. If you don\'t think it\'s the best clean your AL has ever had, you owe nothing.',
@@ -475,7 +529,7 @@ export default function LandingPage() {
       howItWorks: {
         tag: 'Process Trust',
         title: 'How it works in 3 simple steps',
-        subtitle: 'We built our process to save Lisbon hosts 10+ hours a week in operational chaos.',
+        subtitle: 'We built our process to save hosts 10+ hours a week in operational chaos.',
         step1Num: '01',
         step1Title: 'Send your schedule',
         step1Text: 'Connect your Airbnb/iCal link or simply drop checkout dates in our dedicated WhatsApp thread.',
@@ -489,54 +543,57 @@ export default function LandingPage() {
         badge2: '42-Point Photo Checklist',
         badge3: 'Secure Key Lockbox Handling',
         badge4: 'Guaranteed Ready by 3:00 PM',
-        cohortBadge: 'Lisbon Launch Cohort',
-        cohortTitle: 'Currently onboarding hosts in Alfama, Chiado, Arroios & Príncipe Real',
-        cohortSub: 'We limit our Lisbon partner roster to ensure every unit receives guaranteed 3:00 PM turnaround times without compromise.',
+        cohortBadge: 'Active Launch Cohort',
+        cohortTitle: 'Onboarding hosts across Lisbon, Cascais, Oeiras, Sintra & surrounds',
+        cohortSub: 'We limit our partner roster to ensure every unit receives guaranteed 3:00 PM turnaround times without compromise.',
       },
       neighborhoods: {
-        title: 'Covering all core Airbnb hubs in Lisbon',
+        title: 'Covering Lisbon, Cascais, Oeiras, Sintra & Surrounding Hubs',
+        subtitle: 'Dedicated mobile turnover teams across all major short-term rental zones.',
       },
       faq: {
         tag: 'Frequently Asked Questions',
-        title: 'Answers for Lisbon AL Hosts',
+        title: 'Answers for Short-Term Rental Hosts',
         q1: 'How does the "First Clean Free" trial work?',
         a1: 'Submit the form below or message us on WhatsApp. We will schedule your upcoming turnover, complete the full 42-point turnover clean, and send you the verified photo report. No payment details required and zero obligation.',
-        q2: 'How do your cleaners handle keys and access?',
-        a2: 'Most hosts use smart locks or secure lockboxes (e.g. Master Lock, Igloohome, Nuki). Our vetted cleaners follow strict key security protocols and return keys immediately to lockboxes upon departure.',
-        q3: 'What happens if a guest leaves damage or a severe mess?',
-        a3: 'Our cleaners immediately take photos of the damage and notify you via WhatsApp before proceeding, providing the exact documentation needed for Airbnb AirCover deposit claims.',
-        q4: 'How do you manage linen and towel laundry?',
-        a4: 'We handle on-site washing if unit washers/dryers allow, or swap with host-supplied backup sets. For multi-unit hosts, off-site linen service coordination is also available.',
+        q2: 'Do you cover properties outside central Lisbon (Cascais, Oeiras, Sintra)?',
+        a2: 'Yes! We have dedicated teams operating across Lisbon, the entire Cascais coastline, Oeiras, Sintra (historic center, Colares, coastal beaches) and South Bay with the exact same punctual 3:00 PM guarantees.',
+        q3: 'How do your cleaners handle keys and access?',
+        a3: 'Most hosts use smart locks or secure lockboxes (Master Lock, Igloohome, Nuki). Our vetted cleaners follow strict key security protocols and return keys immediately to lockboxes upon departure.',
+        q4: 'What happens if a guest leaves damage or a severe mess?',
+        a4: 'Our cleaners immediately take photos of the damage and notify you via WhatsApp before proceeding, providing the exact documentation needed for Airbnb AirCover deposit claims.',
       },
       form: {
         tag: 'Limited Launch Spots',
         headline: 'Claim your first turnover clean free.',
-        sub: 'No credit card required. No lock-in contracts. See the difference verified photo turnovers make for your Lisbon AL.',
+        sub: 'No credit card required. No lock-in contracts. Available across Lisbon, Cascais, Oeiras, Sintra & surrounds.',
         perk1: 'Full 42-point turnover deep clean',
         perk2: 'Timestamped photo report to your WhatsApp',
         perk3: 'Pre-arrival damage & inspection check',
         waBoxTitle: 'Prefer instant response?',
-        waBoxDesc: 'Chat directly with our Lisbon operations team on WhatsApp.',
+        waBoxDesc: 'Chat directly with our operations team on WhatsApp.',
         waBtn: 'Chat on WhatsApp Now',
         boxTitle: 'Get Your Free Trial Clean',
-        boxSubtitle: 'Fill in 4 quick details to claim your spot.',
+        boxSubtitle: 'Fill in your details to claim your free turnover clean.',
         nameLabel: 'Your Name',
         namePlaceholder: 'e.g. Manuel Silva',
         phoneLabel: 'WhatsApp / Phone Number',
         phonePlaceholder: 'e.g. +351 912 345 678',
         unitsLabel: 'Number of Units',
-        zoneLabel: 'Lisbon Neighborhood',
+        zoneLabel: 'Property Location',
+        customLocationLabel: 'Type your exact location or address',
+        customLocationPlaceholder: 'e.g. Sintra - Colares, Carcavelos, Parede, etc.',
         submitBtn: 'Book Your Free Clean',
         privacyNote: 'No spam. We only contact you to schedule your turnover clean.',
         successTitle: 'Trial Clean Request Received!',
         successDesc: (name: string, phone: string) =>
-          `Thank you, ${name}! Our Lisbon team will message your WhatsApp (${phone}) within 15 minutes to confirm your turnover date.`,
+          `Thank you, ${name}! Our team will message your WhatsApp (${phone}) within 15 minutes to confirm your turnover date.`,
         fastTrackBtn: 'Fast-track on WhatsApp',
       },
       footer: {
-        tagline: 'Dedicated short-term rental turnover cleaning for Airbnb & Alojamento Local hosts in Lisbon.',
+        tagline: 'Dedicated short-term rental turnover cleaning for Airbnb & Alojamento Local hosts across Lisbon, Cascais, Oeiras, Sintra and surrounding areas.',
         colServices: 'Services',
-        colZones: 'Neighborhoods',
+        colZones: 'Regions Covered',
         colContact: 'Contact & Support',
         rights: 'All rights reserved. Registered cleaning & facility management in Portugal.',
       },
@@ -1015,7 +1072,7 @@ export default function LandingPage() {
             </div>
           </div>
 
-          {/* Insurance & Trust Badges */}
+          {/* Trust Badges */}
           <div className="trust-badges-row">
             <div className="trust-badge-item">
               <ShieldCheck size={20} className="text-accent" />
@@ -1044,19 +1101,32 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ── Lisbon Neighborhoods ────────────────────────────────────────── */}
+      {/* ── Lisboa, Cascais, Oeiras, Sintra & Surroundings ─────────────────── */}
       <section className="section-wrapper neighborhoods-section">
         <div className="content-container">
           <div className="neighborhoods-box">
             <div className="neighborhoods-header">
-              <MapPin size={22} className="text-accent" />
-              <h3>{t.neighborhoods.title}</h3>
+              <MapPin size={24} className="text-accent" />
+              <div>
+                <h3>{t.neighborhoods.title}</h3>
+                <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginTop: '2px' }}>
+                  {t.neighborhoods.subtitle}
+                </p>
+              </div>
             </div>
-            <div className="neighborhood-chips">
-              {neighborhoods.map((n) => (
-                <span key={n} className="chip">
-                  <Check size={12} /> {n}
-                </span>
+
+            <div className="location-groups-grid">
+              {locationGroups.map((grp) => (
+                <div key={grp.region} className="location-group-card">
+                  <div className="location-group-title">{grp.region}</div>
+                  <div className="neighborhood-chips">
+                    {grp.places.map((place) => (
+                      <span key={place} className="chip">
+                        <Check size={12} /> {place}
+                      </span>
+                    ))}
+                  </div>
+                </div>
               ))}
             </div>
           </div>
@@ -1202,11 +1272,26 @@ export default function LandingPage() {
                       <label>{t.form.zoneLabel}</label>
                       <CustomSelect
                         value={formData.neighborhood}
-                        options={neighborhoods.map((n) => ({ value: n, label: n }))}
+                        options={locationOptions}
                         onChange={(val) => setFormData({ ...formData, neighborhood: val })}
                       />
                     </div>
                   </div>
+
+                  {/* Custom Location Write-in Input */}
+                  {formData.neighborhood === 'Outro' && (
+                    <div className="form-group animate-fade-in" style={{ marginTop: '4px' }}>
+                      <label htmlFor="custom-location">{t.form.customLocationLabel}</label>
+                      <input
+                        id="custom-location"
+                        type="text"
+                        required
+                        placeholder={t.form.customLocationPlaceholder}
+                        value={formData.customLocation}
+                        onChange={(e) => setFormData({ ...formData, customLocation: e.target.value })}
+                      />
+                    </div>
+                  )}
 
                   <button type="submit" className="btn-form-submit">
                     <span>{t.form.submitBtn}</span>
@@ -1246,10 +1331,11 @@ export default function LandingPage() {
             </div>
             <div className="footer-column">
               <span className="footer-col-title">{t.footer.colZones}</span>
-              <span>Baixa & Chiado</span>
-              <span>Alfama & Castelo</span>
-              <span>Príncipe Real & Arroios</span>
-              <span>Campo de Ourique & Estrela</span>
+              <span>Lisboa & Parque das Nações</span>
+              <span>Cascais, Estoril & Carcavelos</span>
+              <span>Oeiras, Paço de Arcos & Algés</span>
+              <span>Sintra, Colares & Queluz</span>
+              <span>Almada & Costa da Caparica</span>
             </div>
             <div className="footer-column">
               <span className="footer-col-title">{t.footer.colContact}</span>
@@ -1258,7 +1344,7 @@ export default function LandingPage() {
           </div>
         </div>
         <div className="footer-bottom">
-          <p>© 2026 Impporta AL Lisboa. {t.footer.rights}</p>
+          <p>© 2026 Impporta AL. {t.footer.rights}</p>
         </div>
       </footer>
     </div>

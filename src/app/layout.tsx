@@ -9,18 +9,20 @@ import { ThemeProvider } from "@/context/ThemeContext";
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
-  title: "Limpeza Alojamento Local Lisboa | Turnover Cleaning for Airbnb Hosts",
-  description: "Turnover cleaning in Lisbon engineered for 1–5 unit Airbnb & AL hosts. 100% photo-verified, damage reporting. Claim your first clean free.",
+  title: "Limpeza Alojamento Local Lisboa, Cascais, Oeiras & Sintra | Airbnb Turnover Cleaning",
+  description: "Limpeza de turnover para Alojamento Local e Airbnb em Lisboa, Cascais, Oeiras e Sintra. 100% verificado por fotos, relatórios de danos e 1ª limpeza gratuita.",
   keywords: [
     "limpeza alojamento local Lisboa",
-    "limpeza Airbnb Lisboa",
-    "turnover cleaning Lisboa",
-    "short term rental cleaning Lisbon",
-    "limpeza AL Lisboa"
+    "limpeza Airbnb Cascais",
+    "limpeza AL Oeiras",
+    "turnover cleaning Sintra",
+    "limpeza alojamento local Sintra",
+    "short term rental cleaning Lisbon Cascais",
+    "limpeza AL Estoril Carcavelos"
   ],
   openGraph: {
-    title: "Limpeza Alojamento Local Lisboa | First Clean Free for Airbnb Hosts",
-    description: "Revenue protection cleaning for Lisbon Airbnb & AL hosts. 100% photo-verified checkouts, damage reports, no lock-in contracts.",
+    title: "Limpeza Alojamento Local Lisboa, Cascais, Oeiras & Sintra | 1ª Limpeza Grátis",
+    description: "Proteção de receita e turnover profissional para anfitriões de AL em Lisboa, Cascais, Oeiras e Sintra.",
     locale: "pt_PT",
     type: "website",
   }
