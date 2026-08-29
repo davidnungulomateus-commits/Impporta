@@ -21,7 +21,10 @@ import {
   Flame,
   KeyRound,
   FileCheck,
-  ChevronDown
+  ChevronDown,
+  RefreshCw,
+  Eye,
+  DollarSign
 } from 'lucide-react';
 
 type Language = 'pt' | 'en';
@@ -229,7 +232,7 @@ export default function LandingPage() {
     pt: {
       brandSub: 'Lisboa · Cascais · Oeiras · Sintra',
       nav: {
-        whyUs: 'Porquê Nós',
+        whyUs: 'Dores & Soluções',
         inclusions: 'O Que Inclui',
         pricing: 'Preços',
         howItWorks: 'Como Funciona',
@@ -240,7 +243,7 @@ export default function LandingPage() {
         pill: 'Concebido para Anfitriões de Airbnb & AL em Lisboa, Cascais, Oeiras e Sintra',
         headlinePart1: 'A sua próxima avaliação de 1 estrela',
         headlinePart2: 'começa na casa de banho.',
-        subheadline: 'Um turnover mal feito não perde apenas um hóspede — perde os próximos dez. Protegemos a sua receita de AL em Lisboa, Cascais, Oeiras e Sintra com limpezas 100% verificadas por foto, padrão de hotel e entrega garantida antes do check-in das 15:00.',
+        subheadline: 'Não vendemos apenas limpezas domésticas — entregamos Operações de Turnover e Proteção de Avaliações. Protegemos a sua receita em Lisboa, Cascais, Oeiras e Sintra com 100% de prova fotográfica, zero estrangulamentos de lavandaria e entregas garantidas antes das 15:00.',
         ctaPrimary: 'Pedir 1ª Limpeza Gratuita',
         ctaSecondary: 'Falar por WhatsApp',
         guarantee: 'Sem contratos de fidelização · Cancele quando quiser',
@@ -248,30 +251,42 @@ export default function LandingPage() {
       stats: {
         stat1Num: '~3.000 €',
         stat1Label: 'Custo de 1 Mau Turnover',
-        stat1Desc: 'Média de receita perdida por anfitrião em reembolsos, cancelamentos e queda no algoritmo do Airbnb.',
+        stat1Desc: 'Média de receita perdida por anfitrião em reembolsos a hóspedes, noites canceladas e penalizações no algoritmo do Airbnb.',
         stat2Num: '-15% a -20%',
         stat2Label: 'Queda nas Reservas',
-        stat2Desc: 'Causada por uma simples descida de 0.5 estrelas na pontuação de limpeza em plataformas de AL.',
+        stat2Desc: 'Causada por uma descida de apenas 0.5 estrelas na pontuação de limpeza em plataformas de AL.',
         stat3Num: '100% Verificado',
-        stat3Label: 'Fotos & Relatório de Danos',
-        stat3Desc: 'Verificação fotográfica com carimbo de data/hora enviada para o seu telemóvel antes da entrada do hóspede.',
+        stat3Label: 'Auditoria de 10–15 Fotos',
+        stat3Desc: 'Relatório fotográfico com carimbo de data/hora enviado para o WhatsApp antes da entrada do hóspede contra pedidos falsos de reembolso.',
       },
       pain: {
-        tag: 'A Realidade do Alojamento Local',
-        title: 'Porque é que as limpezas tradicionais falham no AL em Lisboa e arredores',
-        subtitle: 'As limpezas domésticas funcionam com rotinas semanais. O Alojamento Local em Lisboa, Cascais, Oeiras e Sintra exige turnovers rápidos e rigorosos, onde um único cabelo esquecido arruína o estatuto de Superhost.',
-        card1Badge: 'Janela Apertada',
-        card1Title: 'A janela impossível das 10h às 15h',
-        card1Text: 'Checkout às 10h00, novo check-in às 15h00. Sem margem para erros, sem atrasos e sem tempo para ter de atravessar a cidade para corrigir falhas.',
-        card2Badge: 'Roleta de Qualidade',
-        card2Title: 'Qualidade inconsistente em cada limpeza',
-        card2Text: 'Uma limpeza corre bem, a seguinte deixa camas mal feitas ou pó. Não devia ter de inspecionar fisicamente cada unidade para poder dormir tranquilo.',
-        card3Badge: 'Zero Provas',
-        card3Title: 'Sem visibilidade quando está longe',
-        card3Text: 'Recebe apenas uma mensagem a dizer "feito", mas e o frigorífico, os lençóis ou o ralo? Precisa de prova fotográfica, não de confiança cega.',
-        card4Badge: 'Horários Rígidos',
-        card4Title: 'Horários rígidos de 9h às 17h não servem o AL',
-        card4Text: 'Reservas de última hora, check-ins antecipados e turnovers seguidos não funcionam com empresas convencionais. Adaptamo-nos ao seu calendário.',
+        tag: 'Dores Reais de Anfitriões vs. A Nossa Solução',
+        title: 'Porque é que 90% das limpezas tradicionais falham no Alojamento Local',
+        subtitle: 'Analisámos os maiores pesadelos reportados por anfitriões de AL e desenhámos uma operação profissional que elimina cada um desses riscos.',
+        card1Badge: 'Queda de Padrão ("Standard Drift")',
+        card1Title: 'Começam bem, mas a qualidade cai ao fim de poucas semanas',
+        card1Text: 'Cabelos esquecidos no ralo ou nos lençóis, micro-ondas e frigoríficos engordurados, café por limpar e pó debaixo da cama custam o estatuto de Superhost.',
+        card1Sol: 'Nossa Solução: Lista digital rigorosa de 42 pontos com fotos obrigatórias e normas de hotelaria em todas as limpezas sem exceção.',
+        card2Badge: 'O Estrangulamento da Lavandaria',
+        card2Title: 'Esperar 1–2h por máquinas atrasa a janela das 10h às 15h',
+        card2Text: 'Lavandaria no imóvel é o maior desperdício de tempo. Se a máquina de secar demorar, o turnover atrasa e o próximo check-in entra em pânico.',
+        card2Sol: 'Nossa Solução: Sistema de rotação rápida de lençóis e parceria de lavandaria externa — turnovers até 50% mais rápidos e sempre a horas.',
+        card3Badge: 'Faltas & Zero Backup',
+        card3Title: 'Faxineiros que faltam à última hora em domingos e feriados',
+        card3Text: 'Ficar sem ninguém a uma hora do checkout num domingo de época alta obriga o anfitrião a largar tudo e correr para limpar o alojamento.',
+        card3Sol: 'Nossa Solução: SLA de Backup 100% Garantido 7 dias/semana — se um profissional adoecer, um substituto treinado assume automaticamente.',
+        card4Badge: 'Extorsão de Reembolsos',
+        card4Title: 'Hóspedes que inventam queixas para exigir noites grátis',
+        card4Text: 'Sem prova documental de como o apartamento foi entregue, o suporte do Airbnb tende a dar razão ao hóspede e retirar dinheiro ao anfitrião.',
+        card4Sol: 'Nossa Solução: Auditoria de 10–15 fotos com carimbo de data/hora enviada para o seu WhatsApp antes de cada check-in como prova irrefutável.',
+        card5Badge: 'Danos Ocultos & AirCover',
+        card5Title: 'Danos não reportados a tempo impedem acionar o AirCover',
+        card5Text: 'Quando o anfitrião descobre móveis partidos, nódoas ou comandos desaparecidos já o novo hóspede entrou, perdendo o direito à caução.',
+        card5Sol: 'Nossa Solução: "Inspeção de Chegada" nos primeiros 15 minutos com fotos imediatas para reportar ao Airbnb antes da nova entrada.',
+        card6Badge: 'Consumíveis & Manutenção',
+        card6Title: 'Falta de papel higiénico, cápsulas de café e luzes fundidas',
+        card6Text: 'Cleaners comuns ignoram lâmpadas fundidas, comandos sem pilhas e deixam o hóspede sem café de boas-vindas nem amenidades.',
+        card6Sol: 'Nossa Solução: Controlo e reposição de consumíveis em cada turnover + verificação técnica preventiva de lâmpadas, AC e canalização.',
       },
       slider: {
         tag: 'Padrão Visual de Entrega',
@@ -293,7 +308,7 @@ export default function LandingPage() {
         title: 'O que está incluído em cada limpeza',
         subtitle: 'Cada turnover é executado com base numa lista de verificação de 42 pontos criada para proteger o seu estatuto de Superhost.',
         card1Title: 'Limpeza Profunda de Turnover',
-        card1Desc: 'Cozinha impecável, desinfeção de casas de banho, chão sem cabelos, rodapés limpos e espelhos brilhantes em todo o apartamento.',
+        card1Desc: 'Cozinha impecável, desinfeção de casas de banho, chão sem cabelos, rodapés limpos, interior de micro-ondas e espelhos brilhantes.',
         card1Tag: 'Incluído em todas as limpezas',
         card2Title: 'Camas Feitas com Padrão de Hotel',
         card2Desc: 'Troca de roupa de cama com cantos hospitalares dobrados, almofadas afofadas e conjuntos de toalhas organizados sobre a cama.',
@@ -301,14 +316,14 @@ export default function LandingPage() {
         card3Title: 'Reposição de Consumíveis',
         card3Desc: 'Produtos de higiene, cápsulas de café, chá e papel fornecidos pelo anfitrião repostos de raiz (pack de abastecimento opcional disponível).',
         card3Tag: 'Consumíveis do anfitrião ou pack extra',
-        card4Title: 'Lista de Verificação com Fotos',
-        card4Desc: 'Fotografias de alta resolução de cada divisão enviadas para o seu WhatsApp imediatamente após a conclusão do turnover.',
-        card4Tag: '100% de prova no seu telemóvel',
+        card4Title: 'Auditoria com 10–15 Fotos',
+        card4Desc: 'Fotografias com carimbo de data/hora de cada divisão enviadas para o seu WhatsApp imediatamente após a conclusão do turnover.',
+        card4Tag: '100% de prova contra extorsões',
         card5Title: 'Relatório de Danos Pré-Chegada',
-        card5Desc: 'Documentamos qualquer dano, quebras ou anomalias com fotos antes da chegada do próximo hóspede para proteger o seu depósito no Airbnb.',
+        card5Desc: 'Inspeção nos primeiros 15 minutos: documentamos qualquer quebra com fotos antes da chegada do próximo hóspede para acionar o AirCover.',
         card5Tag: 'Protege os seus pedidos no AirCover',
         card6Title: 'Profissionais Verificados e Especializados',
-        card6Desc: 'Profissionais com antecedentes verificados e formação especializada em Alojamento Local e hotelaria.',
+        card6Desc: 'Profissionais com antecedentes verificados e formação especializada em turnovers rápidos de Alojamento Local e hotelaria.',
         card6Tag: 'Equipa de Confiança',
       },
       pricing: {
@@ -325,10 +340,10 @@ export default function LandingPage() {
         t2Title: 'Apartamento T2',
         t3Badge: '3 Quartos',
         t3Title: 'Apartamento T3',
-        featureFullClean: 'Limpeza completa de turnover',
+        featureFullClean: 'Limpeza completa de turnover (42 pontos)',
         featureBedLinen: 'Troca e arrumação de roupa de cama',
-        featurePhotoChecklist: 'Relatório fotográfico no WhatsApp',
-        featureDamageReport: 'Verificação e relatório de danos',
+        featurePhotoChecklist: 'Auditoria de fotos no WhatsApp',
+        featureDamageReport: 'Inspeção de danos para AirCover',
         featureT1Full: 'Quarto, sala, casa de banho e cozinha',
         featureT2Beds: 'Até 2 quartos e 2 casas de banho',
         featureT3Large: 'Unidade grande e desinfeção profunda',
@@ -345,16 +360,16 @@ export default function LandingPage() {
         title: 'Como funciona em 3 passos simples',
         subtitle: 'Criámos o nosso processo para poupar mais de 10 horas semanais de stress operacional aos anfitriões da Grande Lisboa.',
         step1Num: '01',
-        step1Title: 'Envie o seu calendário',
-        step1Text: 'Sincronize o seu link iCal do Airbnb ou envie facilmente as datas de checkout na nossa conversa de WhatsApp.',
+        step1Title: 'Sincronize o seu calendário',
+        step1Text: 'Integre o link iCal do Airbnb/PMS ou envie simplesmente as datas de checkout na nossa conversa de WhatsApp.',
         step2Num: '02',
-        step2Title: 'Limpamos e enviamos fotos de prova',
-        step2Text: 'A nossa equipa cumpre a lista de 42 pontos, repõe os consumíveis e envia as fotos com carimbo de data/hora.',
+        step2Title: 'Limpamos e enviamos auditoria fotográfica',
+        step2Text: 'A nossa equipa cumpre a lista de 42 pontos, inspeciona danos em 15 minutos, repõe consumíveis e envia 10–15 fotos com carimbo de hora.',
         step3Num: '03',
-        step3Title: 'Reveja e relaxe',
+        step3Title: 'Reveja e relaxe com proteção total',
         step3Text: 'O seu hóspede entra num alojamento impecável. Fatura mensal consolidada. Cancele quando quiser, sem fidelização.',
         badge1: 'Equipa Verificada & de Confiança',
-        badge2: 'Lista de 42 Pontos com Foto',
+        badge2: 'Auditoria com 10–15 Fotos',
         badge3: 'Gestão Segura de Cofres/Chaves',
         badge4: 'Entrega Garantida até às 15:00',
         cohortBadge: 'Vagas de Lançamento Ativas',
@@ -363,27 +378,35 @@ export default function LandingPage() {
       },
       neighborhoods: {
         title: 'Cobertura em Lisboa, Cascais, Oeiras, Sintra e Arredores',
-        subtitle: 'Equipas dedicadas distribuídas por todas as zonas turísticas e de lazer.',
+        subtitle: 'Equipas móveis permanentes distribuídas por todas as zonas turísticas e de lazer.',
       },
       faq: {
-        tag: 'Perguntas Frequentes',
-        title: 'Respostas para Anfitriões de AL',
-        q1: 'Como funciona o teste da "1ª Limpeza Grátis"?',
-        a1: 'Basta preencher o formulário abaixo ou enviar mensagem no WhatsApp. Agendamos o seu próximo turnover, executamos a limpeza completa de 42 pontos e enviamos o relatório fotográfico. Não são pedidos dados de pagamento nem há qualquer compromisso.',
-        q2: 'Cobrem imóveis fora de Lisboa (Cascais, Oeiras, Sintra)?',
-        a2: 'Sim! Temos equipas móveis permanentes a cobrir toda a Linha de Cascais, Oeiras, Sintra (Vila, Colares e arredores) e Margem Sul com as mesmas garantias de pontualidade.',
-        q3: 'Como é que a equipa acede às chaves e ao imóvel?',
-        a3: 'A maioria dos anfitriões utiliza fechaduras inteligentes ou cofres de chaves (Master Lock, Igloohome, Nuki). Seguimos protocolos rigorosos de segurança e as chaves são guardadas no cofre imediatamente após a saída da equipa.',
-        q4: 'O que acontece se o hóspede deixar danos ou sujidade extrema?',
-        a4: 'A equipa fotografa de imediato os danos e avisa-o pelo WhatsApp antes de avançar com o turnover, fornecendo a documentação exata necessária para abrir pedidos de caução no Airbnb AirCover.',
+        tag: 'Perguntas Frequentes & Respostas Operacionais',
+        title: 'Como resolvemos os maiores problemas do Alojamento Local',
+        q1: 'Como resolvem a quebra de qualidade que acontece ao fim de algumas semanas ("Standard Drift")?',
+        a1: 'Não confiamos na memória ou no acaso. Cada turnover segue uma lista digital obrigatória de 42 pontos (incluindo filtros de exaustor, interior de micro-ondas, gavetas e cantos de duche). O profissional só pode marcar o imóvel como "Pronto" após fazer o upload das fotos comprobatórias.',
+        q2: 'Como evitam atrasos causados pela lavandaria na janela apertada das 10h às 15h?',
+        a2: 'Lavar lençóis no próprio imóvel é a principal causa de atrasos e pânico em turnovers consecutivos. Trabalhamos com rotação de jogos de lençóis e parceiros de lavandaria profissional externa. A nossa equipa chega com conjuntos limpos e engomados, troca de imediato e leva a roupa usada, reduzindo o tempo no imóvel em até 50%.',
+        q3: 'O que acontece se o vosso profissional faltar num domingo ou feriado de época alta?',
+        a3: 'Dispomos de um SLA de Backup 100% Garantido. Ao contrário de uma empregada individual, a nossa empresa mantém profissionais de reserva em permanência 7 dias por semana. Se alguém adoecer, destacamos um substituto treinado imediatamente, sem que o anfitrião precise de se preocupar.',
+        q4: 'Como é que nos protegem contra pedidos desonestos de reembolso de hóspedes no Airbnb?',
+        a4: 'Enviamos uma auditoria de 10 a 15 fotos em alta resolução com carimbo de data e hora para o seu WhatsApp logo após a conclusão da limpeza. Se um hóspede tentar forjar uma reclamação de falta de limpeza, terá provas irrefutáveis com data/hora para o suporte do Airbnb recusar o pedido de reembolso.',
+        q5: 'Como funciona a deteção e reporte de danos para acionar o AirCover a tempo?',
+        a5: 'Nos primeiros 15 minutos após a entrada no apartamento, a equipa executa a "Inspeção de Chegada". Qualquer móvel partido, nódoas graves ou eletrodomésticos danificados pelo hóspede anterior são fotografados e enviados de imediato para que possa abrir o pedido de caução antes da entrada seguinte.',
+        q6: 'Fazem reposição de consumíveis e inspeção de manutenção básica?',
+        a6: 'Sim. Repomos papel higiénico, sacos de lixo, champô/gel de banho, detergente e cápsulas de café. Além disso, verificamos lâmpadas fundidas, comandos de TV/AC sem pilhas e torneiras a pingar, alertando-o imediatamente para evitar surpresas desagradáveis com o próximo hóspede.',
+        q7: 'Como funciona a integração com o meu calendário de reservas (iCal / PMS)?',
+        a7: 'Basta partilhar o link iCal do seu anúncio do Airbnb/Booking ou ligar o seu sistema de gestão. As nossas equipas são agendadas automaticamente em função das entradas e saídas, adaptando-se a reservas de última hora e gap nights sem necessidade de trocas constantes de mensagens.',
+        q8: 'Como funciona a 1ª Limpeza Gratuita de Teste?',
+        a8: 'Basta preencher o formulário no final da página ou enviar mensagem no WhatsApp. Agendamos o seu próximo turnover, executamos o serviço completo de 42 pontos e enviamos o relatório fotográfico detalhado. Não é necessário cartão de crédito nem há qualquer contrato de fidelização.',
       },
       form: {
         tag: 'Vagas Limitadas de Lançamento',
         headline: 'Peça a sua primeira limpeza de turnover gratuita.',
         sub: 'Sem cartão de crédito. Sem contratos de fidelização. Disponível para alojamentos em Lisboa, Cascais, Oeiras, Sintra e arredores.',
         perk1: 'Limpeza profunda completa com lista de 42 pontos',
-        perk2: 'Relatório fotográfico enviado para o seu WhatsApp',
-        perk3: 'Inspecção de danos e quebras antes da nova entrada',
+        perk2: 'Auditoria fotográfica com 10–15 fotos no seu WhatsApp',
+        perk3: 'Inspeção de danos e stock antes da nova entrada',
         waBoxTitle: 'Prefere resposta imediata?',
         waBoxDesc: 'Fale diretamente com a nossa equipa de operações no WhatsApp.',
         waBtn: 'Falar no WhatsApp Agora',
@@ -405,7 +428,7 @@ export default function LandingPage() {
         fastTrackBtn: 'Acelerar no WhatsApp',
       },
       footer: {
-        tagline: 'Serviço especializado de limpeza e turnover para anfitriões de Airbnb e Alojamento Local em Lisboa, Cascais, Oeiras, Sintra e arredores.',
+        tagline: 'Operações de Turnover e Proteção de Avaliações para anfitriões de Airbnb e Alojamento Local em Lisboa, Cascais, Oeiras, Sintra e arredores.',
         colServices: 'Tipologias',
         colZones: 'Zonas Atendidas',
         colContact: 'Contacto & Suporte',
@@ -415,7 +438,7 @@ export default function LandingPage() {
     en: {
       brandSub: 'Lisbon · Cascais · Oeiras · Sintra',
       nav: {
-        whyUs: 'Why Us',
+        whyUs: 'Pain Points & Solutions',
         inclusions: 'Inclusions',
         pricing: 'Pricing',
         howItWorks: 'How It Works',
@@ -426,7 +449,7 @@ export default function LandingPage() {
         pill: 'Engineered for Airbnb & AL Hosts in Lisbon, Cascais, Oeiras & Sintra',
         headlinePart1: 'Your next 1-star review',
         headlinePart2: 'starts in the bathroom.',
-        subheadline: 'A dirty turnover doesn\'t just lose one guest — it loses the next ten. We protect your AL revenue across Lisbon, Cascais, Oeiras & Sintra with 100% photo-verified, hotel-standard turnovers guaranteed ready before your 3:00 PM check-in.',
+        subheadline: 'We don\'t just sell standard cleaning — we deliver Turnover Operations & Guest Review Protection. We protect your AL revenue across Lisbon, Cascais, Oeiras & Sintra with 10–15 timestamped audit photos, zero laundry bottlenecks, and guaranteed 3:00 PM guest-ready turnovers.',
         ctaPrimary: 'Get Your First Clean Free',
         ctaSecondary: 'Message on WhatsApp',
         guarantee: 'Zero contract lock-in · Cancel anytime',
@@ -434,30 +457,42 @@ export default function LandingPage() {
       stats: {
         stat1Num: '~$3,000',
         stat1Label: 'Cost of 1 Bad Clean',
-        stat1Desc: 'Average revenue lost per host in refunds, cancelled bookings, and Airbnb algorithm penalties.',
+        stat1Desc: 'Average revenue lost per host in guest refunds, cancelled bookings, and Airbnb search algorithm penalties.',
         stat2Num: '-15% to -20%',
         stat2Label: 'Inquiry Drop',
         stat2Desc: 'Caused by a mere 0.5-star drop in cleanliness score on short-term rental platforms.',
         stat3Num: '100% Verified',
-        stat3Label: 'Photo Proof & Inspection',
-        stat3Desc: 'Timestamped photo verification sent to your phone after every clean before the next guest arrives.',
+        stat3Label: '10–15 Photo Audit',
+        stat3Desc: 'Timestamped photo audit sent to WhatsApp before check-in to safeguard against dishonest refund claims.',
       },
       pain: {
-        tag: 'The Reality of STR Hosting',
-        title: 'Why traditional cleaners fail Airbnb hosts across Greater Lisbon',
-        subtitle: 'Domestic cleaners work on weekly routines. Short-term rentals across Lisbon, Cascais, Oeiras & Sintra demand tight, rigorous turnovers where a single missed hair costs superhost status.',
-        card1Badge: 'Turnaround Crunch',
-        card1Title: 'The impossible 10am–3pm window',
-        card1Text: 'Checkout at 10:00 AM, next arrival at 3:00 PM. No room for delays, no second chances, and no time for you to rush across town to fix missed spots.',
-        card2Badge: 'Quality Roulette',
-        card2Title: 'Inconsistent quality every turnover',
-        card2Text: 'One clean is great, the next leaves unmade beds or a dusty shower corner. You shouldn\'t have to physically inspect every unit yourself to sleep at night.',
-        card3Badge: 'Zero Proof',
-        card3Title: 'No visibility when you\'re off-site',
-        card3Text: 'You receive a vague "done" text, but what about the fridge, linen tucks, or bathroom drain? You need timestamped photo proof, not blind trust.',
-        card4Badge: 'Rigid Schedules',
-        card4Title: 'Rigid 9–5 cleaners don\'t fit STR',
-        card4Text: 'Last-minute bookings, early check-ins, and back-to-back turnovers don\'t adhere to standard cleaning agencies. We adapt to your guest calendar.',
+        tag: 'Real Host Pain Points vs. Our Solutions',
+        title: 'Why 90% of traditional cleaners fail short-term rental hosts',
+        subtitle: 'We analyzed the top operational stressors reported by Airbnb and AL hosts and engineered a systematic operation that solves every single one.',
+        card1Badge: 'Quality Drift & Detail Traps',
+        card1Title: 'Starts great, but cleanliness drifts after a few weeks',
+        card1Text: 'Stray hairs in showers or bedsheets, greasy microwave interiors, uncleaned coffee machines, and dust under couches trigger 1-star reviews.',
+        card1Sol: 'Our Solution: Strict 42-point digital checklist with mandatory photo verification and hotel-grade presentation SOPs on every clean.',
+        card2Badge: 'The Laundry Bottleneck',
+        card2Title: 'Waiting 1–2h on in-unit washers delays the 10am–3pm window',
+        card2Text: 'On-site laundry is the #1 time-suck. If slow dryer cycles hold up the cleaner, back-to-back turnovers result in late guest check-ins.',
+        card2Sol: 'Our Solution: Off-site laundry & linen swap service — cleaners arrive with fresh hotel linens, reducing on-site turnover time by up to 50%.',
+        card3Badge: 'No-Shows & Flakes',
+        card3Title: 'Cleaners canceling last-minute on Sundays and peak holidays',
+        card3Text: 'Solo cleaners calling in sick an hour before checkout leaves hosts scrambling to drive across town and clean the apartment themselves.',
+        card3Sol: 'Our Solution: 100% Guaranteed Backup SLA 7 days a week — if a cleaner is ill, a trained backup is automatically deployed.',
+        card4Badge: 'Guest Refund Extortion',
+        card4Title: 'Dishonest guests manufacturing flaws to demand refunds',
+        card4Text: 'Without timestamped evidence of how the property was delivered, Airbnb support usually favors the guest and deducts payouts.',
+        card4Sol: 'Our Solution: 10–15 timestamped photos sent to your WhatsApp right upon completion, providing indisputable legal proof.',
+        card5Badge: 'Unreported Damage & AirCover',
+        card5Title: 'Undetected damage prevents filing timely AirCover claims',
+        card5Text: 'If cleaners fail to spot broken furniture, carpet stains, or missing remotes before the next guest arrives, your deposit claim is void.',
+        card5Sol: 'Our Solution: 15-Minute "Arrival Inspection" with immediate photo dispatch to document outgoing damage before new guests arrive.',
+        card6Badge: 'Consumables & Neglected Maintenance',
+        card6Title: 'Empty toiletries, missing coffee pods, and unspotted burnt bulbs',
+        card6Text: 'Standard maids ignore burnt-out bulbs, dead remote batteries, and forget to restock essential welcome amenities.',
+        card6Sol: 'Our Solution: Rigorous consumables inventory tracking and proactive hardware checks (AC remotes, lights, plumbing leaks).',
       },
       slider: {
         tag: 'Visual Standard',
@@ -479,7 +514,7 @@ export default function LandingPage() {
         title: 'What is included in every clean',
         subtitle: 'Every turnover is completed against a 42-point short-term rental checklist built to protect your Superhost status.',
         card1Title: 'Full Turnover Deep Cleaning',
-        card1Desc: 'Spotless kitchen, sanitized bathrooms, hair-free floors, dusted baseboards, and sparkling mirrors throughout the apartment.',
+        card1Desc: 'Spotless kitchen, sanitized bathrooms, hair-free floors, dusted baseboards, inside microwave cleaning, and sparkling mirrors.',
         card1Tag: 'Standard in every clean',
         card2Title: 'Bed Making & Linen Care',
         card2Desc: 'Fresh linen change with tight hospital corners, pillow fluffing, and neatly folded bath towel sets staged on the bed.',
@@ -487,14 +522,14 @@ export default function LandingPage() {
         card3Title: 'Consumables Restocking',
         card3Desc: 'Host-supplied toiletries, Nespresso capsules, tea, and paper goods restocked by default. (Optional supply replenishment packs available).',
         card3Tag: 'Host supplies or pack add-on',
-        card4Title: 'Photo-Verified Checklist',
-        card4Desc: 'High-resolution photos of every completed zone sent to your WhatsApp immediately upon turnover completion.',
-        card4Tag: '100% proof sent to phone',
+        card4Title: '10–15 Photo Audit Checklist',
+        card4Desc: 'High-resolution timestamped photos of every completed zone sent to your WhatsApp immediately upon turnover completion.',
+        card4Tag: '100% proof against refund claims',
         card5Title: 'Pre-Arrival Damage Reporting',
-        card5Desc: 'We document and flag any guest damage, broken glass, or maintenance issues with timestamped photos before the next guest arrives.',
+        card5Desc: '15-minute arrival audit: we document and flag any guest damage or broken items with photos before the next guest arrives.',
         card5Tag: 'Protects your deposit claims',
         card6Title: 'Vetted & STR-Trained Cleaners',
-        card6Desc: 'Background-checked professionals with specialized training in short-term rental standards and hospitality.',
+        card6Desc: 'Background-checked professionals with specialized training in fast short-term rental turnover standards and hospitality.',
         card6Tag: 'Trusted Team',
       },
       pricing: {
@@ -511,10 +546,10 @@ export default function LandingPage() {
         t2Title: 'T2 Apartment',
         t3Badge: '3 Bedroom',
         t3Title: 'T3 Apartment',
-        featureFullClean: 'Full apartment turnover clean',
+        featureFullClean: 'Full turnover clean (42 points)',
         featureBedLinen: '1 Bed linen change & staging',
-        featurePhotoChecklist: 'Photo checklist to WhatsApp',
-        featureDamageReport: 'Damage inspection report',
+        featurePhotoChecklist: '10–15 Photo audit to WhatsApp',
+        featureDamageReport: 'Arrival damage inspection for AirCover',
         featureT1Full: 'Full bedroom, living, bath & kitchen',
         featureT2Beds: 'Up to 2 bedrooms & 2 bathrooms',
         featureT3Large: 'Large unit turnover & deep sanitization',
@@ -531,16 +566,16 @@ export default function LandingPage() {
         title: 'How it works in 3 simple steps',
         subtitle: 'We built our process to save hosts 10+ hours a week in operational chaos.',
         step1Num: '01',
-        step1Title: 'Send your schedule',
-        step1Text: 'Connect your Airbnb/iCal link or simply drop checkout dates in our dedicated WhatsApp thread.',
+        step1Title: 'Sync your calendar',
+        step1Text: 'Connect your Airbnb/PMS iCal link or simply drop checkout dates in our dedicated WhatsApp operations thread.',
         step2Num: '02',
-        step2Title: 'We clean & send photo proof',
-        step2Text: 'Our insured cleaner arrives on time, follows the 42-point checklist, restocks amenities, and sends timestamped photo verification.',
+        step2Title: 'We clean & send photo audit',
+        step2Text: 'Our cleaner arrives on time, performs a 15-min damage check, follows the 42-point checklist, and sends 10–15 timestamped audit photos.',
         step3Num: '03',
-        step3Title: 'You review & relax',
+        step3Title: 'You review & relax with full protection',
         step3Text: 'Your guest checks in to a pristine apartment. You receive a monthly consolidated invoice. Cancel anytime with zero lock-in contracts.',
         badge1: 'Vetted & Trusted Cleaners',
-        badge2: '42-Point Photo Checklist',
+        badge2: '10–15 Photo Audit Checklist',
         badge3: 'Secure Key Lockbox Handling',
         badge4: 'Guaranteed Ready by 3:00 PM',
         cohortBadge: 'Active Launch Cohort',
@@ -552,24 +587,32 @@ export default function LandingPage() {
         subtitle: 'Dedicated mobile turnover teams across all major short-term rental zones.',
       },
       faq: {
-        tag: 'Frequently Asked Questions',
-        title: 'Answers for Short-Term Rental Hosts',
-        q1: 'How does the "First Clean Free" trial work?',
-        a1: 'Submit the form below or message us on WhatsApp. We will schedule your upcoming turnover, complete the full 42-point turnover clean, and send you the verified photo report. No payment details required and zero obligation.',
-        q2: 'Do you cover properties outside central Lisbon (Cascais, Oeiras, Sintra)?',
-        a2: 'Yes! We have dedicated teams operating across Lisbon, the entire Cascais coastline, Oeiras, Sintra (historic center, Colares, coastal beaches) and South Bay with the exact same punctual 3:00 PM guarantees.',
-        q3: 'How do your cleaners handle keys and access?',
-        a3: 'Most hosts use smart locks or secure lockboxes (Master Lock, Igloohome, Nuki). Our vetted cleaners follow strict key security protocols and return keys immediately to lockboxes upon departure.',
-        q4: 'What happens if a guest leaves damage or a severe mess?',
-        a4: 'Our cleaners immediately take photos of the damage and notify you via WhatsApp before proceeding, providing the exact documentation needed for Airbnb AirCover deposit claims.',
+        tag: 'Frequently Asked Questions & Operational Answers',
+        title: 'How we solve the top short-term rental challenges',
+        q1: 'How do you solve quality slippage over time ("Standard Drift")?',
+        a1: 'We don\'t rely on memory or casual routines. Every single turnover follows an enforced 42-point digital checklist (including oven interiors, range hoods, cabinet interiors, and shower grout). Cleaners cannot mark an apartment "Ready" without uploading standardized inspection photos.',
+        q2: 'How do you avoid laundry bottlenecks during the tight 10am–3pm window?',
+        a2: 'Running in-unit laundry is the #1 cause of turnover delays. We operate on a linen rotation system (3+ sets) and partner with commercial off-site laundries. Cleaners walk in with fresh hotel-pressed linens, swap them immediately, and bag dirty linens, cutting turnover time by up to 50%.',
+        q3: 'What happens if a cleaner is sick or cancels on a Sunday / peak holiday?',
+        a3: 'We provide a 100% Guaranteed Backup SLA. Unlike independent solo cleaners, we maintain full-time standby replacement staff 7 days a week. If a primary cleaner is unavailable, a vetted backup is deployed automatically with zero host effort.',
+        q4: 'How do you protect hosts against dishonest guests demanding refunds on Airbnb?',
+        a4: 'Immediately upon finishing every clean, we send a 10–15 photo high-resolution audit with timestamps directly to your WhatsApp. If a guest manufactures a claim to extract discounts, you have concrete time-stamped proof for Airbnb support to dismiss the claim.',
+        q5: 'How does damage reporting work to ensure AirCover claims are accepted?',
+        a5: 'During the first 15 minutes of entering the property, cleaners execute an "Arrival Inspection Checklist". Any pre-existing damage, broken glass, carpet stains, or missing remotes from departing guests are photographed immediately so you can file an AirCover claim before the next guest arrives.',
+        q6: 'Do you restock consumables and check basic property maintenance?',
+        a6: 'Yes. We restock toilet paper, trash bags, hand soap, shower gel, dish tabs, and coffee capsules. We also test lights, AC/TV remotes, and check for plumbing leaks, alerting you proactively before guest check-in.',
+        q7: 'Can you integrate with my Airbnb booking calendar or PMS?',
+        a7: 'Yes! Connect your Airbnb/Booking.com iCal link or PMS. Our dispatch system automatically schedules turnover slots as bookings come in, adjusting seamlessly to last-minute bookings or schedule changes.',
+        q8: 'How does the "First Clean Free" trial work?',
+        a8: 'Fill out the form below or drop us a WhatsApp message. We will book your upcoming checkout turnover, perform the full 42-point service, and send you the timestamped photo report. No payment details required and zero obligation.',
       },
       form: {
         tag: 'Limited Launch Spots',
         headline: 'Claim your first turnover clean free.',
         sub: 'No credit card required. No lock-in contracts. Available across Lisbon, Cascais, Oeiras, Sintra & surrounds.',
         perk1: 'Full 42-point turnover deep clean',
-        perk2: 'Timestamped photo report to your WhatsApp',
-        perk3: 'Pre-arrival damage & inspection check',
+        perk2: 'Timestamped 10–15 photo audit sent to WhatsApp',
+        perk3: '15-Minute damage & consumables inspection check',
         waBoxTitle: 'Prefer instant response?',
         waBoxDesc: 'Chat directly with our operations team on WhatsApp.',
         waBtn: 'Chat on WhatsApp Now',
@@ -591,7 +634,7 @@ export default function LandingPage() {
         fastTrackBtn: 'Fast-track on WhatsApp',
       },
       footer: {
-        tagline: 'Dedicated short-term rental turnover cleaning for Airbnb & Alojamento Local hosts across Lisbon, Cascais, Oeiras, Sintra and surrounding areas.',
+        tagline: 'Turnover Operations & Guest Review Protection for Airbnb & Alojamento Local hosts across Lisbon, Cascais, Oeiras, Sintra and surrounding areas.',
         colServices: 'Services',
         colZones: 'Regions Covered',
         colContact: 'Contact & Support',
@@ -742,7 +785,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ── Pain Points Section ─────────────────────────────────────────── */}
+      {/* ── Pain Points & Solutions Section (Reddit/Community Research) ─── */}
       <section id="pain-points" className="section-wrapper bg-surface-alt">
         <div className="content-container">
           <div className="section-heading-center">
@@ -751,41 +794,89 @@ export default function LandingPage() {
             <p className="section-subtitle">{t.pain.subtitle}</p>
           </div>
 
-          <div className="pain-grid">
+          <div className="pain-grid pain-grid-6">
+            {/* Card 1: Quality Drift */}
             <div className="pain-card">
               <div className="pain-icon-box">
-                <Clock size={24} />
+                <Sparkles size={22} />
               </div>
               <div className="pain-badge">{t.pain.card1Badge}</div>
               <h3 className="pain-title">{t.pain.card1Title}</h3>
               <p className="pain-text">{t.pain.card1Text}</p>
+              <div className="pain-solution-box">
+                <CheckCircle2 size={15} className="text-accent flex-shrink-0" />
+                <span>{t.pain.card1Sol}</span>
+              </div>
             </div>
 
+            {/* Card 2: Laundry Bottleneck */}
             <div className="pain-card">
               <div className="pain-icon-box">
-                <Layers size={24} />
+                <RefreshCw size={22} />
               </div>
               <div className="pain-badge">{t.pain.card2Badge}</div>
               <h3 className="pain-title">{t.pain.card2Title}</h3>
               <p className="pain-text">{t.pain.card2Text}</p>
+              <div className="pain-solution-box">
+                <CheckCircle2 size={15} className="text-accent flex-shrink-0" />
+                <span>{t.pain.card2Sol}</span>
+              </div>
             </div>
 
+            {/* Card 3: No-shows / Backup */}
             <div className="pain-card">
               <div className="pain-icon-box">
-                <Camera size={24} />
+                <Clock size={22} />
               </div>
               <div className="pain-badge">{t.pain.card3Badge}</div>
               <h3 className="pain-title">{t.pain.card3Title}</h3>
               <p className="pain-text">{t.pain.card3Text}</p>
+              <div className="pain-solution-box">
+                <CheckCircle2 size={15} className="text-accent flex-shrink-0" />
+                <span>{t.pain.card3Sol}</span>
+              </div>
             </div>
 
+            {/* Card 4: Guest Extortion */}
             <div className="pain-card">
               <div className="pain-icon-box">
-                <Calendar size={24} />
+                <Camera size={22} />
               </div>
               <div className="pain-badge">{t.pain.card4Badge}</div>
               <h3 className="pain-title">{t.pain.card4Title}</h3>
               <p className="pain-text">{t.pain.card4Text}</p>
+              <div className="pain-solution-box">
+                <CheckCircle2 size={15} className="text-accent flex-shrink-0" />
+                <span>{t.pain.card4Sol}</span>
+              </div>
+            </div>
+
+            {/* Card 5: Damage & AirCover */}
+            <div className="pain-card">
+              <div className="pain-icon-box">
+                <Eye size={22} />
+              </div>
+              <div className="pain-badge">{t.pain.card5Badge}</div>
+              <h3 className="pain-title">{t.pain.card5Title}</h3>
+              <p className="pain-text">{t.pain.card5Text}</p>
+              <div className="pain-solution-box">
+                <CheckCircle2 size={15} className="text-accent flex-shrink-0" />
+                <span>{t.pain.card5Sol}</span>
+              </div>
+            </div>
+
+            {/* Card 6: Consumables & Maintenance */}
+            <div className="pain-card">
+              <div className="pain-icon-box">
+                <Coffee size={22} />
+              </div>
+              <div className="pain-badge">{t.pain.card6Badge}</div>
+              <h3 className="pain-title">{t.pain.card6Title}</h3>
+              <p className="pain-text">{t.pain.card6Text}</p>
+              <div className="pain-solution-box">
+                <CheckCircle2 size={15} className="text-accent flex-shrink-0" />
+                <span>{t.pain.card6Sol}</span>
+              </div>
             </div>
           </div>
         </div>
@@ -1133,7 +1224,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ── FAQ Section ─────────────────────────────────────────────────── */}
+      {/* ── FAQ Section (Comprehensive Solutions for Real Host Pain Points) ─ */}
       <section id="faq" className="section-wrapper bg-surface-alt">
         <div className="content-container">
           <div className="section-heading-center">
@@ -1160,6 +1251,26 @@ export default function LandingPage() {
             <div className="faq-card">
               <h4 className="faq-q">{t.faq.q4}</h4>
               <p className="faq-a">{t.faq.a4}</p>
+            </div>
+
+            <div className="faq-card">
+              <h4 className="faq-q">{t.faq.q5}</h4>
+              <p className="faq-a">{t.faq.a5}</p>
+            </div>
+
+            <div className="faq-card">
+              <h4 className="faq-q">{t.faq.q6}</h4>
+              <p className="faq-a">{t.faq.a6}</p>
+            </div>
+
+            <div className="faq-card">
+              <h4 className="faq-q">{t.faq.q7}</h4>
+              <p className="faq-a">{t.faq.a7}</p>
+            </div>
+
+            <div className="faq-card">
+              <h4 className="faq-q">{t.faq.q8}</h4>
+              <p className="faq-a">{t.faq.a8}</p>
             </div>
           </div>
         </div>
