@@ -660,11 +660,6 @@ export default function LandingPage() {
       <header className="landing-header">
         <div className="landing-header-container">
           <div className="landing-brand">
-            <img
-              src="/logo.png"
-              alt="Impporta Logo"
-              style={{ width: 28, height: 28, objectFit: 'contain' }}
-            />
             <div className="brand-text-group">
               <span className="brand-name">Impporta AL</span>
               <span className="brand-sub">{t.brandSub}</span>
@@ -1525,11 +1520,6 @@ export default function LandingPage() {
         <div className="landing-footer-container">
           <div className="footer-left">
             <div className="landing-brand">
-              <img
-                src="/logo.png"
-                alt="Impporta Logo"
-                style={{ width: 26, height: 26, objectFit: 'contain' }}
-              />
               <span className="brand-name">Impporta AL</span>
             </div>
             <p className="footer-tagline">
