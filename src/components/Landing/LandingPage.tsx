@@ -24,7 +24,8 @@ import {
   ChevronDown,
   RefreshCw,
   Eye,
-  DollarSign
+  DollarSign,
+  Plus
 } from 'lucide-react';
 
 type Language = 'pt' | 'en';
@@ -125,6 +126,13 @@ export default function LandingPage() {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [sliderPosition, setSliderPosition] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
+  const [openFaqs, setOpenFaqs] = useState<number[]>([]);
+
+  const toggleFaq = (index: number) => {
+    setOpenFaqs((prev) =>
+      prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
+    );
+  };
 
   // Extensive locations list covering Lisboa, Cascais, Oeiras, Sintra and surroundings
   const locationOptions = [
@@ -1224,7 +1232,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ── FAQ Section (Comprehensive Solutions for Real Host Pain Points) ─ */}
+      {/* ── FAQ Accordion Section (Click question with plus icon to reveal answer) ─ */}
       <section id="faq" className="section-wrapper bg-surface-alt">
         <div className="content-container">
           <div className="section-heading-center">
@@ -1232,46 +1240,43 @@ export default function LandingPage() {
             <h2 className="section-title">{t.faq.title}</h2>
           </div>
 
-          <div className="faq-grid">
-            <div className="faq-card">
-              <h4 className="faq-q">{t.faq.q1}</h4>
-              <p className="faq-a">{t.faq.a1}</p>
-            </div>
+          <div className="faq-accordion-list">
+            {[
+              { q: t.faq.q1, a: t.faq.a1 },
+              { q: t.faq.q2, a: t.faq.a2 },
+              { q: t.faq.q3, a: t.faq.a3 },
+              { q: t.faq.q4, a: t.faq.a4 },
+              { q: t.faq.q5, a: t.faq.a5 },
+              { q: t.faq.q6, a: t.faq.a6 },
+              { q: t.faq.q7, a: t.faq.a7 },
+              { q: t.faq.q8, a: t.faq.a8 },
+            ].map((faq, idx) => {
+              const isOpen = openFaqs.includes(idx);
+              return (
+                <div
+                  key={idx}
+                  className={`faq-accordion-card ${isOpen ? 'open' : ''}`}
+                >
+                  <button
+                    type="button"
+                    className="faq-accordion-trigger"
+                    onClick={() => toggleFaq(idx)}
+                    aria-expanded={isOpen}
+                  >
+                    <span className="faq-question-title">{faq.q}</span>
+                    <div className={`faq-plus-badge ${isOpen ? 'open' : ''}`}>
+                      <Plus size={18} />
+                    </div>
+                  </button>
 
-            <div className="faq-card">
-              <h4 className="faq-q">{t.faq.q2}</h4>
-              <p className="faq-a">{t.faq.a2}</p>
-            </div>
-
-            <div className="faq-card">
-              <h4 className="faq-q">{t.faq.q3}</h4>
-              <p className="faq-a">{t.faq.a3}</p>
-            </div>
-
-            <div className="faq-card">
-              <h4 className="faq-q">{t.faq.q4}</h4>
-              <p className="faq-a">{t.faq.a4}</p>
-            </div>
-
-            <div className="faq-card">
-              <h4 className="faq-q">{t.faq.q5}</h4>
-              <p className="faq-a">{t.faq.a5}</p>
-            </div>
-
-            <div className="faq-card">
-              <h4 className="faq-q">{t.faq.q6}</h4>
-              <p className="faq-a">{t.faq.a6}</p>
-            </div>
-
-            <div className="faq-card">
-              <h4 className="faq-q">{t.faq.q7}</h4>
-              <p className="faq-a">{t.faq.a7}</p>
-            </div>
-
-            <div className="faq-card">
-              <h4 className="faq-q">{t.faq.q8}</h4>
-              <p className="faq-a">{t.faq.a8}</p>
-            </div>
+                  {isOpen && (
+                    <div className="faq-accordion-body animate-fade-in">
+                      <p className="faq-answer-text">{faq.a}</p>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
