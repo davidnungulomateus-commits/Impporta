@@ -10,7 +10,7 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
   title: "Limpeza Alojamento Local Lisboa | Turnover Cleaning for Airbnb Hosts",
-  description: "Turnover cleaning in Lisbon engineered for 1–5 unit Airbnb & AL hosts. 100% photo-verified, insured cleaners, damage reporting. Claim your first clean free.",
+  description: "Turnover cleaning in Lisbon engineered for 1–5 unit Airbnb & AL hosts. 100% photo-verified, damage reporting. Claim your first clean free.",
   keywords: [
     "limpeza alojamento local Lisboa",
     "limpeza Airbnb Lisboa",
