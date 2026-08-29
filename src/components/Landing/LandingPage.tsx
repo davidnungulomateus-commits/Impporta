@@ -25,7 +25,9 @@ import {
   RefreshCw,
   Eye,
   DollarSign,
-  Plus
+  Plus,
+  Menu,
+  X
 } from 'lucide-react';
 
 type Language = 'pt' | 'en';
@@ -127,6 +129,7 @@ export default function LandingPage() {
   const [sliderPosition, setSliderPosition] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
   const [openFaqs, setOpenFaqs] = useState<number[]>([]);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const toggleFaq = (index: number) => {
     setOpenFaqs((prev) =>
@@ -700,17 +703,96 @@ export default function LandingPage() {
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-whatsapp-sm"
+              className="btn-whatsapp-sm hidden-mobile"
               title="WhatsApp"
             >
               <MessageSquare size={15} />
-              <span className="hidden-mobile">WhatsApp</span>
+              <span>WhatsApp</span>
             </a>
-            <button onClick={scrollToForm} className="btn-trial-nav">
+            <button onClick={scrollToForm} className="btn-trial-nav hidden-mobile">
               {t.nav.freeCleanBtn}
+            </button>
+
+            {/* Mobile Hamburger Toggle Button */}
+            <button
+              type="button"
+              className="mobile-hamburger-btn"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle navigation menu"
+              aria-expanded={mobileMenuOpen}
+            >
+              {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
           </div>
         </div>
+
+        {/* Mobile Navigation Drawer */}
+        {mobileMenuOpen && (
+          <div className="mobile-drawer animate-fade-in">
+            <nav className="mobile-drawer-nav">
+              <a
+                href="#pain-points"
+                className="mobile-nav-link"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {t.nav.whyUs}
+              </a>
+              <a
+                href="#what-is-included"
+                className="mobile-nav-link"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {t.nav.inclusions}
+              </a>
+              <a
+                href="#pricing"
+                className="mobile-nav-link"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {t.nav.pricing}
+              </a>
+              <a
+                href="#how-it-works"
+                className="mobile-nav-link"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {t.nav.howItWorks}
+              </a>
+              <a
+                href="#faq"
+                className="mobile-nav-link"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {t.nav.faq}
+              </a>
+            </nav>
+
+            <div className="mobile-drawer-actions">
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  scrollToForm();
+                }}
+                className="btn-primary-hero"
+                style={{ width: '100%', justifyContent: 'center' }}
+              >
+                <span>{t.nav.freeCleanBtn}</span>
+                <ArrowRight size={16} />
+              </button>
+
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-whatsapp-full"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <MessageSquare size={18} />
+                <span>WhatsApp (+351 927 322 095)</span>
+              </a>
+            </div>
+          </div>
+        )}
       </header>
 
       {/* ── Hero Section ────────────────────────────────────────────────── */}
@@ -1475,6 +1557,27 @@ export default function LandingPage() {
           <p>© 2026 Impporta AL. {t.footer.rights}</p>
         </div>
       </footer>
+
+      {/* ── Mobile Sticky Floating Bottom CTA Bar ─────────────────────── */}
+      <div className="mobile-floating-bar">
+        <a
+          href={whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mobile-floating-wa-btn"
+          aria-label="WhatsApp"
+        >
+          <MessageSquare size={18} />
+          <span>WhatsApp</span>
+        </a>
+        <button
+          onClick={scrollToForm}
+          className="mobile-floating-trial-btn"
+        >
+          <span>{t.nav.freeCleanBtn}</span>
+          <ArrowRight size={16} />
+        </button>
+      </div>
     </div>
   );
 }
