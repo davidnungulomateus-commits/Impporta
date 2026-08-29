@@ -1710,14 +1710,20 @@ body {
   position: relative;
   width: 100%;
   max-width: 960px;
-  height: 380px;
+  height: 520px;
   margin: 0 auto;
   border-radius: var(--radius-xl);
   overflow: hidden;
   border: 1px solid var(--border);
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
   cursor: ew-resize;
   user-select: none;
+}
+
+@media (max-width: 768px) {
+  .slider-container {
+    height: 380px;
+  }
 }
 
 .slider-image-layer {
@@ -1726,37 +1732,36 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  overflow: hidden;
 }
 
-.room-mockup {
+.slider-photo {
   width: 100%;
   height: 100%;
-  padding: 36px 40px;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+
+.slider-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 30px 32px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  position: relative;
+  pointer-events: none;
 }
 
-.ready-state {
-  background: linear-gradient(135deg, #102a1b 0%, #0d1e15 100%);
-  border: 2px solid rgba(34, 197, 94, 0.3);
+.ready-overlay {
+  background: linear-gradient(180deg, rgba(6, 26, 12, 0.55) 0%, rgba(0, 0, 0, 0.05) 40%, rgba(6, 26, 12, 0.7) 100%);
 }
 
-[data-theme="light"] .ready-state {
-  background: linear-gradient(135deg, #e8f5ee 0%, #d5eedd 100%);
-}
-
-.messy-state {
-  background: linear-gradient(135deg, #2b1515 0%, #1f0f0f 100%);
-  border: 2px solid rgba(239, 68, 68, 0.3);
-}
-
-[data-theme="light"] .messy-state {
-  background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+.messy-overlay {
+  background: linear-gradient(180deg, rgba(38, 12, 12, 0.6) 0%, rgba(0, 0, 0, 0.05) 40%, rgba(38, 12, 12, 0.75) 100%);
 }
 
 .room-badge {
@@ -1768,6 +1773,7 @@ body {
   font-size: 0.85rem;
   font-weight: 800;
   width: fit-content;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .room-badge.success {

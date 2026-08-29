@@ -923,7 +923,13 @@ export default function LandingPage() {
           >
             {/* After (Right Reveal) */}
             <div className="slider-image-layer slider-after">
-              <div className="room-mockup ready-state">
+              <img
+                src="/images/after-turnover.jpg"
+                alt="5-Star Guest Ready Turnover"
+                className="slider-photo"
+                draggable={false}
+              />
+              <div className="slider-overlay ready-overlay">
                 <div className="room-badge success">
                   <Sparkles size={14} /> {t.slider.readyBadge}
                 </div>
@@ -941,7 +947,13 @@ export default function LandingPage() {
               className="slider-image-layer slider-before"
               style={{ clipPath: `polygon(0 0, ${sliderPosition}% 0, ${sliderPosition}% 100%, 0 100%)` }}
             >
-              <div className="room-mockup messy-state">
+              <img
+                src="/images/before-turnover.jpg"
+                alt="Post Checkout Mess"
+                className="slider-photo"
+                draggable={false}
+              />
+              <div className="slider-overlay messy-overlay">
                 <div className="room-badge warning">
                   <Clock size={14} /> {t.slider.messyBadge}
                 </div>
