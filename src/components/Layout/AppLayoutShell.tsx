@@ -11,7 +11,7 @@ export default function AppLayoutShell({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-  const isLandingPage = pathname === '/';
+  const isLandingPage = pathname === '/' || pathname === '/condominios';
 
   if (isLandingPage) {
     return <div className="landing-layout-wrapper">{children}</div>;

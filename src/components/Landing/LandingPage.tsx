@@ -672,6 +672,7 @@ export default function LandingPage() {
             <a href="#pricing" className="nav-item">{t.nav.pricing}</a>
             <a href="#how-it-works" className="nav-item">{t.nav.howItWorks}</a>
             <a href="#faq" className="nav-item">{t.nav.faq}</a>
+            <Link href="/condominios" className="nav-item" style={{ color: 'var(--accent)' }}>{lang === 'pt' ? 'Condomínios' : 'Condominiums'}</Link>
           </nav>
 
           <div className="landing-header-actions">
@@ -762,6 +763,14 @@ export default function LandingPage() {
               >
                 {t.nav.faq}
               </a>
+              <Link
+                href="/condominios"
+                className="mobile-nav-link"
+                onClick={() => setMobileMenuOpen(false)}
+                style={{ color: 'var(--accent)' }}
+              >
+                {lang === 'pt' ? 'Condomínios' : 'Condominiums'}
+              </Link>
             </nav>
 
             <div className="mobile-drawer-actions">
