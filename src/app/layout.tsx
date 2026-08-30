@@ -20,6 +20,15 @@ export const metadata: Metadata = {
     "short term rental cleaning Lisbon Cascais",
     "limpeza AL Estoril Carcavelos"
   ],
+  icons: {
+    icon: [
+      { url: '/icon.svg', type: 'image/svg+xml' },
+      { url: '/favicon.ico', sizes: 'any' },
+    ],
+    apple: [
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+  },
   openGraph: {
     title: "Limpeza Alojamento Local Lisboa, Cascais, Oeiras & Sintra | 1ª Limpeza Grátis",
     description: "Proteção de receita e turnover profissional para anfitriões de AL em Lisboa, Cascais, Oeiras e Sintra.",

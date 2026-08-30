@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <linearGradient id="iStemGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" sharp="true" stop-color="#4ade80" />
+      <stop offset="100%" stop-color="#16a34a" />
+    </linearGradient>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a1b0e" />
+      <stop offset="100%" stop-color="#040d07" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background Container -->
+  <rect width="512" height="512" rx="120" fill="url(#bgGrad)" />
+  <rect width="496" height="496" x="8" y="8" rx="112" fill="none" stroke="#22c55e" stroke-width="16" stroke-opacity="0.45" />
+
+  <!-- Letter I of Impporta -->
+  <!-- Top Serif Bar -->
+  <rect x="120" y="96" width="272" height="64" rx="32" fill="#ffffff" />
+  
+  <!-- Vertical Stem -->
+  <rect x="216" y="136" width="80" height="240" rx="26" fill="url(#iStemGrad)" />
+  
+  <!-- Bottom Serif Bar -->
+  <rect x="120" y="352" width="272" height="64" rx="32" fill="#ffffff" />
+</svg>
