@@ -656,7 +656,7 @@ export default function LandingPage() {
 
   return (
     <div className="landing-root">
-      {/* ── Sticky Announcement / Header ───────────────────────────────── */}
+      {/* -- Sticky Announcement / Header --------------------------------- */}
       <header className="landing-header">
         <div className="landing-header-container">
           <div className="landing-brand">
@@ -666,13 +666,23 @@ export default function LandingPage() {
             </div>
           </div>
 
+          {/* Vertical Toggle — Prominent Switcher */}
+          <div className="header-vertical-toggle">
+            <Link href="/" className="vertical-toggle-btn active">
+              <span className="vertical-toggle-icon">🏠</span>
+              <span className="vertical-toggle-label">{lang === 'pt' ? 'Alojamento Local' : 'Airbnb & AL'}</span>
+            </Link>
+            <Link href="/condominios" className="vertical-toggle-btn">
+              <span className="vertical-toggle-icon">🏢</span>
+              <span className="vertical-toggle-label">{lang === 'pt' ? 'Condomínios' : 'Condominiums'}</span>
+              <span className="vertical-toggle-pill">€11/h</span>
+            </Link>
+          </div>
+
           <nav className="landing-nav">
-            <a href="#pain-points" className="nav-item">{t.nav.whyUs}</a>
-            <a href="#what-is-included" className="nav-item">{t.nav.inclusions}</a>
-            <a href="#pricing" className="nav-item">{t.nav.pricing}</a>
             <a href="#how-it-works" className="nav-item">{t.nav.howItWorks}</a>
+            <a href="#pricing" className="nav-item">{t.nav.pricing}</a>
             <a href="#faq" className="nav-item">{t.nav.faq}</a>
-            <Link href="/condominios" className="nav-item" style={{ color: 'var(--accent)' }}>{lang === 'pt' ? 'Condomínios' : 'Condominiums'}</Link>
           </nav>
 
           <div className="landing-header-actions">
@@ -727,6 +737,36 @@ export default function LandingPage() {
         {/* Mobile Navigation Drawer */}
         {mobileMenuOpen && (
           <div className="mobile-drawer animate-fade-in">
+            {/* Prominent Vertical Switcher in Mobile Drawer */}
+            <div className="mobile-drawer-service-selector">
+              <span className="mobile-drawer-label">{lang === 'pt' ? 'Serviço Ativo:' : 'Current Service:'}</span>
+              <div className="mobile-service-cards">
+                <Link
+                  href="/"
+                  className="mobile-service-card active"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <span className="service-card-icon">🏠</span>
+                  <div className="service-card-info">
+                    <span className="service-card-title">Alojamento Local / Airbnb</span>
+                    <span className="service-card-desc">{lang === 'pt' ? 'Turnover e proteção 5★ entre hóspedes' : 'Turnover cleaning & 5-star protection'}</span>
+                  </div>
+                  <Check size={16} className="text-accent" />
+                </Link>
+                <Link
+                  href="/condominios"
+                  className="mobile-service-card"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <span className="service-card-icon">🏢</span>
+                  <div className="service-card-info">
+                    <span className="service-card-title">{lang === 'pt' ? 'Condomínios & Prédios' : 'Condominiums & Buildings'}</span>
+                    <span className="service-card-desc">{lang === 'pt' ? 'Limpeza de partes comuns a €11/hora' : 'Common-area cleaning at €11/hour'}</span>
+                  </div>
+                </Link>
+              </div>
+            </div>
+
             <nav className="mobile-drawer-nav">
               <a
                 href="#pain-points"
@@ -763,14 +803,6 @@ export default function LandingPage() {
               >
                 {t.nav.faq}
               </a>
-              <Link
-                href="/condominios"
-                className="mobile-nav-link"
-                onClick={() => setMobileMenuOpen(false)}
-                style={{ color: 'var(--accent)' }}
-              >
-                {lang === 'pt' ? 'Condomínios' : 'Condominiums'}
-              </Link>
             </nav>
 
             <div className="mobile-drawer-actions">
@@ -801,7 +833,7 @@ export default function LandingPage() {
         )}
       </header>
 
-      {/* ── Hero Section ────────────────────────────────────────────────── */}
+      {/* -- Hero Section -------------------------------------------------- */}
       <section className="hero-section">
         <div className="hero-glow-blob" />
         <div className="hero-container">
@@ -843,7 +875,7 @@ export default function LandingPage() {
             <span>{t.hero.guarantee}</span>
           </div>
 
-          {/* ── Required Stat Callout Box ──────────────────────────────────── */}
+          {/* -- Required Stat Callout Box ------------------------------------ */}
           <div className="hero-stats-banner">
             <div className="stat-card-hero stat-highlight">
               <div className="stat-icon-wrapper text-danger">
@@ -881,7 +913,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ── Pain Points & Solutions Section (Reddit/Community Research) ─── */}
+      {/* -- Pain Points & Solutions Section (Reddit/Community Research) --- */}
       <section id="pain-points" className="section-wrapper bg-surface-alt">
         <div className="content-container">
           <div className="section-heading-center">
@@ -978,7 +1010,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ── Interactive Before & After Turnover Slider ──────────────────── */}
+      {/* -- Interactive Before & After Turnover Slider -------------------- */}
       <section className="section-wrapper">
         <div className="content-container">
           <div className="section-heading-center">
@@ -1067,7 +1099,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ── What's Included (Service Bundle) ────────────────────────────── */}
+      {/* -- What's Included (Service Bundle) ------------------------------ */}
       <section id="what-is-included" className="section-wrapper bg-surface-alt">
         <div className="content-container">
           <div className="section-heading-center">
@@ -1134,7 +1166,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ── Transparent Pricing Section ─────────────────────────────────── */}
+      {/* -- Transparent Pricing Section ----------------------------------- */}
       <section id="pricing" className="section-wrapper">
         <div className="content-container">
           <div className="section-heading-center">
@@ -1239,7 +1271,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ── Trust / Credibility Section ─────────────────────────────────── */}
+      {/* -- Trust / Credibility Section ----------------------------------- */}
       <section id="how-it-works" className="section-wrapper bg-surface-alt">
         <div className="content-container">
           <div className="section-heading-center">
@@ -1300,7 +1332,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ── Lisboa, Cascais, Oeiras, Sintra & Surroundings ─────────────────── */}
+      {/* -- Lisboa, Cascais, Oeiras, Sintra & Surroundings ------------------- */}
       <section className="section-wrapper neighborhoods-section">
         <div className="content-container">
           <div className="neighborhoods-box">
@@ -1332,7 +1364,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ── FAQ Accordion Section (Click question with plus icon to reveal answer) ─ */}
+      {/* -- FAQ Accordion Section (Click question with plus icon to reveal answer) - */}
       <section id="faq" className="section-wrapper bg-surface-alt">
         <div className="content-container">
           <div className="section-heading-center">
@@ -1381,7 +1413,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ── Low-Friction Trial Booking Form & WhatsApp CTA ───────────────── */}
+      {/* -- Low-Friction Trial Booking Form & WhatsApp CTA ----------------- */}
       <section id="claim-trial" className="section-wrapper trial-form-section">
         <div className="content-container">
           <div className="form-container-card">
@@ -1524,7 +1556,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ── Footer ──────────────────────────────────────────────────────── */}
+      {/* -- Footer -------------------------------------------------------- */}
       <footer className="landing-footer">
         <div className="landing-footer-container">
           <div className="footer-left">
@@ -1563,7 +1595,7 @@ export default function LandingPage() {
         </div>
       </footer>
 
-      {/* ── Mobile Sticky Floating Bottom CTA Bar ─────────────────────── */}
+      {/* -- Mobile Sticky Floating Bottom CTA Bar ----------------------- */}
       <div className="mobile-floating-bar">
         <a
           href={whatsappUrl}
