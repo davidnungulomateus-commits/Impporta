@@ -268,7 +268,7 @@ export default function WorkerDashboard({ workerId = 'worker-001', onSwitchToHom
   };
 
   return (
-    <div style={{ background: '#f7f4ee', minHeight: '100vh', padding: '32px 24px', fontFamily: 'Inter, sans-serif' }}>
+    <div className="dashboard-page dashboard-page--worker" style={{ background: '#f7f4ee', minHeight: '100vh', padding: '32px 24px', fontFamily: 'Inter, sans-serif' }}>
       <div style={{ maxWidth: '1240px', margin: '0 auto' }}>
         
         {/* Neatify Header Card */}
