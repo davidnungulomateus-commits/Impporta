@@ -4,6 +4,7 @@ import React, { Suspense } from 'react';
 import { usePathname } from 'next/navigation';
 import Sidebar from '@/components/Layout/Sidebar';
 import TopBar from '@/components/Layout/TopBar';
+import DebugRoleSwitcher from '@/components/UI/DebugRoleSwitcher';
 
 export default function AppLayoutShell({
   children,
@@ -11,10 +12,15 @@ export default function AppLayoutShell({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-  const isLandingPage = pathname === '/' || pathname === '/condominios';
+  const isFullPage = pathname === '/' || pathname === '/condominios' || pathname === '/worker' || pathname === '/owner' || pathname === '/admin';
 
-  if (isLandingPage) {
-    return <div className="landing-layout-wrapper">{children}</div>;
+  if (isFullPage) {
+    return (
+      <div className="landing-layout-wrapper">
+        {children}
+        <DebugRoleSwitcher />
+      </div>
+    );
   }
 
   return (
@@ -28,6 +34,7 @@ export default function AppLayoutShell({
           {children}
         </main>
       </div>
+      <DebugRoleSwitcher />
     </div>
   );
 }

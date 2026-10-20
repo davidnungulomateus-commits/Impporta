@@ -8,7 +8,6 @@ import {
   Clock,
   Camera,
   AlertTriangle,
-  Sparkles,
   Calendar,
   MessageSquare,
   ArrowRight,
@@ -926,7 +925,7 @@ export default function LandingPage() {
             {/* Card 1: Quality Drift */}
             <div className="pain-card">
               <div className="pain-icon-box">
-                <Sparkles size={22} />
+                <CheckCircle2 size={22} />
               </div>
               <div className="pain-badge">{t.pain.card1Badge}</div>
               <h3 className="pain-title">{t.pain.card1Title}</h3>
@@ -1051,7 +1050,7 @@ export default function LandingPage() {
               />
               <div className="slider-overlay ready-overlay">
                 <div className="room-badge success">
-                  <Sparkles size={14} /> {t.slider.readyBadge}
+                  <CheckCircle2 size={14} /> {t.slider.readyBadge}
                 </div>
                 <div className="staged-details">
                   <div className="detail-tag"><Check size={12} /> {t.slider.tagReady1}</div>
@@ -1111,7 +1110,7 @@ export default function LandingPage() {
           <div className="inclusions-grid">
             <div className="inclusion-card">
               <div className="inclusion-header">
-                <div className="inclusion-icon"><Sparkles size={20} /></div>
+                <div className="inclusion-icon"><CheckCircle2 size={20} /></div>
                 <h3 className="inclusion-title">{t.inclusions.card1Title}</h3>
               </div>
               <p className="inclusion-desc">{t.inclusions.card1Desc}</p>

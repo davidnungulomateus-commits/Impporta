@@ -20,9 +20,9 @@ import { useProfile, ProfileType } from '@/context/ProfileContext';
 import { supabase } from '@/lib/supabase';
 
 const profileOptions: { label: string; value: ProfileType; icon: React.ElementType }[] = [
-  { label: 'Client',  value: 'client', icon: Users },
-  { label: 'Agent',   value: 'agent',  icon: Briefcase },
-  { label: 'Worker',  value: 'worker', icon: UserRound },
+  { label: 'Trabalhador', value: 'worker', icon: UserRound },
+  { label: 'Proprietário', value: 'owner',  icon: Users },
+  { label: 'Admin',       value: 'admin',  icon: Briefcase },
 ];
 
 export default function Sidebar() {
@@ -36,6 +36,8 @@ export default function Sidebar() {
     client: [],
     agent: [],
     worker: [],
+    owner: [],
+    admin: [],
     user: []
   });
 
@@ -43,7 +45,14 @@ export default function Sidebar() {
     const fetchProfiles = async () => {
       const { data } = await supabase.from('profiles').select('id, name, role');
       if (data) {
-        const grouped: any = { client: [], agent: [], worker: [], user: [] };
+        const grouped: Record<ProfileType, { id: string; name: string }[]> = {
+          client: [],
+          agent: [],
+          worker: [],
+          owner: [],
+          admin: [],
+          user: []
+        };
         data.forEach(p => {
           // Map DB 'user' role to UI 'client' role if needed, or keep both
           const roleKey = (p.role === 'user') ? 'client' : p.role as ProfileType;
@@ -73,18 +82,11 @@ export default function Sidebar() {
   };
 
   const navItems = [
-    { name: 'Dashboard',    href: '/',       icon: LayoutDashboard },
-    ...(profile === 'worker' || isExploreVisible
-      ? [{ name: 'Explore', href: '/explore', icon: Compass }]
-      : []),
-    { name: 'Messages',     href: '/chat',    icon: MessageSquare },
-    { name: 'Deals',        href: '/deals',   icon: Handshake },
-    {
-      name: profile === 'agent' ? 'My Clients' : profile === 'worker' ? 'Agents' : 'My Agents',
-      href: '/agents',
-      icon: UserRound,
-    },
-    ...(profile === 'worker' ? [{ name: 'Users', href: '/users', icon: Users }] : []),
+    { name: 'Início (Neatify)', href: '/',       icon: LayoutDashboard },
+    { name: 'Portal Trabalhador', href: '/worker', icon: UserRound },
+    { name: 'Portal Proprietário', href: '/owner', icon: Users },
+    { name: 'Painel Admin',     href: '/admin',   icon: Briefcase },
+    { name: 'Mensagens',        href: '/chat',    icon: MessageSquare },
   ];
 
   const bottomItems = [

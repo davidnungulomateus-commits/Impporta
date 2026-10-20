@@ -1,12 +1,9 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import AppLayoutShell from "@/components/Layout/AppLayoutShell";
 import { ProfileProvider } from "@/context/ProfileContext";
 import { DealProvider } from "@/context/DealContext";
 import { ThemeProvider } from "@/context/ThemeContext";
-
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
   title: "Limpeza Alojamento Local Lisboa, Cascais, Oeiras & Sintra | Airbnb Turnover Cleaning",
@@ -22,11 +19,11 @@ export const metadata: Metadata = {
   ],
   icons: {
     icon: [
-      { url: '/icon.svg', type: 'image/svg+xml' },
-      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/icon.svg?v=3', type: 'image/svg+xml' },
+      { url: '/favicon.ico?v=3', sizes: 'any' },
     ],
     apple: [
-      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+      { url: '/apple-touch-icon.png?v=3', sizes: '180x180', type: 'image/png' },
     ],
   },
   openGraph: {
@@ -56,7 +53,7 @@ export default function RootLayout({
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} suppressHydrationWarning />
       </head>
-      <body suppressHydrationWarning style={{ fontFamily: 'Inter, sans-serif' }}>
+      <body suppressHydrationWarning style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>
         <ThemeProvider>
           <ProfileProvider>
             <DealProvider>

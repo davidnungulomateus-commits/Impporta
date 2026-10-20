@@ -17,7 +17,7 @@ import {
   Shield,
   Clock,
   Users,
-  Sparkles,
+  Star,
   TreePine,
   Droplets,
   Car,
@@ -578,14 +578,13 @@ function renderIcon(name: string) {
     case 'Building2': return <Building2 size={22} />;
     case 'Layers': return <Layers size={22} />;
     case 'Mail': return <Mail size={22} />;
-    case 'Sparkles': return <Sparkles size={22} />;
     case 'Shield': return <Shield size={22} />;
     case 'Clock': return <Clock size={22} />;
     case 'Users': return <Users size={22} />;
     case 'TreePine': return <TreePine size={20} />;
     case 'Droplets': return <Droplets size={20} />;
     case 'Car': return <Car size={20} />;
-    default: return <Sparkles size={22} />;
+    default: return <CheckCircle2 size={22} />;
   }
 }
 
@@ -938,7 +937,7 @@ export default function CondominiosPage() {
 
             <div className="stat-card-hero">
               <div className="stat-icon-wrapper text-warning">
-                <Sparkles size={20} />
+                <Star size={20} />
               </div>
               <div className="stat-content">
                 <div className="stat-number text-warning">{t.hero.stat2Num}</div>
@@ -1110,7 +1109,7 @@ export default function CondominiosPage() {
             <div className="condo-calc-result-sticky">
               <div className="condo-calc-result-box">
                 <div className="condo-calc-result-badge">
-                  <Sparkles size={14} />
+                  <CheckCircle2 size={14} />
                   <span>{t.calculator.badgeResult}</span>
                 </div>
 

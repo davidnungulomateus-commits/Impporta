@@ -9,7 +9,7 @@
   --bg-surface:     #141414;
   --bg-elevated:    #1a1a1a;
   --bg-hover:       #222222;
-  --bg-active:      #1e2a1e;
+  --bg-active:      #0c2338;
 
   --border:         #2a2a2a;
   --border-subtle:  #1f1f1f;
@@ -18,9 +18,9 @@
   --text-secondary: #888888;
   --text-tertiary:  #555555;
 
-  --accent:         #22c55e;       /* green – Impporta brand */
-  --accent-dim:     rgba(34,197,94,0.12);
-  --accent-glow:    rgba(34,197,94,0.25);
+  --accent:         #9bb6f6;       /* soft periwinkle blue – Sparkles / Impporta */
+  --accent-dim:     rgba(155,182,246,0.15);
+  --accent-glow:    rgba(155,182,246,0.3);
 
   --positive:       #22c55e;
   --positive-dim:   rgba(34,197,94,0.12);
@@ -77,22 +77,29 @@
 
 /* ---------- LIGHT MODE ---------- */
 [data-theme="light"] {
-  --bg-base:        #f4f4f5;
+  --bg-base:        #f7f4ee;       /* warm linen & oatmeal canvas */
   --bg-surface:     #ffffff;
-  --bg-elevated:    #fafafa;
-  --bg-hover:       #f0f0f0;
-  --bg-active:      #e8f5ee;
+  --bg-elevated:    #efece4;       /* warm sand card surface */
+  --bg-hover:       #f0ede4;
+  --bg-active:      #e8eefc;       /* soft periwinkle active wash */
 
-  --border:         #e4e4e7;
-  --border-subtle:  #efefef;
+  --border:         #e7e3da;
+  --border-subtle:  #eeeae2;
 
-  --text-primary:   #0f172a;
-  --text-secondary: #64748b;
-  --text-tertiary:  #94a3b8;
+  --text-primary:   #111625;       /* deep obsidian ink */
+  --text-secondary: #52525b;
+  --text-tertiary:  #71717a;
 
-  --accent:         #16a34a;
-  --accent-dim:     rgba(22,163,74,0.10);
-  --accent-glow:    rgba(22,163,74,0.20);
+  --accent:         #9bb6f6;       /* iconic soft periwinkle blue */
+  --accent-hover:   #88a9f4;
+  --accent-contrast:#0f172a;       /* bold dark navy ink contrast for buttons */
+  --accent-dim:     rgba(155,182,246,0.15);
+  --accent-glow:    rgba(155,182,246,0.25);
+
+  --sparkle:        #f59e0b;       /* golden star sparkle */
+  --notice-bg:      #ebe7fe;       /* soft lilac notification bar */
+  --notice-text:    #4338ca;       /* deep indigo notice text */
+  --dark-card:      #111625;       /* deep obsidian rounded hero card */
 
   --positive:       #16a34a;
   --positive-dim:   rgba(22,163,74,0.10);
@@ -209,9 +216,10 @@ input::placeholder, textarea::placeholder {
 }
 
 .sidebar-logo-text {
-  font-size: 1rem;
-  font-weight: 700;
-  letter-spacing: -0.3px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 1.15rem;
+  font-weight: 900;
+  letter-spacing: -0.04em;
   color: var(--text-primary);
 }
 
@@ -1242,9 +1250,10 @@ body {
 }
 
 .brand-name {
-  font-weight: 800;
-  font-size: 1.05rem;
-  letter-spacing: -0.3px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 900;
+  font-size: 1.1rem;
+  letter-spacing: -0.04em;
   color: var(--text-primary);
   line-height: 1.2;
 }
@@ -3285,7 +3294,7 @@ body {
 
 /* ── Hero Custom Gradient ─────────────────────────────────────────── */
 .hero-gradient-condo {
-  background: linear-gradient(135deg, #22c55e 0%, #10b981 50%, #3b82f6 100%);
+  background: linear-gradient(135deg, #111625 0%, #6366f1 40%, #9bb6f6 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -4004,4 +4013,540 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+/* ==========================================================================
+   RADIX UI PRIMITIVE STYLES & TRUSTWORTHY UI TOKENS
+   ========================================================================== */
+
+@keyframes radixOverlayShow {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes radixContentShow {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -48%) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes radixAccordionDown {
+  from { height: 0; opacity: 0; }
+  to { height: var(--radix-accordion-content-height); opacity: 1; }
+}
+
+@keyframes radixAccordionUp {
+  from { height: var(--radix-accordion-content-height); opacity: 1; }
+  to { height: 0; opacity: 0; }
+}
+
+.radix-dialog-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(13, 46, 35, 0.75);
+  backdrop-filter: blur(8px);
+  z-index: 99990;
+  animation: radixOverlayShow 200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.radix-dialog-content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 92vw;
+  max-width: 620px;
+  max-height: 88vh;
+  overflow-y: auto;
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 32px;
+  box-shadow: 0 25px 60px -15px rgba(13, 46, 35, 0.35), 0 0 0 1px rgba(13, 46, 35, 0.08);
+  z-index: 99995;
+  animation: radixContentShow 250ms cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+}
+
+@media (max-width: 640px) {
+  .radix-dialog-content {
+    width: 95vw;
+    padding: 24px 20px;
+    border-radius: 20px;
+    max-height: 92vh;
+  }
+}
+
+.radix-accordion-content {
+  overflow: hidden;
+}
+.radix-accordion-content[data-state='open'] {
+  animation: radixAccordionDown 250ms cubic-bezier(0.87, 0, 0.13, 1);
+}
+.radix-accordion-content[data-state='closed'] {
+  animation: radixAccordionUp 200ms cubic-bezier(0.87, 0, 0.13, 1);
+}
+
+.radix-tabs-trigger {
+  padding: 10px 20px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #4b5563;
+  border-radius: 999px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+.radix-tabs-trigger[data-state='active'] {
+  background: #111625;
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(17, 22, 37, 0.18);
+}
+.radix-tabs-trigger:hover:not([data-state='active']) {
+  color: #111625;
+  background: #efece4;
+}
+
+/* Trust Pill Badges */
+.trust-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+.trust-badge-pill.green {
+  background: #e8eefc;
+  color: #1e3a8a;
+  border: 1px solid #c7d7fd;
+}
+.trust-badge-pill.dark {
+  background: #111625;
+  color: #9bb6f6;
+  border: 1px solid rgba(155, 182, 246, 0.3);
+}
+
+/* Landing layout wrapper allows smooth full-page scrolling */
+.landing-layout-wrapper {
+  width: 100vw;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Responsive adjustments for header nav */
+.neatify-nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+}
+
+.neatify-role-buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 640px) {
+  .neatify-nav-container {
+    padding: 10px 16px !important;
+  }
+  .neatify-brand-text {
+    font-size: 1.35rem !important;
+  }
+  .neatify-role-buttons {
+    gap: 6px;
+  }
+  .neatify-role-btn {
+    padding: 6px 10px !important;
+    font-size: 0.75rem !important;
+  }
+}
+
+/* ==========================================================================
+   UI/UX PRO MAX — DESIGN SYSTEM ENHANCEMENTS (Minimalism & Swiss Grid)
+   ========================================================================== */
+
+.uipro-navbar-wrapper {
+  position: sticky;
+  top: 12px;
+  z-index: 100;
+  padding: 0 clamp(16px, 4vw, 48px);
+  max-width: 1240px;
+  margin: 12px auto 0 auto;
+}
+
+.uipro-navbar-glass {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.86);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(220, 215, 204, 0.9);
+  border-radius: 999px;
+  padding: 12px 24px;
+  box-shadow: 0 8px 28px rgba(17, 22, 37, 0.06);
+  transition: box-shadow 200ms ease, border-color 200ms ease;
+}
+
+.uipro-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #334155;
+}
+
+.uipro-nav-link {
+  color: #334155;
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 999px;
+  transition: color 200ms ease, background-color 200ms ease;
+  cursor: pointer;
+}
+
+.uipro-nav-link:hover {
+  color: #111625;
+  background-color: rgba(155, 182, 246, 0.2);
+}
+
+@media (max-width: 768px) {
+  .uipro-nav-links {
+    display: none;
+  }
+}
+
+/* Interactive Cards & Option Selectors (No layout shift on hover) */
+.uipro-card-interactive {
+  cursor: pointer;
+  transition: border-color 200ms ease, background-color 200ms ease, box-shadow 200ms ease;
+}
+
+.uipro-card-interactive:hover {
+  border-color: #688af2 !important;
+  box-shadow: 0 6px 18px rgba(17, 22, 37, 0.07);
+}
+
+/* Buttons with smooth 200ms feedback */
+.uipro-btn-primary {
+  cursor: pointer;
+  transition: background-color 200ms ease, box-shadow 200ms ease, transform 200ms ease;
+}
+
+.uipro-btn-primary:hover {
+  background-color: #1e293b !important;
+  box-shadow: 0 8px 24px rgba(17, 22, 37, 0.28) !important;
+  transform: translateY(-1px);
+}
+
+.uipro-btn-secondary {
+  cursor: pointer;
+  transition: background-color 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
+}
+
+.uipro-btn-secondary:hover {
+  background-color: #f8fafc !important;
+  border-color: #111625 !important;
+  box-shadow: 0 4px 14px rgba(17, 22, 37, 0.08) !important;
+}
+
+.uipro-btn-whatsapp {
+  cursor: pointer;
+  transition: background-color 200ms ease, box-shadow 200ms ease, transform 200ms ease;
+}
+
+.uipro-btn-whatsapp:hover {
+  background-color: #20bd5a !important;
+  box-shadow: 0 12px 28px rgba(37, 211, 102, 0.45) !important;
+  transform: translateY(-1px);
+}
+
+/* Tactile Swiss-Style Range Slider */
+.uipro-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 8px;
+  border-radius: 999px;
+  background: #e2e8f0;
+  outline: none;
+  cursor: pointer;
+  transition: background 200ms ease;
+}
+
+.uipro-slider:hover {
+  background: #cbd5e1;
+}
+
+.uipro-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #111625;
+  border: 3px solid #9bb6f6;
+  box-shadow: 0 2px 8px rgba(17, 22, 37, 0.25);
+  cursor: pointer;
+  transition: transform 150ms ease, background-color 150ms ease;
+}
+
+.uipro-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+  background: #1e293b;
+}
+
+.uipro-slider::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #111625;
+  border: 3px solid #9bb6f6;
+  box-shadow: 0 2px 8px rgba(17, 22, 37, 0.25);
+  cursor: pointer;
+  transition: transform 150ms ease, background-color 150ms ease;
+}
+
+/* Stepper Icon Buttons */
+.uipro-stepper-btn {
+  cursor: pointer;
+  transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+}
+
+.uipro-stepper-btn:hover:not(:disabled) {
+  background-color: #111625 !important;
+  color: #ffffff !important;
+  border-color: #111625 !important;
+}
+
+/* Sticky Summary Panel on Desktop */
+.uipro-sticky-summary {
+  position: sticky;
+  top: 88px;
+}
+
+@media (max-width: 900px) {
+  .uipro-sticky-summary {
+    position: static;
+  }
+}
+
+/* Interactive Pricing Table Rows */
+.uipro-table-row {
+  cursor: pointer;
+  transition: background-color 150ms ease;
+}
+
+.uipro-table-row:hover {
+  background-color: rgba(155, 182, 246, 0.22) !important;
+}
+
+/* Step Number Pill inside Simulator */
+.uipro-step-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 8px;
+  background: #111625;
+  color: #9bb6f6;
+  font-size: 0.74rem;
+  font-weight: 900;
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+
+/* Keyboard Focus Accessibility */
+.uipro-card-interactive:focus-visible,
+.uipro-btn-primary:focus-visible,
+.uipro-btn-secondary:focus-visible,
+.uipro-btn-whatsapp:focus-visible,
+.uipro-stepper-btn:focus-visible,
+.uipro-nav-link:focus-visible,
+.uipro-slider:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+/* Respect Reduced Motion Preference */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Landing polish: warmer canvas, clearer hierarchy, and more tactile controls. */
+.landing-hero {
+  position: relative;
+  padding-top: 42px !important;
+  padding-bottom: 24px !important;
+}
+.landing-hero::before {
+  content: '';
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  top: -80px;
+  right: 8%;
+  border-radius: 50%;
+  background: rgba(155, 182, 246, 0.18);
+  filter: blur(70px);
+  pointer-events: none;
+}
+.landing-hero-title {
+  font-size: clamp(3rem, 6vw, 5.4rem) !important;
+  line-height: 0.98 !important;
+  letter-spacing: -0.065em !important;
+  max-width: 720px;
+}
+.landing-hero-media > div:first-child {
+  border-radius: 34px !important;
+  box-shadow: 0 28px 70px rgba(17, 22, 37, 0.18) !important;
+  transform: rotate(1deg);
+  transition: transform 300ms ease, box-shadow 300ms ease;
+}
+.landing-hero-media:hover > div:first-child {
+  transform: rotate(0deg) translateY(-5px);
+  box-shadow: 0 36px 80px rgba(17, 22, 37, 0.22) !important;
+}
+.pricing-simulator {
+  --pricing-ink: #18372d;
+  --pricing-green: #2f6b4f;
+  --pricing-mint: #dceee2;
+  --pricing-cream: #f8f5ed;
+}
+.pricing-simulator > div:first-child h2 {
+  color: var(--pricing-ink) !important;
+  font-size: clamp(1.7rem, 3vw, 2.55rem) !important;
+  text-transform: none !important;
+  letter-spacing: -0.045em !important;
+}
+.pricing-simulator > div:first-child > span {
+  background: var(--pricing-mint) !important;
+  color: var(--pricing-green) !important;
+  border-color: #c7dfcf !important;
+}
+.pricing-simulator > div:first-child > div {
+  background: #edf4ee !important;
+  border-color: #d3e4d7 !important;
+}
+.pricing-simulator > div:first-child > div button {
+  color: var(--pricing-ink) !important;
+}
+.pricing-simulator > div:first-child > div button[style*="rgb(17, 22, 37)"],
+.pricing-simulator > div:first-child > div button[style*="#111625"] {
+  background: var(--pricing-ink) !important;
+  color: white !important;
+}
+.pricing-simulator-grid { gap: 24px !important; }
+.pricing-controls {
+  background: #fffdf9 !important;
+  border-color: #e5dfd2 !important;
+  border-radius: 28px !important;
+  box-shadow: 0 18px 45px rgba(35, 61, 47, 0.08) !important;
+}
+.pricing-summary {
+  background: var(--pricing-ink) !important;
+  border-radius: 28px !important;
+  border-color: #244b3c !important;
+  box-shadow: 0 24px 55px rgba(24, 55, 45, 0.2) !important;
+}
+.pricing-simulator .uipro-step-badge {
+  background: var(--pricing-mint) !important;
+  color: var(--pricing-green) !important;
+}
+.pricing-simulator .uipro-card-interactive {
+  border-color: #d8e5da !important;
+  background: #fbfcf8 !important;
+  color: #18372d !important;
+}
+.pricing-simulator .uipro-card-interactive.pricing-option-active {
+  background: #18372d !important;
+  border-color: #18372d !important;
+  color: #ffffff !important;
+}
+.pricing-simulator .uipro-card-interactive.pricing-option-active span {
+  color: #b9e4c4 !important;
+}
+.pricing-simulator .uipro-card-interactive:not(.pricing-option-active) span {
+  color: #2f6b4f !important;
+}
+.pricing-simulator .uipro-card-interactive:hover {
+  border-color: var(--pricing-green) !important;
+  background: #f0f7f1 !important;
+}
+.pricing-simulator .pricing-summary a.uipro-btn-whatsapp {
+  background: #8bcf9d !important;
+  color: #143324 !important;
+  border-radius: 14px !important;
+  box-shadow: none !important;
+}
+.pricing-simulator .pricing-summary a.uipro-btn-whatsapp:hover {
+  background: #a6dfb3 !important;
+}
+.pricing-simulator .pricing-summary svg { color: #8bcf9d; }
+.pricing-simulator .pricing-summary > div:first-child {
+  background: #29483c !important;
+  border-color: #4c7662 !important;
+}
+@media (max-width: 720px) {
+  .pricing-simulator-grid { grid-template-columns: 1fr !important; }
+  .pricing-controls, .pricing-summary { border-radius: 22px !important; }
+}
+.landing-layout-wrapper {
+  background:
+    radial-gradient(circle at 8% 0%, rgba(155, 182, 246, 0.18), transparent 28rem),
+    linear-gradient(180deg, #fbfaf7 0%, #f7f4ee 48%, #fff 100%);
+  color: #111625;
+}
+
+.uipro-navbar-wrapper { top: 16px; }
+.uipro-navbar-glass {
+  background: rgba(255, 255, 255, 0.92);
+  border-color: rgba(17, 22, 37, 0.1);
+  box-shadow: 0 10px 34px rgba(17, 22, 37, 0.08);
+}
+.uipro-navbar-glass:hover { box-shadow: 0 14px 40px rgba(17, 22, 37, 0.12); }
+.uipro-btn-primary,
+.uipro-btn-secondary,
+.uipro-btn-whatsapp { border-radius: 12px !important; }
+.uipro-btn-primary { box-shadow: 0 8px 20px rgba(17, 22, 37, 0.14); }
+.uipro-btn-primary:hover,
+.uipro-btn-secondary:hover,
+.uipro-btn-whatsapp:hover { transform: translateY(-2px); }
+.uipro-card-interactive { border-radius: 18px !important; }
+.uipro-step-badge { border-radius: 9px; }
+
+@media (max-width: 640px) {
+  .uipro-navbar-wrapper { top: 8px; padding: 0 12px; }
+  .uipro-navbar-glass { padding: 10px 14px; }
+  .landing-layout-wrapper section { scroll-margin-top: 84px; }
+  .landing-hero { padding-top: 28px !important; }
+  .landing-hero-title { font-size: clamp(2.7rem, 13vw, 4rem) !important; }
+  .landing-hero-media > div:first-child { transform: none; }
+}
+
 

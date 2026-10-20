@@ -1,171 +1,23 @@
--- =============================================================
--- Impporta Platform — Complete Schema + RLS Policies
--- Run this in your Supabase SQL Editor
--- =============================================================
-
--- 1. Enable pgcrypto for password hashing in seed data
-CREATE EXTENSION IF NOT EXISTS pgcrypto;
-
--- ─────────────────────────────────────────────────────────────
--- TABLES
--- ─────────────────────────────────────────────────────────────
-
--- profiles (extends auth.users)
-CREATE TABLE IF NOT EXISTS public.profiles (
-  id          uuid PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
-  name        text NOT NULL DEFAULT '',
-  role        text NOT NULL DEFAULT 'user' CHECK (role IN ('user', 'agent', 'worker')),
-  avatar_url  text,
-  created_at  timestamptz DEFAULT now(),
-  updated_at  timestamptz DEFAULT now()
-);
-
--- conversations
-CREATE TABLE IF NOT EXISTS public.conversations (
-  id          uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-  client_id   uuid REFERENCES public.profiles(id) ON DELETE SET NULL,
-  agent_id    uuid REFERENCES public.profiles(id) ON DELETE SET NULL,
-  created_at  timestamptz DEFAULT now(),
-  updated_at  timestamptz DEFAULT now()
-);
-
--- messages
-CREATE TABLE IF NOT EXISTS public.messages (
-  id              uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-  conversation_id uuid NOT NULL REFERENCES public.conversations(id) ON DELETE CASCADE,
-  sender_id       uuid REFERENCES public.profiles(id) ON DELETE SET NULL,
-  sender_role     text NOT NULL CHECK (sender_role IN ('client', 'agent', 'worker', 'system')),
-  content         text NOT NULL DEFAULT '',
-  type            text NOT NULL DEFAULT 'text' CHECK (type IN ('text', 'image', 'video', 'audio', 'system')),
-  media_url       text,
-  status          text DEFAULT 'sent' CHECK (status IN ('sent', 'delivered', 'read')),
-  created_at      timestamptz DEFAULT now()
-);
-
--- deals
-CREATE TABLE IF NOT EXISTS public.deals (
-  id              uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-  conversation_id uuid REFERENCES public.conversations(id) ON DELETE CASCADE,
-  title           text NOT NULL,
-  status          text DEFAULT 'Pending' CHECK (status IN ('Pending', 'Waiting for Approval', 'Accepted', 'Rejected')),
-  created_at      timestamptz DEFAULT now(),
-  updated_at      timestamptz DEFAULT now()
-);
-
--- ─────────────────────────────────────────────────────────────
--- TRIGGER: auto-update updated_at
--- ─────────────────────────────────────────────────────────────
-CREATE OR REPLACE FUNCTION public.handle_updated_at()
-RETURNS trigger LANGUAGE plpgsql AS $$
-BEGIN
-  NEW.updated_at = now();
-  RETURN NEW;
-END;
-$$;
-
-DROP TRIGGER IF EXISTS set_conversations_updated_at ON public.conversations;
-CREATE TRIGGER set_conversations_updated_at
-  BEFORE UPDATE ON public.conversations
-  FOR EACH ROW EXECUTE FUNCTION public.handle_updated_at();
-
--- Update conversations.updated_at when a new message arrives
-CREATE OR REPLACE FUNCTION public.touch_conversation_on_message()
-RETURNS trigger LANGUAGE plpgsql AS $$
-BEGIN
-  UPDATE public.conversations SET updated_at = now() WHERE id = NEW.conversation_id;
-  RETURN NEW;
-END;
-$$;
-
-DROP TRIGGER IF EXISTS touch_conversation ON public.messages;
-CREATE TRIGGER touch_conversation
-  AFTER INSERT ON public.messages
-  FOR EACH ROW EXECUTE FUNCTION public.touch_conversation_on_message();
-
--- ─────────────────────────────────────────────────────────────
--- ENABLE ROW LEVEL SECURITY
--- ─────────────────────────────────────────────────────────────
-ALTER TABLE public.profiles      ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.conversations ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.messages      ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.deals         ENABLE ROW LEVEL SECURITY;
-
--- ─────────────────────────────────────────────────────────────
--- RLS POLICIES — profiles
--- Everyone can read all profiles (needed for directory/chat headers)
--- Only the profile owner can update their own row
--- ─────────────────────────────────────────────────────────────
-DROP POLICY IF EXISTS "profiles: public read"  ON public.profiles;
-DROP POLICY IF EXISTS "profiles: owner update" ON public.profiles;
-DROP POLICY IF EXISTS "profiles: owner insert" ON public.profiles;
-
-CREATE POLICY "profiles: public read"
-  ON public.profiles FOR SELECT
-  USING (true);  -- any authenticated or anonymous request can read
-
-CREATE POLICY "profiles: owner insert"
-  ON public.profiles FOR INSERT
-  WITH CHECK (true);  -- allow inserts (needed for signup)
-
-CREATE POLICY "profiles: owner update"
-  ON public.profiles FOR UPDATE
-  USING (auth.uid() = id);
-
--- ─────────────────────────────────────────────────────────────
--- RLS POLICIES — conversations
--- ─────────────────────────────────────────────────────────────
-DROP POLICY IF EXISTS "convs: public read"   ON public.conversations;
-DROP POLICY IF EXISTS "convs: public insert" ON public.conversations;
-DROP POLICY IF EXISTS "convs: public update" ON public.conversations;
-
-CREATE POLICY "convs: public read"
-  ON public.conversations FOR SELECT
-  USING (true);
-
-CREATE POLICY "convs: public insert"
-  ON public.conversations FOR INSERT
-  WITH CHECK (true);
-
-CREATE POLICY "convs: public update"
-  ON public.conversations FOR UPDATE
-  USING (true);
-
--- ─────────────────────────────────────────────────────────────
--- RLS POLICIES — messages
--- ─────────────────────────────────────────────────────────────
-DROP POLICY IF EXISTS "msgs: public read"   ON public.messages;
-DROP POLICY IF EXISTS "msgs: public insert" ON public.messages;
-
-CREATE POLICY "msgs: public read"
-  ON public.messages FOR SELECT
-  USING (true);
-
-CREATE POLICY "msgs: public insert"
-  ON public.messages FOR INSERT
-  WITH CHECK (true);
-
--- ─────────────────────────────────────────────────────────────
--- RLS POLICIES — deals
--- ─────────────────────────────────────────────────────────────
-DROP POLICY IF EXISTS "deals: public read"   ON public.deals;
-DROP POLICY IF EXISTS "deals: public insert" ON public.deals;
-DROP POLICY IF EXISTS "deals: public update" ON public.deals;
-
-CREATE POLICY "deals: public read"
-  ON public.deals FOR SELECT
-  USING (true);
-
-CREATE POLICY "deals: public insert"
-  ON public.deals FOR INSERT
-  WITH CHECK (true);
-
-CREATE POLICY "deals: public update"
-  ON public.deals FOR UPDATE
-  USING (true);
-
--- ─────────────────────────────────────────────────────────────
--- ENABLE REALTIME on all tables
--- ─────────────────────────────────────────────────────────────
-ALTER PUBLICATION supabase_realtime ADD TABLE public.messages;
-ALTER PUBLICATION supabase_realtime ADD TABLE public.conversations;
-ALTER PUBLICATION supabase_realtime ADD TABLE public.profiles;
+-- Apply in the Supabase SQL editor.
+create extension if not exists pgcrypto;
+create table if not exists public.profiles (id uuid primary key references auth.users(id) on delete cascade, name text not null default '', role text not null default 'user' check (role in ('user','client','agent','worker','owner','admin')), avatar_url text, created_at timestamptz not null default now(), updated_at timestamptz not null default now());
+create table if not exists public.conversations (id uuid primary key default gen_random_uuid(), client_id uuid references public.profiles(id) on delete set null, agent_id uuid references public.profiles(id) on delete set null, created_at timestamptz not null default now(), updated_at timestamptz not null default now());
+create table if not exists public.messages (id uuid primary key default gen_random_uuid(), conversation_id uuid not null references public.conversations(id) on delete cascade, sender_id uuid references public.profiles(id) on delete set null, sender_role text not null check (sender_role in ('client','agent','worker','system')), content text not null default '', type text not null default 'text' check (type in ('text','image','video','audio','system')), media_url text, status text not null default 'sent' check (status in ('sent','delivered','read')), created_at timestamptz not null default now());
+create table if not exists public.deals (id uuid primary key default gen_random_uuid(), conversation_id uuid references public.conversations(id) on delete cascade, title text not null, status text not null default 'Pending' check (status in ('Pending','Waiting for Approval','Accepted','Rejected')), created_at timestamptz not null default now(), updated_at timestamptz not null default now());
+create index if not exists messages_conversation_created_idx on public.messages (conversation_id, created_at);
+create index if not exists conversations_participants_idx on public.conversations (client_id, agent_id);
+create or replace function public.handle_updated_at() returns trigger language plpgsql as $$ begin new.updated_at = now(); return new; end; $$;
+drop trigger if exists set_profiles_updated_at on public.profiles; create trigger set_profiles_updated_at before update on public.profiles for each row execute function public.handle_updated_at();
+drop trigger if exists set_conversations_updated_at on public.conversations; create trigger set_conversations_updated_at before update on public.conversations for each row execute function public.handle_updated_at();
+drop trigger if exists set_deals_updated_at on public.deals; create trigger set_deals_updated_at before update on public.deals for each row execute function public.handle_updated_at();
+create or replace function public.handle_new_user() returns trigger language plpgsql security invoker set search_path = public as $$ begin insert into public.profiles (id, name) values (new.id, coalesce(new.raw_user_meta_data->>'name', new.email, '')) on conflict do nothing; return new; end; $$;
+drop trigger if exists on_auth_user_created on auth.users; create trigger on_auth_user_created after insert on auth.users for each row execute function public.handle_new_user();
+alter table public.profiles enable row level security; alter table public.conversations enable row level security; alter table public.messages enable row level security; alter table public.deals enable row level security;
+drop policy if exists "profiles: public read" on public.profiles; drop policy if exists "profiles: owner insert" on public.profiles; drop policy if exists "profiles: owner update" on public.profiles;
+create policy "profiles: authenticated read" on public.profiles for select to authenticated using (true); create policy "profiles: owner update" on public.profiles for update to authenticated using ((select auth.uid()) = id) with check ((select auth.uid()) = id);
+drop policy if exists "convs: public read" on public.conversations; drop policy if exists "convs: public insert" on public.conversations; drop policy if exists "convs: public update" on public.conversations;
+create policy "convs: participant read" on public.conversations for select to authenticated using ((select auth.uid()) in (client_id, agent_id)); create policy "convs: participant insert" on public.conversations for insert to authenticated with check ((select auth.uid()) in (client_id, agent_id)); create policy "convs: participant update" on public.conversations for update to authenticated using ((select auth.uid()) in (client_id, agent_id)) with check ((select auth.uid()) in (client_id, agent_id));
+drop policy if exists "msgs: public read" on public.messages; drop policy if exists "msgs: public insert" on public.messages;
+create policy "msgs: participant read" on public.messages for select to authenticated using (exists (select 1 from public.conversations c where c.id = conversation_id and (select auth.uid()) in (c.client_id, c.agent_id))); create policy "msgs: participant insert" on public.messages for insert to authenticated with check (sender_id = (select auth.uid()) and exists (select 1 from public.conversations c where c.id = conversation_id and (select auth.uid()) in (c.client_id, c.agent_id)));
+drop policy if exists "deals: public read" on public.deals; drop policy if exists "deals: public insert" on public.deals; drop policy if exists "deals: public update" on public.deals;
+create policy "deals: participant read" on public.deals for select to authenticated using (exists (select 1 from public.conversations c where c.id = conversation_id and (select auth.uid()) in (c.client_id, c.agent_id))); create policy "deals: participant insert" on public.deals for insert to authenticated with check (exists (select 1 from public.conversations c where c.id = conversation_id and (select auth.uid()) in (c.client_id, c.agent_id))); create policy "deals: participant update" on public.deals for update to authenticated using (exists (select 1 from public.conversations c where c.id = conversation_id and (select auth.uid()) in (c.client_id, c.agent_id))) with check (exists (select 1 from public.conversations c where c.id = conversation_id and (select auth.uid()) in (c.client_id, c.agent_id)));
