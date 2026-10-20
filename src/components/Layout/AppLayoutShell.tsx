@@ -18,7 +18,7 @@ export default function AppLayoutShell({
     return (
       <div className="landing-layout-wrapper">
         {children}
-        <DebugRoleSwitcher />
+        {process.env.NODE_ENV === 'development' && <DebugRoleSwitcher />}
       </div>
     );
   }
@@ -34,7 +34,7 @@ export default function AppLayoutShell({
           {children}
         </main>
       </div>
-      <DebugRoleSwitcher />
+      {process.env.NODE_ENV === 'development' && <DebugRoleSwitcher />}
     </div>
   );
 }
