@@ -2418,6 +2418,30 @@ export default function NeatifyLanding({ onNavigateToPortal }: NeatifyLandingPro
         );
       })()}
 
+      <section id="addons" className="addon-services-section">
+        <div className="addon-services-header">
+          <span className="addon-eyebrow">SERVIÇOS EXTRA · SOB ORÇAMENTO</span>
+          <h2>Uma só equipa para cuidar de tudo.</h2>
+          <p>Adicione serviços exteriores e de manutenção à sua operação, com profissionais selecionados pela Impporta e uma margem clara em cada intervenção.</p>
+        </div>
+        <div className="addon-services-grid">
+          {[
+            { icon: '✦', title: 'Jardinagem', detail: 'Manutenção de jardins pequenos e médios', price: 'desde 75 € / visita' },
+            { icon: '◌', title: 'Limpeza de piscinas', detail: 'Limpeza, análise e manutenção de rotina', price: 'desde 120 € / visita' },
+            { icon: '▣', title: 'Vidros exteriores', detail: 'Vidros e caixilharia acessíveis', price: 'desde 65 € / serviço' },
+            { icon: '＋', title: 'Pintura', detail: 'Pintura interior com preparação standard', price: 'desde 14 € / m²' },
+          ].map((service) => (
+            <article className="addon-service-card" key={service.title}>
+              <div className="addon-service-icon">{service.icon}</div>
+              <h3>{service.title}</h3>
+              <p>{service.detail}</p>
+              <strong>{service.price}</strong>
+            </article>
+          ))}
+        </div>
+        <p className="addon-disclaimer">Valores indicativos, sem IVA. O preço final depende do acesso, área, estado do local, materiais e deslocação. Trabalhos em altura, recuperação de piscinas e pintura com reparações são sempre orçamentados.</p>
+      </section>
+
       {/* ─────────────────────────────────────────────────────────────
           6.1 TEAM SECTION: TENHA SEMPRE A MESMA PESSOA (SPARKLES INSPIRATION)
           ───────────────────────────────────────────────────────────── */}

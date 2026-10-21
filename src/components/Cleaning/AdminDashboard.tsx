@@ -61,6 +61,7 @@ export default function AdminDashboard({ onSwitchToHome }: AdminDashboardProps) 
   const [showAddCleaningModal, setShowAddCleaningModal] = useState(false);
   const [showAddEquipModal, setShowAddEquipModal] = useState(false);
   const [reviewingPayout, setReviewingPayout] = useState<PayoutRequest | null>(null);
+  const [viewingPhotos, setViewingPhotos] = useState<Cleaning | null>(null);
   const [payoutNotes, setPayoutNotes] = useState('');
 
   // Worker Reassignment Modal State
@@ -182,6 +183,12 @@ export default function AdminDashboard({ onSwitchToHome }: AdminDashboardProps) 
   const totalWorkerPayouts = cleanings.filter(c => c.status === 'completed' || c.status === 'approved').reduce((sum, c) => sum + Number(c.price_worker), 0);
   const platformMargin = totalRevenue - totalWorkerPayouts;
   const pendingPayoutsCount = payouts.filter(p => p.status === 'pending').length;
+  const addOnEconomics = [
+    { service: 'Jardinagem', sell: 75, contractor: 50, margin: 25, unit: '/ visita' },
+    { service: 'Limpeza de piscinas', sell: 120, contractor: 80, margin: 40, unit: '/ visita' },
+    { service: 'Vidros exteriores', sell: 65, contractor: 45, margin: 20, unit: '/ serviço' },
+    { service: 'Pintura interior', sell: 14, contractor: 10, margin: 4, unit: '/ m²' },
+  ];
 
   return (
     <div style={{ background: '#f7f4ee', minHeight: '100vh', padding: '32px 24px', fontFamily: 'Inter, sans-serif' }}>
@@ -294,6 +301,27 @@ export default function AdminDashboard({ onSwitchToHome }: AdminDashboardProps) 
             </div>
             <span style={{ fontSize: '0.75rem', color: '#9ca3af' }}>Aguardam conferência fiscal</span>
           </div>
+        </div>
+
+        <div style={{ background: '#18372d', color: '#ffffff', borderRadius: '20px', padding: '24px', marginBottom: '28px', boxShadow: '0 12px 28px rgba(24,55,45,.14)' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: '12px', flexWrap: 'wrap', marginBottom: '16px' }}>
+            <div>
+              <div style={{ color: '#b9e4c4', fontSize: '.7rem', fontWeight: 800, letterSpacing: '.08em', textTransform: 'uppercase' }}>Gestão interna · Add-ons</div>
+              <h2 style={{ margin: '6px 0 0', fontSize: '1.35rem' }}>Economia dos serviços complementares</h2>
+            </div>
+            <span style={{ color: '#b9e4c4', fontSize: '.75rem' }}>Valores alvo sem IVA</span>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(190px, 1fr))', gap: '10px' }}>
+            {addOnEconomics.map((item) => (
+              <div key={item.service} style={{ padding: '14px', background: 'rgba(255,255,255,.08)', border: '1px solid rgba(185,228,196,.22)', borderRadius: '14px' }}>
+                <div style={{ fontWeight: 800, fontSize: '.85rem' }}>{item.service}</div>
+                <div style={{ marginTop: '10px', fontSize: '.75rem', color: '#c9d8ce' }}>Venda: {item.sell.toFixed(2)} € {item.unit}</div>
+                <div style={{ fontSize: '.75rem', color: '#c9d8ce' }}>Subcontratação: {item.contractor.toFixed(2)} € {item.unit}</div>
+                <div style={{ marginTop: '7px', color: '#8bcf9d', fontWeight: 900 }}>Margem bruta: {item.margin.toFixed(2)} € {item.unit}</div>
+              </div>
+            ))}
+          </div>
+          <div style={{ marginTop: '14px', color: '#b9cabe', fontSize: '.72rem', lineHeight: 1.5 }}>Confirmar sempre o orçamento do prestador antes de aceitar o serviço. Acrescentar deslocação, materiais, acesso em altura e reparações quando aplicável.</div>
         </div>
 
         {/* ─────────────────────────────────────────────────────────────
@@ -485,6 +513,25 @@ export default function AdminDashboard({ onSwitchToHome }: AdminDashboardProps) 
                       </td>
 
                       <td style={{ padding: '16px 14px' }}>
+                        <button
+                          onClick={() => setViewingPhotos(c)}
+                          disabled={!c.photos?.length}
+                          title={c.photos?.length ? 'Ver fotografias do serviço' : 'Ainda sem fotografias'}
+                          style={{
+                            padding: '6px 10px',
+                            marginRight: '6px',
+                            borderRadius: '8px',
+                            border: '1px solid #cbd5e1',
+                            background: c.photos?.length ? '#eff6ff' : '#f8fafc',
+                            color: c.photos?.length ? '#1d4ed8' : '#94a3b8',
+                            cursor: c.photos?.length ? 'pointer' : 'not-allowed',
+                            fontWeight: '700',
+                            fontSize: '0.8rem',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '4px'
+                          }}
+                        ><Camera size={14} /> Fotos ({c.photos?.length || 0})</button>
                         <button
                           onClick={() => setEditingCleaning(c)}
                           style={{
@@ -1249,6 +1296,31 @@ export default function AdminDashboard({ onSwitchToHome }: AdminDashboardProps) 
                   </button>
                 </div>
               </form>
+            </Dialog.Content>
+          </Dialog.Portal>
+        </Dialog.Root>
+
+        <Dialog.Root open={!!viewingPhotos} onOpenChange={(open) => { if (!open) setViewingPhotos(null); }}>
+          <Dialog.Portal>
+            <Dialog.Overlay style={{ position: 'fixed', inset: 0, background: 'rgba(15,23,42,.55)', zIndex: 100 }} />
+            <Dialog.Content style={{ position: 'fixed', zIndex: 101, left: '50%', top: '50%', transform: 'translate(-50%, -50%)', width: 'min(920px, calc(100vw - 32px))', maxHeight: 'min(760px, calc(100vh - 32px))', overflowY: 'auto', background: '#fff', borderRadius: '22px', padding: '24px', boxShadow: '0 24px 80px rgba(15,23,42,.28)' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '16px', marginBottom: '18px' }}>
+                <div>
+                  <Dialog.Title style={{ margin: 0, color: '#111625', fontSize: '1.25rem' }}>Fotografias do serviço</Dialog.Title>
+                  <div style={{ marginTop: '4px', color: '#6b7280', fontSize: '.85rem' }}>{viewingPhotos?.property?.name} · {viewingPhotos?.scheduled_date}</div>
+                </div>
+                <Dialog.Close asChild><button style={{ border: 0, background: 'transparent', cursor: 'pointer', color: '#64748b' }}><X size={20} /></button></Dialog.Close>
+              </div>
+              {viewingPhotos?.photos?.length ? (
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '16px' }}>
+                  {viewingPhotos.photos.map((photo) => (
+                    <figure key={photo.id} style={{ margin: 0, border: '1px solid #e2e8f0', borderRadius: '14px', overflow: 'hidden', background: '#f8fafc' }}>
+                      <img src={photo.photo_url} alt={`${photo.photo_type === 'before' ? 'Antes' : 'Depois'} - ${photo.room_tag}`} style={{ display: 'block', width: '100%', height: '220px', objectFit: 'cover' }} />
+                      <figcaption style={{ padding: '10px 12px', fontSize: '.8rem', color: '#334155', fontWeight: 700 }}>{photo.photo_type === 'before' ? 'Antes' : 'Depois'} · {photo.room_tag}</figcaption>
+                    </figure>
+                  ))}
+                </div>
+              ) : <p style={{ color: '#64748b' }}>Este serviço ainda não tem fotografias carregadas.</p>}
             </Dialog.Content>
           </Dialog.Portal>
         </Dialog.Root>

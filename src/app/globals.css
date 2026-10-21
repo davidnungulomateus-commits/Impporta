@@ -4544,10 +4544,51 @@ body {
   background: #29483c !important;
   border-color: #4c7662 !important;
 }
+.addon-services-section {
+  max-width: 1240px;
+  margin: 76px auto 84px;
+  padding: 0 clamp(24px, 5vw, 56px);
+}
+.addon-services-header { max-width: 680px; margin-bottom: 26px; }
+.addon-eyebrow {
+  display: inline-block;
+  padding: 6px 11px;
+  border-radius: 999px;
+  background: #dceee2;
+  color: #2f6b4f;
+  font-size: .7rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+}
+.addon-services-header h2 {
+  margin: 14px 0 10px;
+  color: #18372d;
+  font-size: clamp(2rem, 4vw, 3.1rem);
+  letter-spacing: -.055em;
+}
+.addon-services-header p { margin: 0; color: #607267; line-height: 1.65; }
+.addon-services-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.addon-service-card {
+  padding: 22px;
+  border: 1px solid #dce8dd;
+  border-radius: 20px;
+  background: #fffdf9;
+  box-shadow: 0 10px 30px rgba(24,55,45,.06);
+}
+.addon-service-card:hover { border-color: #8bcf9d; transform: translateY(-3px); transition: .2s ease; }
+.addon-service-icon { color: #2f6b4f; font-size: 24px; }
+.addon-service-card h3 { margin: 18px 0 6px; color: #18372d; font-size: 1.08rem; }
+.addon-service-card p { min-height: 42px; margin: 0 0 18px; color: #718177; font-size: .82rem; line-height: 1.45; }
+.addon-service-card strong { color: #2f6b4f; font-size: 1rem; }
+.addon-service-economics { display: grid; gap: 5px; margin-top: 16px; padding-top: 13px; border-top: 1px solid #e3ece4; color: #718177; font-size: .72rem; }
+.addon-service-economics span:last-child { color: #2f6b4f; font-weight: 800; }
+.addon-disclaimer { max-width: 780px; margin: 18px 0 0; color: #87938b; font-size: .75rem; line-height: 1.55; }
 @media (max-width: 720px) {
   .pricing-simulator-grid { grid-template-columns: 1fr !important; }
   .pricing-controls, .pricing-summary { border-radius: 22px !important; }
+  .addon-services-grid { grid-template-columns: 1fr 1fr; }
 }
+@media (max-width: 520px) { .addon-services-grid { grid-template-columns: 1fr; } }
 .landing-layout-wrapper {
   background:
     radial-gradient(circle at 8% 0%, rgba(155, 182, 246, 0.18), transparent 28rem),
