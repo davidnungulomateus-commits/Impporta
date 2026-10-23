@@ -2,7 +2,8 @@
 
 import React from 'react';
 import OwnerDashboard from '@/components/Cleaning/OwnerDashboard';
+import PortalNav from '@/components/Layout/PortalNav';
 
 export default function OwnerRoute() {
-  return <OwnerDashboard ownerId="owner-001" />;
+  return <><PortalNav /><OwnerDashboard ownerId="owner-001" /></>;
 }

@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
 import AdminDashboard from '@/components/Cleaning/AdminDashboard';
+import PortalNav from '@/components/Layout/PortalNav';
 
 export default function AdminRoute() {
   const router = useRouter();
@@ -24,5 +25,5 @@ export default function AdminRoute() {
 
   if (state === 'checking') return <main style={{ maxWidth: 520, margin: '18vh auto', padding: 24 }}><p>A verificar o acesso de administrador…</p></main>;
   if (state === 'denied') return <main style={{ maxWidth: 520, margin: '18vh auto', padding: 24 }}><h1>Acesso não autorizado</h1><p>A sua conta não tem permissões de administrador.</p></main>;
-  return <AdminDashboard />;
+  return <><PortalNav /><AdminDashboard /></>;
 }

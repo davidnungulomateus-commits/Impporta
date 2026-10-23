@@ -2,7 +2,8 @@
 
 import React from 'react';
 import WorkerDashboard from '@/components/Cleaning/WorkerDashboard';
+import PortalNav from '@/components/Layout/PortalNav';
 
 export default function WorkerRoute() {
-  return <WorkerDashboard workerId="worker-001" />;
+  return <><PortalNav /><WorkerDashboard workerId="worker-001" /></>;
 }
