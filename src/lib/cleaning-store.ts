@@ -54,7 +54,7 @@ export const DEFAULT_PRICING_RULES: Record<TypologyType, PricingRule> = {
   },
 };
 
-export const INITIAL_PROFILES: UserProfile[] = [
+const DEMO_PROFILES: UserProfile[] = [
   {
     id: 'worker-001',
     name: 'Maria Santos',
@@ -105,7 +105,9 @@ export const INITIAL_PROFILES: UserProfile[] = [
   }
 ];
 
-export const INITIAL_PROPERTIES: Property[] = [
+export const INITIAL_PROFILES: UserProfile[] = [];
+
+const DEMO_PROPERTIES: Property[] = [
   {
     id: 'prop-001',
     owner_id: 'owner-001',
@@ -147,7 +149,9 @@ export const INITIAL_PROPERTIES: Property[] = [
   }
 ];
 
-export const INITIAL_CLEANINGS: Cleaning[] = [
+export const INITIAL_PROPERTIES: Property[] = [];
+
+const DEMO_CLEANINGS: Cleaning[] = [
   {
     id: 'clean-001',
     property_id: 'prop-001',
@@ -223,7 +227,9 @@ export const INITIAL_CLEANINGS: Cleaning[] = [
   }
 ];
 
-export const INITIAL_EQUIPMENT: WorkerEquipment[] = [
+export const INITIAL_CLEANINGS: Cleaning[] = [];
+
+const DEMO_EQUIPMENT: WorkerEquipment[] = [
   {
     id: 'eq-001',
     worker_id: 'worker-001',
@@ -274,7 +280,9 @@ export const INITIAL_EQUIPMENT: WorkerEquipment[] = [
   }
 ];
 
-export const INITIAL_PAYOUTS: PayoutRequest[] = [
+export const INITIAL_EQUIPMENT: WorkerEquipment[] = [];
+
+const DEMO_PAYOUTS: PayoutRequest[] = [
   {
     id: 'payout-001',
     worker_id: 'worker-001',
@@ -289,12 +297,14 @@ export const INITIAL_PAYOUTS: PayoutRequest[] = [
   }
 ];
 
+export const INITIAL_PAYOUTS: PayoutRequest[] = [];
+
 const STORAGE_KEYS = {
-  PROFILES: 'impporta_cleaning_profiles_v2',
-  PROPERTIES: 'impporta_cleaning_properties_v2',
-  CLEANINGS: 'impporta_cleaning_cleanings_v2',
-  EQUIPMENT: 'impporta_cleaning_equipment_v2',
-  PAYOUTS: 'impporta_cleaning_payouts_v2',
+  PROFILES: 'impporta_cleaning_profiles_v3',
+  PROPERTIES: 'impporta_cleaning_properties_v3',
+  CLEANINGS: 'impporta_cleaning_cleanings_v3',
+  EQUIPMENT: 'impporta_cleaning_equipment_v3',
+  PAYOUTS: 'impporta_cleaning_payouts_v3',
 };
 
 export function getStoredData<T>(key: string, fallback: T): T {
