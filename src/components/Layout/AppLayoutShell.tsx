@@ -12,7 +12,7 @@ export default function AppLayoutShell({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-  const isFullPage = pathname === '/' || pathname === '/condominios' || pathname === '/worker' || pathname === '/owner' || pathname === '/admin';
+  const isFullPage = pathname === '/' || pathname === '/condominios' || pathname === '/worker' || pathname === '/owner' || pathname === '/admin' || pathname.startsWith('/auth/');
 
   if (isFullPage) {
     return (

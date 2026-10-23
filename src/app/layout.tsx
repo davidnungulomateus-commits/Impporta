@@ -6,9 +6,14 @@ import { DealProvider } from "@/context/DealContext";
 import { ThemeProvider } from "@/context/ThemeContext";
 
 export const metadata: Metadata = {
-  title: "Limpeza Alojamento Local Lisboa, Cascais, Oeiras & Sintra | Airbnb Turnover Cleaning",
-  description: "Limpeza de turnover para Alojamento Local e Airbnb em Lisboa, Cascais, Oeiras e Sintra. 100% verificado por fotos, relatórios de danos e 1ª limpeza gratuita.",
+  title: "Empresa de Limpeza Profissional Lisboa, Cascais, Oeiras & Sintra | Impporta",
+  description: "Limpeza profissional para empresas, escritórios, supermercados, restaurantes, alojamento local e condomínios em Lisboa, Cascais, Oeiras e Sintra.",
   keywords: [
+    "empresa de limpeza Lisboa",
+    "limpeza profissional Cascais",
+    "limpeza de escritórios Oeiras",
+    "limpeza de supermercados Sintra",
+    "limpeza de restaurantes Lisboa",
     "limpeza alojamento local Lisboa",
     "limpeza Airbnb Cascais",
     "limpeza AL Oeiras",
@@ -27,8 +32,8 @@ export const metadata: Metadata = {
     ],
   },
   openGraph: {
-    title: "Limpeza Alojamento Local Lisboa, Cascais, Oeiras & Sintra | 1ª Limpeza Grátis",
-    description: "Proteção de receita e turnover profissional para anfitriões de AL em Lisboa, Cascais, Oeiras e Sintra.",
+    title: "Impporta | Limpeza profissional para empresas e propriedades",
+    description: "Equipas profissionais para escritórios, supermercados, restaurantes, alojamento local, condomínios e limpezas profundas.",
     locale: "pt_PT",
     type: "website",
   }

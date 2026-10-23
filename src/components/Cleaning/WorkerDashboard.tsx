@@ -39,7 +39,6 @@ import {
   ArrowRight,
   ShieldCheck,
   Lock,
-  Shield,
   Award,
   FileCheck
 } from 'lucide-react';
@@ -757,10 +756,10 @@ export default function WorkerDashboard({ workerId = 'worker-001', onSwitchToHom
             </div>
             <div>
               <div style={{ fontSize: '0.85rem', fontWeight: '800', color: '#0b192c' }}>
-                Conta Profissional Verificada & Segurada
+                Conta Profissional Verificada
               </div>
               <div style={{ fontSize: '0.75rem', color: '#6b7280' }}>
-                Cobertura Fidelidade até 500.000€ • Retenção de IRS & Recibos Verdes em conformidade AT
+                Retenção de IRS e Recibos Verdes em conformidade AT
               </div>
             </div>
           </div>

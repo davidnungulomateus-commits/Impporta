@@ -311,6 +311,34 @@ export default function NeatifyLanding({ onNavigateToPortal }: NeatifyLandingPro
     {
       id: 3,
       number: '04',
+      title: t('Limpeza de Supermercados & Lojas', 'Supermarket & Retail Cleaning'),
+      category: 'Retail cleaning',
+      description: t(
+        'Limpeza regular de corredores, zonas de venda, armazéns, instalações sanitárias e áreas de circulação, com horários adaptados à operação da loja.',
+        'Regular cleaning of aisles, sales floors, storage areas, restrooms, and circulation spaces, with schedules adapted to your store operations.'
+      ),
+      tags: lang === 'en'
+        ? ['Sales Floors', 'Stockrooms', 'Restrooms', 'Flexible Scheduling']
+        : ['Áreas de Venda', 'Armazéns', 'Instalações Sanitárias', 'Horário Flexível'],
+      image: 'https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=800&auto=format&fit=crop&q=80',
+    },
+    {
+      id: 4,
+      number: '05',
+      title: t('Limpeza de Restaurantes & Cozinhas', 'Restaurant & Kitchen Cleaning'),
+      category: 'Food service cleaning',
+      description: t(
+        'Higienização de salas, cozinhas, zonas de preparação, balcões, casas de banho e áreas de serviço, com foco em higiene e continuidade operacional.',
+        'Cleaning of dining rooms, kitchens, preparation areas, counters, restrooms, and service areas, focused on hygiene and operational continuity.'
+      ),
+      tags: lang === 'en'
+        ? ['Dining Areas', 'Professional Kitchens', 'Degreasing', 'Food-Safe Protocols']
+        : ['Salas e Esplanadas', 'Cozinhas Profissionais', 'Desengorduramento', 'Protocolos de Higiene'],
+      image: 'https://images.unsplash.com/photo-1515003197-9040fed747b8?w=800&auto=format&fit=crop&q=80',
+    },
+    {
+      id: 5,
+      number: '06',
       title: t('Limpeza Pós-Obras & Limpeza Profunda', 'Post-Construction & Deep Cleaning'),
       category: 'Industrial & Specialised cleaning',
       description: t(
@@ -455,7 +483,7 @@ export default function NeatifyLanding({ onNavigateToPortal }: NeatifyLandingPro
           2. HERO SECTION (CLEAN 2-COLUMN HERO WITHOUT CARD RECTANGLES)
           ───────────────────────────────────────────────────────────── */}
       <section className="landing-hero" style={{ maxWidth: '1240px', margin: '40px auto 70px auto', padding: '0 clamp(24px, 5vw, 56px)' }}>
-        <div style={{
+        <div className="landing-hero-grid" style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))',
           gap: '48px',
@@ -516,9 +544,10 @@ export default function NeatifyLanding({ onNavigateToPortal }: NeatifyLandingPro
               textTransform: 'uppercase',
               margin: '0 0 18px 0'
             }}>
-              {t('Limpeza de excelência', 'Excellence in cleaning')} <br />
-              <span style={{ color: '#111625' }}>{t('para quem não tem ', 'for those with ')}</span><br />
-              <span style={{ color: '#688af2', fontStyle: 'italic', fontWeight: '800' }}>{t('tempo a perder.', 'no time to waste.')}</span>
+              {t('Limpeza profissional', 'Professional cleaning')} <br />
+              <span style={{ color: '#111625' }}>{t('para empresas', 'for businesses')}</span><br />
+              <span style={{ color: '#111625' }}>{t('e propriedades.', 'and properties.')}</span><br />
+              <span style={{ color: '#688af2', fontStyle: 'italic', fontWeight: '800' }}>{t('Uma só equipa.', 'One dedicated team.')}</span>
             </h1>
 
             <p style={{
@@ -529,8 +558,8 @@ export default function NeatifyLanding({ onNavigateToPortal }: NeatifyLandingPro
               margin: '0 0 32px 0'
             }}>
               {t(
-                'A plataforma inteligente que liga anfitriões de Alojamento Local e condomínios a profissionais verificados, com relatórios fotográficos de Antes e Depois em cada visita.',
-                'The smart platform connecting Short-Term Rental hosts and condominiums with verified professionals, featuring mandatory Before & After photo reports on every visit.'
+                'A Impporta coordena limpeza profissional para escritórios, supermercados, restaurantes, alojamento local, condomínios e propriedades, com equipas verificadas e acompanhamento em cada serviço.',
+                'Impporta coordinates professional cleaning for offices, supermarkets, restaurants, short-term rentals, condominiums, and properties with verified teams and service oversight.'
               )}
             </p>
 
@@ -736,27 +765,7 @@ export default function NeatifyLanding({ onNavigateToPortal }: NeatifyLandingPro
           </div>
 
           {/* Stats Cards Grid (Neatify Dark Forest Cards) */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
-            <div style={{
-              background: '#0b192c',
-              borderRadius: '20px',
-              padding: '28px',
-              color: '#ffffff',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-between'
-            }}>
-              <span style={{ fontSize: '0.75rem', fontWeight: '700', color: '#38bdf8', letterSpacing: '0.05em' }}>
-                {t('IMÓVEIS ASSISTIDOS', 'PROPERTIES SERVICED')}
-              </span>
-              <div style={{ marginTop: '20px' }}>
-                <div style={{ fontSize: '2.5rem', fontWeight: '800', color: '#ffffff' }}>500+</div>
-                <p style={{ margin: '4px 0 0 0', fontSize: '0.8rem', color: '#9ca3af' }}>
-                  {t('Apartamentos e condomínios em Lisboa, Cascais e Sintra', 'Apartments and condominiums across Lisbon, Cascais, and Sintra')}
-                </p>
-              </div>
-            </div>
-
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '16px' }}>
             <div style={{
               background: '#0b192c',
               borderRadius: '20px',
@@ -804,8 +813,8 @@ export default function NeatifyLanding({ onNavigateToPortal }: NeatifyLandingPro
             </div>
             <p style={{ maxWidth: '420px', color: '#9ca3af', fontSize: '0.95rem', lineHeight: '1.6', margin: 0 }}>
               {t(
-                'Seja para o seu alojamento local ou condomínio, as nossas equipas dedicadas asseguram limpeza profissional e pontualidade irrepreensível.',
-                'Whether for your short-term rental or condominium, our dedicated teams ensure professional cleaning and uncompromising punctuality.'
+                'Desde a operação diária de um escritório ou restaurante até ao turnover de um alojamento local, fornecemos equipas, produtos, checklists, supervisão e relatórios.',
+                'From daily office or restaurant operations to short-term rental turnovers, we provide teams, supplies, checklists, supervision, and reports.'
               )}
             </p>
           </div>
@@ -2483,8 +2492,8 @@ export default function NeatifyLanding({ onNavigateToPortal }: NeatifyLandingPro
             </div>
             <p style={{ maxWidth: '440px', color: '#52525b', fontSize: '0.95rem', lineHeight: '1.6', margin: 0 }}>
               {t(
-                'Os nossos profissionais são rigorosamente verificados, formados com protocolo hoteleiro e segurados. Saberá sempre quem está a cuidar do seu imóvel.',
-                'Our professionals are thoroughly vetted, trained in hotel-grade protocols, and fully insured. You will always know who is taking care of your property.'
+                'Os nossos profissionais são rigorosamente verificados e formados com protocolo hoteleiro. Saberá sempre quem está a cuidar do seu imóvel.',
+                'Our professionals are thoroughly vetted and trained in hotel-grade protocols. You will always know who is taking care of your property.'
               )}
             </p>
           </div>
@@ -3011,11 +3020,6 @@ export default function NeatifyLanding({ onNavigateToPortal }: NeatifyLandingPro
                       {quoteTypology === 'T0' ? '42 €' : quoteTypology === 'T1' ? '48 €' : quoteTypology === 'T2' ? '58 €' : quoteTypology === 'T3' ? '78 €' : '98 €'}
                       <span style={{ fontSize: '0.8rem', fontWeight: '600', color: '#6b7280' }}> / turnover</span>
                     </div>
-                  </div>
-                  <div style={{ textAlign: 'right' }}>
-                    <span className="trust-badge-pill green">
-                      <ShieldCheck size={14} /> {t('Seguro Fidelidade 500k€', '500k€ Liability Insurance')}
-                    </span>
                   </div>
                 </div>
 
@@ -3747,7 +3751,7 @@ export default function NeatifyLanding({ onNavigateToPortal }: NeatifyLandingPro
             </div>
             <p style={{ maxWidth: '320px', fontSize: '0.85rem', marginTop: '12px', lineHeight: '1.5', color: '#94a3b8' }}>
               {t(
-                'A plataforma inteligente para gestão de limpezas de Alojamento Local e condomínios em Portugal.',
+                'A plataforma inteligente para gestão de limpezas profissionais de empresas, propriedades e espaços comerciais em Portugal.',
                 'The smart platform for Short-Term Rental and condominium cleaning management in Portugal.'
               )}
             </p>

@@ -31,7 +31,6 @@ import {
   ArrowRight,
   Layers,
   Lock,
-  Shield,
   Award,
   FileCheck,
   ShieldCheck
@@ -278,16 +277,16 @@ export default function OwnerDashboard({ ownerId = 'owner-001', onSwitchToHome }
             </div>
             <div>
               <div style={{ fontSize: '0.85rem', fontWeight: '800', color: '#111625' }}>
-                Garantia de Qualidade & Proteção Jurídica Total
+                Qualidade Verificada em Cada Serviço
               </div>
               <div style={{ fontSize: '0.75rem', color: '#6b7280' }}>
-                Seguro Fidelidade 500.000€ • Faturas com NIF dedutíveis em IRS/IRC • Profissionais com Registo Criminal limpo
+                Relatórios fotográficos • Faturas com NIF dedutíveis em IRS/IRC • Profissionais verificados
               </div>
             </div>
           </div>
           <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
             <span className="trust-badge-pill green">
-              <Shield size={12} /> Seguro Fidelidade 500k€
+              <Camera size={12} /> Fotos Antes e Depois
             </span>
             <span className="trust-badge-pill green">
               <Award size={12} /> Satisfação 100%

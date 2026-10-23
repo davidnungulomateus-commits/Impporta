@@ -16,6 +16,7 @@ export default function PortalNav() {
 
   return (
     <nav
+      className="portal-nav"
       aria-label="Navegação do portal"
       style={{
         position: 'sticky',
@@ -34,20 +35,21 @@ export default function PortalNav() {
       }}
     >
       <button
+        className="portal-nav-brand"
         type="button"
         onClick={() => router.push('/')}
         style={{ border: 0, background: 'transparent', color: '#111827', fontWeight: 800, fontSize: 18, cursor: 'pointer' }}
       >
         Impporta
       </button>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+      <div className="portal-nav-actions" style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
         <button
           type="button"
           onClick={() => router.push('/')}
           style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '9px 14px', border: '1px solid #dbe3ef', borderRadius: 10, background: '#fff', color: '#334155', fontWeight: 700, cursor: 'pointer' }}
         >
           <Home size={16} aria-hidden="true" />
-          <span>Landing page</span>
+          <span className="portal-nav-label">Landing page</span>
         </button>
         <button
           type="button"
@@ -55,7 +57,7 @@ export default function PortalNav() {
           style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '9px 14px', border: 0, borderRadius: 10, background: '#111827', color: '#fff', fontWeight: 700, cursor: 'pointer' }}
         >
           <LogOut size={16} aria-hidden="true" />
-          <span>Terminar sessão</span>
+          <span className="portal-nav-label">Terminar sessão</span>
         </button>
       </div>
     </nav>

@@ -36,7 +36,6 @@ import {
   UserCheck,
   RefreshCw,
   Lock,
-  Shield,
   Award,
   FileCheck
 } from 'lucide-react';
@@ -349,16 +348,13 @@ export default function AdminDashboard({ onSwitchToHome }: AdminDashboardProps) 
                 Torre de Controlo & Conformidade Institucional Impporta
               </div>
               <div style={{ fontSize: '0.75rem', color: '#6b7280' }}>
-                Auditoria de Recibos Verdes (Finanças AT) • Validação de IBANs bancários • Seguro Fidelidade 500k€
+                Auditoria de Recibos Verdes (Finanças AT) • Validação de IBANs bancários
               </div>
             </div>
           </div>
           <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
             <span className="trust-badge-pill green">
               <FileCheck size={12} /> Validação AT Ativa
-            </span>
-            <span className="trust-badge-pill green">
-              <Shield size={12} /> Seguro Fidelidade 500k€
             </span>
             <span className="trust-badge-pill dark">
               <Lock size={12} /> IBAN Seguro

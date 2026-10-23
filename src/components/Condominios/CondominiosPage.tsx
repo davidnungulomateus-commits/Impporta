@@ -49,7 +49,7 @@ const translations = {
       subtitle: 'Limpeza profissional e rigorosa de partes comuns (halls, escadas, elevadores) com preço transparente de 11 €/hora. Sem orçamentos escondidos e sem fidelização.',
       ctaCalc: 'Simular Custo Mensal',
       ctaWhatsApp: 'Falar no WhatsApp',
-      guarantee: '✓ Preço transparente €11/h  •  ✓ Seguro de responsabilidade civil  •  ✓ Sem fidelização',
+      guarantee: '✓ Preço transparente €11/h  •  ✓ Equipas acompanhadas  •  ✓ Sem fidelização',
       stat1Num: '11 €/h',
       stat1Label: 'Base Transparente',
       stat1Desc: 'Sem taxas ocultas. Cálculo direto e justo por tempo real de limpeza.',
@@ -235,12 +235,12 @@ const translations = {
     trust: {
       tag: 'SEGURANÇA & CONFIANÇA',
       title: 'Porque os condomínios confiam na Impporta',
-      subtitle: 'Proteção total para o administrador e total transparência para os condóminos.',
+      subtitle: 'Acompanhamento operacional e transparência para administradores e condóminos.',
       items: [
         {
-          icon: 'Shield',
-          title: 'Seguro de Responsabilidade Civil',
-          desc: 'Cobertura integral contra eventuais danos materiais durante os serviços em áreas comuns.',
+          icon: 'FileCheck',
+          title: 'Relatórios após cada visita',
+          desc: 'Registo visual e acompanhamento do serviço para facilitar a comunicação com a administração.',
         },
         {
           icon: 'Clock',
@@ -318,7 +318,7 @@ const translations = {
       subtitle: 'Professional common-area cleaning (lobbies, stairs, elevators) with transparent pricing at €11/hour. No hidden costs, no lock-in contracts.',
       ctaCalc: 'Calculate Monthly Cost',
       ctaWhatsApp: 'Chat on WhatsApp',
-      guarantee: '✓ Transparent €11/h  •  ✓ Full liability insurance  •  ✓ No lock-in contracts',
+      guarantee: '✓ Transparent €11/h  •  ✓ Managed teams  •  ✓ No lock-in contracts',
       stat1Num: '€11 /h',
       stat1Label: 'Transparent Base Rate',
       stat1Desc: 'No hidden fees. Honest calculation based on actual cleaning time.',
@@ -504,12 +504,12 @@ const translations = {
     trust: {
       tag: 'TRUST & SAFETY',
       title: 'Why condominium administrators trust Impporta',
-      subtitle: 'Complete protection for the administrator and total transparency for all residents.',
+      subtitle: 'Operational follow-up and transparency for administrators and residents.',
       items: [
         {
-          icon: 'Shield',
-          title: 'Comprehensive Liability Insurance',
-          desc: 'Full coverage for any accidental damages in common areas during cleaning operations.',
+          icon: 'FileCheck',
+          title: 'Reports after every visit',
+          desc: 'Visual records and service follow-up that make communication with management straightforward.',
         },
         {
           icon: 'Clock',
